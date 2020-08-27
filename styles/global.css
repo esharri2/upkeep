@@ -1,0 +1,9 @@
+html {
+  font-family: system-ui, Arial, Helvetica, sans-serif;
+  padding: 1rem;
+}
+
+body {
+  max-width: 1200px;
+  margin: 0 auto;
+}

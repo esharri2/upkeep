@@ -1,0 +1,25 @@
+import React, { createContext, useState } from "react";
+
+const defaultState = {
+  email: null,
+  token: null,
+};
+
+const UserContext = createContext();
+
+const UserProvider = (props) => {
+  const [user, setUserValue] = useState(defaultState);
+
+  const setUser = (object) => {
+    setUserValue(object);
+  };
+
+  const value = { user, setUser };
+
+  return (
+    <UserContext.Provider value={value}>{props.children}</UserContext.Provider>
+  );
+};
+
+export default UserContext;
+export { UserProvider };
