@@ -26,22 +26,34 @@ export default async (req, res) => {
       );
 
       // Find user with refresh token
-      const user = await User.findOne({ refreshToken });
+      // TODO these query conditions copy/pasted from login route - maybe need utility to fetch user + default home id?
+      // TODO logic for getting homeId from data is duplicated as well
+      const homeQueryConditions = {
+        path: "homes",
+        match: { isDefault: true },
+        select: "_id",
+      };
+      const user = await User.findOne({ refreshToken }).populate(
+        homeQueryConditions
+      );
       const email = user?.email;
 
       // If user email matches email from refresh token, send a new access token
       if (email && email === refreshTokenContents?.email) {
-        const accessToken = createToken(email, process.env.TOKEN_EXPIRATION);
-        console.log(accessToken);
+        const homeId = user.homes[0] ? user.homes[0]._id : null;
+        const accessToken = createToken(
+          { email, homeId },
+          process.env.TOKEN_EXPIRATION
+        );
         res.status(200).json({
           accessToken,
           email,
         });
       } else {
-        sendError(res, null, 401);
+        sendError(res, 401);
       }
       break;
     default:
-      sendError(res, null, 405);
+      sendError(res, 405);
   }
 };

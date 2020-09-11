@@ -20,11 +20,11 @@ const handler = async (req, res) => {
           );
         }
       } catch (error) {
-        sendError(res, error, 401);
+        sendError(res, 401, error);
       }
       break;
     default:
-      sendError(res, null, 405);
+      sendError(res, 405);
   }
 };
 

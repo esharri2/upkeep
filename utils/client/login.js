@@ -6,12 +6,12 @@ export default async function login(
   passwordInput,
   setUserCallback
 ) {
-  const { accessToken, email } = await postLogin(null, {
+  const { accessToken, email, homeId } = await postLogin(null, {
     body: JSON.stringify({ email: emailInput, password: passwordInput }),
   });
   if (!accessToken) throw new Error();
   window.localStorage.setItem("returningUser", true);
-  setUserCallback({ email, token: accessToken });
+  setUserCallback({ email, homeId, token: accessToken });
   setTokenRefreshTimer(setUserCallback);
   return;
 }

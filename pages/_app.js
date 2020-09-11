@@ -1,4 +1,4 @@
-import "../styles/global.css";
+import "../styles/index.css";
 
 // Libs
 import dynamic from "next/dynamic";

@@ -39,7 +39,6 @@ const handleResponse = async (response) => {
   let json;
   try {
     json = await response.json();
-    console.log("handle response: ", json);
   } catch (error) {
     console.log(error);
     console.error("Response does not contain json.");
@@ -90,6 +89,28 @@ export const deleteAccount = async (token, email) => {
 
 export const getToken = async () => {
   const response = await fetch("/api/token", getOptions());
+  return await handleResponse(response);
+};
+
+// DASHBOARD
+
+export const getDashboard = async (path, token) => {
+  const response = await fetch(path, getOptions(null, token));
+  return await handleResponse(response);
+};
+
+// ASSETS
+
+export const getAssets = async (path, token) => {
+  const response = await fetch(path, getOptions(null, token));
+  return await handleResponse(response);
+};
+
+export const postAssets = async (token, body, id) => {
+  const response = await fetch(
+    `/api/assets${id ? `/${id}` : ""}`,
+    postOptions(body, token)
+  );
   return await handleResponse(response);
 };
 

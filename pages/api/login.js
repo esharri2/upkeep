@@ -17,11 +17,18 @@ export default async (req, res) => {
 
   switch (method) {
     case "POST":
+      const homeQueryConditions = {
+        path: "homes",
+        match: { isDefault: true },
+        select: "_id",
+      };
       try {
         if (email && password) {
           // Login with email and password.
-          user = await User.findOne({ email });
+          user = await User.findOne({ email }).populate(homeQueryConditions);
+          console.log("Hi, ", user);
           if (!user) throw new Error("Sorry, we can't find this account.");
+          console.log(user);
 
           if (user.isLocked) {
             throw new Error(
@@ -54,7 +61,9 @@ export default async (req, res) => {
           refreshToken = user.refreshToken;
         } else if (refreshToken && !user) {
           // Search for user by refreshToken (auto-login flow).
-          user = await User.findOne({ refreshToken });
+          user = await User.findOne({ refreshToken }).populate(
+            homeQueryConditions
+          );
           if (!user) throw new Error();
           email = user.email;
         }
@@ -68,23 +77,30 @@ export default async (req, res) => {
           if (renewedRefreshToken) refreshToken = renewedRefreshToken;
         }
 
+        // Get id of default home for the token
+        const homeId = user.homes[0] ? user.homes[0]._id : null;
+
         // Final check that user and refresh token have been set
-        if (user && refreshToken) {
+        if (user && refreshToken && homeId) {
           setRefreshTokenHeader(res, refreshToken);
         } else {
           throw new Error("Unable to login.");
         }
 
         res.status(200).json({
-          accessToken: createToken(email, process.env.TOKEN_EXPIRATION),
+          accessToken: createToken(
+            { email, homeId },
+            process.env.TOKEN_EXPIRATION
+          ),
           email,
+          homeId,
         });
       } catch (error) {
-        sendError(res, error, 401);
+        sendError(res, 401, error);
       }
       break;
     default:
-      sendError(res, null, 405);
+      sendError(res, 405);
   }
 };
 
@@ -98,7 +114,7 @@ async function renewRefreshToken(refreshToken, user) {
     console.error(error);
     if (error.name === "TokenExpiredError") {
       const freshRefreshtoken = createToken(
-        user.email,
+        { email: user.email },
         process.env.REFRESH_TOKEN_EXPIRATION
       );
       user.refreshToken = freshRefreshtoken;

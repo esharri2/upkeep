@@ -19,10 +19,10 @@ export default async function (req, res) {
         await user.save();
         res.status(200).json({});
       } catch (error) {
-        sendError(res, error, 401);
+        sendError(res, 401, error);
       }
       break;
     default:
-      sendError(res, null, 405);
+      sendError(res, 405);
   }
 }

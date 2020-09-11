@@ -19,7 +19,11 @@ export default function LoginForm(props) {
 
     login(email, password, setUser)
       .then(() => {
-        router.push("/todos");
+        if (props.isNewUser) {
+          router.push("/setup");
+        } else {
+          router.push("/dashboard");
+        }
       })
       .catch((error) => setStatus(error));
   };

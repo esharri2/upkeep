@@ -1,5 +1,7 @@
 // Libs
-import Link from "next/link";
+import Link from "../components/Link";
+
+// Components
 
 // Utils
 import useUser from "../hooks/useUser";
@@ -9,26 +11,22 @@ export default function Home() {
   return (
     <div className="container">
       <main>
-        <h1 className="title">Next.js + Mongoose + Auth Todo Example</h1>
+        <h1 className="title text-xl">
+          Next.js + Mongoose + Auth Todo Example
+        </h1>
 
         {email ? (
           <>
             <p>Hey! We logged you in automatically as {email}.</p>
-            <Link href="/todos">
-              <a>Go to your dashboard.</a>
-            </Link>
+            <Link href="/dashboard">Go to your dashboard.</Link>
           </>
         ) : (
           <ul>
             <li>
-              <Link href="/signup">
-                <a>Sign up</a>
-              </Link>
+              <Link href="/signup">Sign up</Link>
             </li>
             <li>
-              <Link href="/login">
-                <a>Log in with existing account</a>
-              </Link>
+              <Link href="/login">Log in with existing account</Link>
             </li>
           </ul>
         )}

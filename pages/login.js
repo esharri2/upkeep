@@ -16,8 +16,7 @@ export default function Login(props) {
           ? "Thanks for creating an account! Please log in."
           : "Log in to your account."}
       </h1>
-      <LoginForm />
-
+      <LoginForm isNewUser={isNewUser} />
       <Link href="/forgot-password">
         <a>I forgot my password.</a>
       </Link>

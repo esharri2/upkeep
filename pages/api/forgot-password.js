@@ -27,7 +27,7 @@ export default async (req, res) => {
         user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
         await user.save();
       } catch (error) {
-        sendError(res, error, 403);
+        sendError(res, 403, error);
       }
       try {
         await sendEmail(
@@ -38,10 +38,10 @@ export default async (req, res) => {
         );
         res.status(200).json({});
       } catch (error) {
-        sendError(res, null, 404);
+        sendError(res, 404, error);
       }
       break;
     default:
-      sendError(res, null, 405);
+      sendError(res, 405);
   }
 };
