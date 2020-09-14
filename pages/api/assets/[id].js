@@ -13,15 +13,13 @@ const handler = async (req, res) => {
 
   switch (method) {
     case "GET":
-      //   try {
-      //     const home = await Home.findOne(
-      //       { _id: user.homeId },
-      //       "assets.name assets._id assets.owned"
-      //     );
-      //     res.status(200).json({ assets: home.assets });
-      //   } catch (error) {
-      //     sendError(res, 400, error);
-      //   }
+      try {
+        const home = await Home.findOne({ _id: user.homeId }, "assets");
+        let asset = home.assets.id(query.id);
+        res.status(200).json({ asset });
+      } catch (error) {
+        sendError(res, 400, error);
+      }
       break;
     case "POST":
       try {

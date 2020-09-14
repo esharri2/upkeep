@@ -35,11 +35,23 @@ export default function Assets() {
             handleSubmit(values, setStatus)
           }>
           {({ dirty, isSubmitting, status, values }) => {
+            const assetCards = data.assets.map((asset) => {
+              const { owned, name } = asset;
+              if (
+                name.toLowerCase().includes(values.search.toLowerCase()) &&
+                ((values.owned && owned) || (values.unowned && !owned))
+              ) {
+                return <AssetCard asset={asset} />;
+              } else {
+                return null;
+              }
+            });
+
             return (
               <>
                 <Form>
                   <div>
-                    <label htmlFor="email">Search:</label>
+                    <label htmlFor="search">Search:</label>
                     <Field name="search" type="text" />
                   </div>
                   <label>
@@ -52,19 +64,9 @@ export default function Assets() {
                   </label>
                 </Form>
                 {data &&
-                  data.assets.map((asset) => {
-                    const { owned, name } = asset;
-                    if (
-                      name
-                        .toLowerCase()
-                        .includes(values.search.toLowerCase()) &&
-                      ((values.owned && owned) || (values.unowned && !owned))
-                    ) {
-                      return <AssetCard asset={asset} />;
-                    } else {
-                      return null;
-                    }
-                  })}
+                  (assetCards.some((item) => item !== null)
+                    ? assetCards
+                    : "Nothing matches these filters.")}
               </>
             );
           }}
