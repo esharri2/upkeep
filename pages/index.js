@@ -2,6 +2,7 @@
 import Link from "../components/Link";
 
 // Components
+import Layout from "../components/Layout";
 
 // Utils
 import useUser from "../hooks/useUser";

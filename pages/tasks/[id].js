@@ -1,16 +1,15 @@
 //Libs
-import { Formik, Form, Field } from "formik";
 import useSWR from "swr";
 
 //Libs
 import { useRouter } from "next/router";
 
 //Components
-import AssetForm from "../../components/AssetForm";
+import TaskForm from "../../components/TaskForm";
 import PrivateLayout from "../../components/PrivateLayout";
 
 //Utils
-import { getAssets, postAssets } from "../../utils/client/fetchers";
+import { getTasks, postTasks } from "../../utils/client/fetchers";
 import useUser from "../../hooks/useUser";
 
 export default function Asset() {
@@ -27,7 +26,7 @@ export default function Asset() {
   return (
     <PrivateLayout>
       <h1>{data.asset.name}</h1>
-      <AssetForm asset={data.asset} />
+      <TaskForm task={data.task} />
     </PrivateLayout>
   );
 }

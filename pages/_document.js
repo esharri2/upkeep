@@ -9,8 +9,13 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
-        <body className="m-12 p-4">
+        <Head>
+          // TODO add fonts locally? trim weights too, or use variable.
+          <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap"
+            rel="stylesheet"></link>
+        </Head>
+        <body>
           <Main />
           <NextScript />
         </body>

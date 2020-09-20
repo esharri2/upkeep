@@ -4,7 +4,7 @@ const getUser = async (req) => {
   const { headers } = req;
   const authHeader = headers?.authorization;
   // TODO - split throws error here, no auth Header?
-  console.log("headers are ", headers);
+  // console.log("headers are ", headers);
   console.log("authHeader is: ", authHeader);
   const token = authHeader.split(" ")[1];
   //todo what if token is undefined?
