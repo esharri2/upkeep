@@ -1,20 +1,32 @@
 //Libs
 import { Formik, Form, Field } from "formik";
+import useSWR from "swr";
 
 //Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
+import ButtonSubmit from "../ButtonSubmit";
 
 //Utils
-import { getTasks, postTask } from "../utils/client/fetchers";
-import useUser from "../hooks/useUser";
+import { getAssets, postAssets } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
-export default function TaskForm({ task }) {
+export default function AssetForm({ asset }) {
   const { token } = useUser();
 
-  const { _id, name, notes } = asset;
+  const {
+    _id,
+    name,
+    manufacturer,
+    model,
+    modelNumber,
+    serialNumber,
+    datePurchased,
+    notes,
+    tasks,
+  } = asset;
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values, setStatus) =>
     postAssets(
       token,
       {
@@ -23,11 +35,10 @@ export default function TaskForm({ task }) {
       _id
     )
       .then(() => {
-        alert("yaya");
+        alert("done!");
         //mutate? maybe not ...
       })
       .catch((error) => setStatus(error));
-  };
 
   return (
     <Formik
@@ -75,9 +86,7 @@ export default function TaskForm({ task }) {
               <label htmlFor="notes">Notes</label>
               <Field as="textarea" name="notes" />
             </div>
-            <button disabled={isSubmitting} type="submit">
-              Save
-            </button>
+            <ButtonSubmit isSubmitting={isSubmitting} formHasChanged={dirty} />
             <Notification role="alert">
               {status?.error && <ServerErrorMessage error={status.error} />}
             </Notification>

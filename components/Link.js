@@ -1,14 +1,11 @@
 // Libs
 
-import classNames from "classnames";
 import NextLink from "next/link";
 
-export default function Link({ children, href, textColor }) {
+export default function Link({ children, className, href }) {
   return (
     <NextLink href={href} passHref>
-      <a className={classNames(`text-${textColor || "blue-600"}`, "underline")}>
-        {children}
-      </a>
+      <a className={className}>{children}</a>
     </NextLink>
   );
 }

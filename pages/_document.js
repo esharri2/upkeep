@@ -5,12 +5,12 @@ class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps };
   }
+  // TODO add fonts locally? trim weights too, or use variable.
 
   render() {
     return (
       <Html>
         <Head>
-          // TODO add fonts locally? trim weights too, or use variable.
           <link
             href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700&display=swap"
             rel="stylesheet"></link>

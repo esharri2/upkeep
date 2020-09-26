@@ -1,15 +1,15 @@
 // Libs
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import Link from "next/link";
 
 // Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import Link from "../Link";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import logout from "../utils/client/logout";
-import { postPassword } from "../utils/client/fetchers";
-import useUser from "../hooks/useUser";
+import logout from "../../utils/client/logout";
+import { postPassword } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
 export default function PasswordChangeForm(props) {
   const { token, setUser } = useUser();
@@ -73,9 +73,11 @@ export default function PasswordChangeForm(props) {
             <Field name="newPasswordMatch" type="password" />
             <ErrorMessage name="newPasswordMatch" />
           </div>
-          <button disabled={isSubmitting || !dirty || !isValid} type="submit">
-            Submit
-          </button>
+          <ButtonSubmit
+            isSubmitting={isSubmitting}
+            formHasChanged={dirty}
+            isValid={isValid}
+          />
           <Notification role="alert">
             {status?.error && <ServerErrorMessage error={status.error} />}
             {status?.success && (

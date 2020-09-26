@@ -1,29 +1,18 @@
 //Libs
 import { Formik, Form, Field } from "formik";
-import useSWR from "swr";
 
 //Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 //Utils
-import { getAssets, postAssets } from "../utils/client/fetchers";
-import useUser from "../hooks/useUser";
+import { getTasks, postTask } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
-export default function AssetForm({ asset }) {
+export default function TaskForm({ task }) {
   const { token } = useUser();
 
-  const {
-    _id,
-    name,
-    manufacturer,
-    model,
-    modelNumber,
-    serialNumber,
-    datePurchased,
-    notes,
-    tasks,
-  } = asset;
+  const { _id, name, notes } = asset;
 
   const handleSubmit = async (values, setStatus) => {
     postAssets(

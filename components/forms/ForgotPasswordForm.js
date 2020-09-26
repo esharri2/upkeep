@@ -1,12 +1,14 @@
 // Libs
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 
 // Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import ButtonSubmit from "../ButtonSubmit";
+import Field from "../Field";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import { postForgotPassword } from "../utils/client/fetchers";
+import { postForgotPassword } from "../../utils/client/fetchers";
 
 export default function ForgotPasswordForm(props) {
   const handleSubmit = async (values, setStatus) => {
@@ -28,9 +30,9 @@ export default function ForgotPasswordForm(props) {
         <Form>
           <label htmlFor="email">Email:</label>
           <Field name="email" type="email" />
-          <button disabled={isSubmitting || !dirty} type="submit">
+          <ButtonSubmit isSubmitting={isSubmitting} formHasChanged={dirty}>
             Send email
-          </button>
+          </ButtonSubmit>
           <Notification role="alert">
             {status?.error && <ServerErrorMessage error={status.error} />}
             {status?.success && (

@@ -3,14 +3,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Components
-import LoginForm from "../components/LoginForm";
+import Layout from "../components/Layout";
+import LoginForm from "../components/forms/LoginForm";
 
 export default function Login(props) {
   const router = useRouter();
   const isNewUser = router.query?.isNewUser;
 
   return (
-    <div>
+    <Layout narrow>
       <h1>
         {isNewUser
           ? "Thanks for creating an account! Please log in."
@@ -20,6 +21,6 @@ export default function Login(props) {
       <Link href="/forgot-password">
         <a>I forgot my password.</a>
       </Link>
-    </div>
+    </Layout>
   );
 }

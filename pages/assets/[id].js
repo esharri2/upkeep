@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 
 //Components
-import AssetForm from "../../components/AssetForm";
+import AssetForm from "../../components/forms/AssetForm";
 import PrivateLayout from "../../components/PrivateLayout";
 
 //Utils

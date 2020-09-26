@@ -1,15 +1,15 @@
 // Libs
-import Link from "next/link";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 // Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import Link from "../Link";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import { postResetPassword } from "../utils/client/fetchers";
-import logout from "../utils/client/logout";
-import useUser from "../hooks/useUser";
+import { postResetPassword } from "../../utils/client/fetchers";
+import logout from "../../utils/client/logout";
+import useUser from "../../hooks/useUser";
 
 export default function PasswordResetForm({ resetPasswordToken }) {
   const { setUser } = useUser();
@@ -63,9 +63,10 @@ export default function PasswordResetForm({ resetPasswordToken }) {
             <Field name="newPasswordMatch" type="password" />
             <ErrorMessage name="newPasswordMatch" />
           </div>
-          <button disabled={isSubmitting} type="submit">
-            Submit
-          </button>
+          <ButtonSubmit
+            disabled={isSubmitting | !dirty}
+            isSubmitting={isSubmitting}
+          />
           <Notification role="alert">
             {status.error && <ServerErrorMessage error={status.error} />}
             {status.success && (

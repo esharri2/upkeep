@@ -1,8 +1,8 @@
 // Libs
 import useSWR from "swr";
-import Link from "next/link";
 
 // Components
+import Link from "../components/Link";
 import PrivateLayout from "../components/PrivateLayout";
 
 // Utils

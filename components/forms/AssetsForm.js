@@ -3,11 +3,11 @@ import { Formik, Form, Field } from "formik";
 import useSWR from "swr";
 
 //Components
-import AssetCard from "./AssetCard";
+import AssetCard from "../AssetCard";
 
 //Utils
-import { getAssets } from "../utils/client/fetchers";
-import useUser from "../hooks/useUser";
+import { getAssets } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
 export default function AssetForm() {
   const { token } = useUser();

@@ -1,7 +1,7 @@
 //Libs
 
 //Components
-import AssetsForm from "../../components/AssetsForm";
+import AssetsForm from "../../components/forms/AssetsForm";
 import PrivateLayout from "../../components/PrivateLayout";
 
 //Utils

@@ -1,10 +1,6 @@
-// Libs
-import Link from "next/link";
-
 // Components
+import Link from "../../components/Link";
 import PrivateLayout from "../../components/PrivateLayout";
-
-// Utils
 
 export default function Settings() {
   return (

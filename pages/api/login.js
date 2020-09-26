@@ -17,6 +17,8 @@ export default async (req, res) => {
 
   switch (method) {
     case "POST":
+      // todo throws cannot read proper homes of undefined sometimes?
+
       const homeQueryConditions = {
         path: "homes",
         match: { isDefault: true },

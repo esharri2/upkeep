@@ -1,20 +1,22 @@
 // Libs
-import Link from "next/link";
-import { Formik, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 
 // Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import ButtonSubmit from "../ButtonSubmit";
+import Field from "../Field";
+import Link from "../Link";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import { deleteAccount } from "../utils/client/fetchers";
-import logout from "../utils/client/logout";
-import useUser from "../hooks/useUser";
+import { deleteAccount } from "../../utils/client/fetchers";
+import logout from "../../utils/client/logout";
+import useUser from "../../hooks/useUser";
 
 export default function DeleteAccount() {
   const { token, setUser } = useUser();
 
-  const handleSubmit = (values, setStatus) => {
+  const handleSubmit = (values, setStatus) =>
     deleteAccount(token, values.email)
       .then(() => {
         setStatus({ success: true });
@@ -23,7 +25,6 @@ export default function DeleteAccount() {
       .catch((error) => {
         setStatus(error);
       });
-  };
 
   return (
     <Formik
@@ -35,9 +36,9 @@ export default function DeleteAccount() {
         <Form>
           <label htmlFor="email">Please type your email:</label>
           <Field name="email" type="email" />
-          <button disabled={isSubmitting} type="submit">
+          <ButtonSubmit isSubmitting={isSubmitting}>
             Delete my account
-          </button>
+          </ButtonSubmit>
           <Notification>
             {status?.error && <ServerErrorMessage error={status.error} />}
             {status?.success && (

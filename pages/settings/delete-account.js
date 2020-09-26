@@ -1,5 +1,5 @@
 // Components
-import AccountDeleteForm from "../../components/AccountDeleteForm";
+import AccountDeleteForm from "../../components/forms/AccountDeleteForm";
 import PrivateLayout from "../../components/PrivateLayout";
 
 export default function DeleteAccount() {

@@ -1,8 +1,8 @@
 // Libs
-import Link from "next/link";
 import { mutate } from "swr";
 
 // Components
+import Link from "./Link";
 
 // Utils
 import { postAssets } from "../utils/client/fetchers";

@@ -1,13 +1,15 @@
 // Libs
 import Router from "next/router";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 
 // Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import Field from "../Field";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import { postSignUp } from "../utils/client/fetchers";
+import { postSignUp } from "../../utils/client/fetchers";
+import ButtonSubmit from "../ButtonSubmit";
 
 export default function SignUpForm(props) {
   const handleSubmit = async (values, setStatus) => {
@@ -60,9 +62,12 @@ export default function SignUpForm(props) {
               maxLength="50"
             />
           </div>
-          <button disabled={isSubmitting || !isValid || !dirty} type="submit">
+          <ButtonSubmit
+            isSubmitting={isSubmitting}
+            isValid={isValid}
+            formHasChanged={dirty}>
             Sign up
-          </button>
+          </ButtonSubmit>
           <Notification role="alert">
             {status && <ServerErrorMessage error={status.error} />}
           </Notification>

@@ -1,4 +1,7 @@
-import Link from "next/link";
+// Components
+import Link from "./Link";
+
+// Utils
 import useUser from "../hooks/useUser";
 
 export default function PrivateRoute(props) {

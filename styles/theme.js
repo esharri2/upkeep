@@ -16,12 +16,16 @@ const theme = {
     accent1: "#068d9d",
     warning: "#c03221",
     success: "#a2ad59",
+    disabled: "#DCDCDC",
   },
   timings: {
     fast: ".2s",
   },
   fontFamilies: {
     body: '"Work Sans", "Helvetica Neue", Arial, sans-serif',
+  },
+  borders: {
+    radius: ".25rem",
   },
   spacing: {
     xs: ".25rem",
@@ -30,13 +34,31 @@ const theme = {
     l: "2rem",
     xl: "4rem",
   },
+  fontSizes: {
+    s: ".8rem",
+    m: "1rem",
+    l: "1.2rem",
+    xl: "2rem",
+  },
   size: {
     headerHeight: "4rem",
   },
+  breakpoints: {
+    s: "576px",
+    m: "768px",
+    l: "992px",
+    xl: "1200px",
+  },
   mediaQueries: {
-    desktop: function (styles) {
-      `@media screen and (min-width: 960px) {${styles}}`;
+    tablet: function (styles) {
+      `@media screen and (min-width: 768px) {${styles}}`;
     },
+    desktop: function (styles) {
+      `@media screen and (min-width: 992px) {${styles}}`;
+    },
+  },
+  hoverEffects: {
+    filter: "brightness(92%)",
   },
 };
 

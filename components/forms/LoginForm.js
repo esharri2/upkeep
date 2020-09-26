@@ -1,14 +1,16 @@
 // Libs
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
 
 // Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+import ButtonSubmit from "../ButtonSubmit";
+import Field from "../Field";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import login from "../utils/client/login";
-import useUser from "../hooks/useUser";
+import login from "../../utils/client/login";
+import useUser from "../../hooks/useUser";
 
 export default function LoginForm(props) {
   const { setUser } = useUser();
@@ -34,7 +36,7 @@ export default function LoginForm(props) {
       onSubmit={async (values, { setStatus }) =>
         handleSubmit(values, setStatus)
       }>
-      {({ isSubmitting, status = {} }) => (
+      {({ dirty, isSubmitting, status = {} }) => (
         <Form>
           <div>
             <label htmlFor="email">Email:</label>
@@ -44,9 +46,7 @@ export default function LoginForm(props) {
             <label htmlFor="password">Password:</label>
             <Field name="password" type="password" maxLength="50" />
           </div>
-          <button disabled={isSubmitting} type="submit">
-            {props.submitButtonText || "Submit"}
-          </button>
+          <ButtonSubmit text="Log in" isSubmitting={isSubmitting} />
           <Notification role="alert">
             {status.error && <ServerErrorMessage error={status.error} />}
           </Notification>

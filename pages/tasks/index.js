@@ -1,9 +1,9 @@
 // Libs
 import { Formik, Form, Field } from "formik";
-import Link from "next/link";
 import useSWR from "swr";
 
 // Components
+import Link from "../../components/Link";
 import PrivateLayout from "../../components/PrivateLayout";
 
 //Utils

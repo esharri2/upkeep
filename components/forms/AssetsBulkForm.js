@@ -3,13 +3,14 @@ import { Formik, Field, Form } from "formik";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
-// Components
-import Notification from "./Notification";
-import ServerErrorMessage from "./ServerErrorMessage";
+//
+import ButtonSubmit from "../ButtonSubmit";
+import Notification from "../Notification";
+import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
-import { getAssets, postAssets } from "../utils/client/fetchers";
-import useUser from "../hooks/useUser";
+import { getAssets, postAssets } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
 export default function AssetsForm() {
   const router = useRouter();
@@ -51,10 +52,11 @@ export default function AssetsForm() {
                 </label>
               ))}
             </div>
-
-            <button disabled={isSubmitting || !dirty} type="submit">
-              Save
-            </button>
+            <ButtonSubmit
+              text="Log in"
+              isSubmitting={isSubmitting}
+              dirty={dirty}
+            />
             <Notification>
               {status && <ServerErrorMessage error={status.error} />}
             </Notification>

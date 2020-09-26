@@ -1,4 +1,4 @@
-import AssetsBulkForm from "../components/AssetsBulkForm";
+import AssetsBulkForm from "../components/forms/AssetsBulkForm";
 import PrivateLayout from "../components/PrivateLayout";
 
 export default function Setup() {
