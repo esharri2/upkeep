@@ -2,10 +2,16 @@
 import { mutate } from "swr";
 
 // Components
-import Link from "./Link";
+import Button from "./Button";
+import CrossSVG from "../media/icons/cross.svg";
+import Icon from "./Icon";
+import EditSVG from "../media/icons/pencil.svg";
+import LinkAsButton from "./LinkAsButton";
+import PlusSVG from "../media/icons/plus.svg";
 
 // Utils
 import { postAssets } from "../utils/client/fetchers";
+import theme from "../styles/theme";
 import useUser from "../hooks/useUser";
 
 export default function AssetCard({ asset }) {
@@ -39,18 +45,50 @@ export default function AssetCard({ asset }) {
   };
 
   return (
-    <div>
+    <div className="card">
       <h2>{asset.name}</h2>
-      {asset.owned ? (
-        <>
-          <Link href={`/assets/${asset._id}`}>
-            <a>Edit</a>
-          </Link>
-          <button onClick={handleRemove}>Remove</button>
-        </>
-      ) : (
-        <button onClick={handleAdd}>Add</button>
-      )}
+      <div className="buttons">
+        {asset.owned ? (
+          <>
+            <LinkAsButton aria-label="Edit" href={`/assets/${asset._id}`}>
+              <Icon width="1rem">
+                <EditSVG />
+              </Icon>
+              Edit
+            </LinkAsButton>
+            <Button reverse onClick={handleRemove}>
+              <Icon>
+                <CrossSVG />
+              </Icon>
+              Remove
+            </Button>
+          </>
+        ) : (
+          <Button onClick={handleAdd}>
+            <Icon>
+              <PlusSVG />
+            </Icon>
+            Add
+          </Button>
+        )}
+      </div>
+      <style jsx>{`
+        .card {
+          padding: ${theme.spacing.m};
+          fill: ${theme.colors.accent1};
+          border-bottom: solid 1px ${theme.colors.middle};
+        }
+
+        h2 {
+          margin: 0 0 ${theme.spacing.m} 0;
+          font-size: ${theme.fontSizes.l};
+        }
+
+        .buttons {
+          display: flex;
+          justify-content: space-between;
+        }
+      `}</style>
     </div>
   );
 }

@@ -18,8 +18,8 @@ import TodoSVG from "../media/icons/to-do.svg";
 // Utils
 import theme from "../styles/theme";
 
-export default function UserMenu({ userName }) {
-  const iconWidth = { width: "1rem" };
+export default function UserMenu() {
+  const styleProps = { width: "1rem", marginRight: "1rem" };
 
   return (
     <Menu>
@@ -30,19 +30,19 @@ export default function UserMenu({ userName }) {
       </MenuButton>
       <MenuList>
         <MenuLink href="/dashboard">
-          <Icon {...iconWidth}>
+          <Icon {...styleProps}>
             <GraphlineSVG />
           </Icon>{" "}
           Dashboard
         </MenuLink>
         <MenuLink href="/assets">
-          <Icon {...iconWidth}>
+          <Icon {...styleProps}>
             <HomeSVG />
           </Icon>
           Manage assets
         </MenuLink>
         <MenuLink href="/tasks">
-          <Icon {...iconWidth}>
+          <Icon {...styleProps}>
             <TodoSVG />
           </Icon>
           Manage tasks

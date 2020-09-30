@@ -33,6 +33,7 @@ const theme = {
     m: "1rem",
     l: "2rem",
     xl: "4rem",
+    xxl: "6rem",
   },
   fontSizes: {
     s: ".8rem",
@@ -50,12 +51,8 @@ const theme = {
     xl: "1200px",
   },
   mediaQueries: {
-    tablet: function (styles) {
-      `@media screen and (min-width: 768px) {${styles}}`;
-    },
-    desktop: function (styles) {
-      `@media screen and (min-width: 992px) {${styles}}`;
-    },
+    tablet: "min-width: 768px",
+    desktop: "min-width: 992px",
   },
   hoverEffects: {
     filter: "brightness(92%)",

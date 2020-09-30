@@ -1,4 +1,11 @@
-export default function Icon({ children, rotate, width = "2rem" }) {
+import theme from "../styles/theme";
+
+export default function Icon({
+  children,
+  marginRight = theme.spacing.s,
+  rotate,
+  width = "1.5rem",
+}) {
   return (
     <div className="icon">
       {children}
@@ -7,6 +14,9 @@ export default function Icon({ children, rotate, width = "2rem" }) {
         div {
           width: ${width};
           transition: transform 0.2s;
+          display: flex;
+          align-items: center;
+          margin-right: ${marginRight};
         }
       `}</style>
       <style jsx>{`

@@ -44,6 +44,7 @@ export default function Layout({ children, narrow = false }) {
           margin: ${theme.spacing.xl} auto;
           max-width: ${narrow ? theme.breakpoints.s : theme.breakpoints.xl};
           padding: 0 ${theme.spacing.m};
+          min-height: 50vh;
         }
 
          {

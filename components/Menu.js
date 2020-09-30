@@ -63,7 +63,7 @@ export default function UserMenu({ children }) {
         }
 
         :global(.icon) {
-          margin-right: ${theme.spacing.m};
+          margin-right: ${theme.spacing.s};
         }
       `}</style>
     </ReachMenu>

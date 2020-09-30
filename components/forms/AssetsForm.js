@@ -1,12 +1,17 @@
 //Libs
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field as FormikField } from "formik";
 import useSWR from "swr";
 
 //Components
 import AssetCard from "../AssetCard";
+import CheckboxInput from "../CheckboxInput";
+import Field from "../Field";
+import Icon from "../Icon";
+import SearchSVG from "../../media/icons/search.svg";
 
 //Utils
 import { getAssets } from "../../utils/client/fetchers";
+import theme from "../../styles/theme";
 import useUser from "../../hooks/useUser";
 
 export default function AssetForm() {
@@ -16,7 +21,6 @@ export default function AssetForm() {
   return (
     <>
       {error && <div>failed to load</div>}
-      {!data && <div>loading...</div>}
       {data && (
         <Formik
           initialValues={{
@@ -40,28 +44,44 @@ export default function AssetForm() {
             return (
               <>
                 <Form>
-                  <div>
+                  <div className="search">
+                    <Icon>
+                      <SearchSVG />
+                    </Icon>
                     <label htmlFor="search">Search:</label>
-                    <Field name="search" type="text" />
+                    <Field noMargin name="search" type="text" />
                   </div>
                   <label>
-                    <Field name="owned" type="checkbox" />
+                    <CheckboxInput name="owned" type="checkbox" />
                     Show owned
                   </label>
                   <label>
-                    <Field name="unowned" type="checkbox" />
+                    <CheckboxInput name="unowned" type="checkbox" />
                     Show unowned
                   </label>
                 </Form>
-                {data &&
-                  (assetCards.some((item) => item !== null)
-                    ? assetCards
-                    : "Nothing matches these filters.")}
+                <div className="cards">
+                  {data &&
+                    (assetCards.some((item) => item !== null)
+                      ? assetCards
+                      : "Nothing matches these filters.")}
+                </div>
               </>
             );
           }}
         </Formik>
       )}
+      <style jsx>{`
+        .search {
+          display: flex;
+          align-items: center;
+          margin-bottom: ${theme.spacing.s};
+        }
+
+        .search label {
+          padding-right: ${theme.spacing.s};
+        }
+      `}</style>
     </>
   );
 }

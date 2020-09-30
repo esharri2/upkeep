@@ -2,10 +2,10 @@
 import Layout from "./Layout";
 import PrivateRoute from "./PrivateRoute";
 
-export default function PrivateLayout(props) {
+export default function PrivateLayout({ children, narrow }) {
   return (
     <PrivateRoute>
-      <Layout>{props.children}</Layout>
+      <Layout narrow={narrow}>{children}</Layout>
     </PrivateRoute>
   );
 }

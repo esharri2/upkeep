@@ -8,8 +8,8 @@ import PrivateLayout from "../../components/PrivateLayout";
 
 export default function Assets() {
   return (
-    <PrivateLayout>
-      <h1>Assets</h1>
+    <PrivateLayout narrow>
+      <h1>Manage your assets</h1>
       <AssetsForm />
     </PrivateLayout>
   );
