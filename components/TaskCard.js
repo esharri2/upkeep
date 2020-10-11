@@ -15,7 +15,7 @@ export default function TaskCard({ task }) {
         <span>{task.asset}:</span> {task.name}
       </h2>
       <div>
-        <LinkAsButton reverse href={`/tasks/${task._id}`}>
+        <LinkAsButton reverse href={`/assets/${task.assetId}/${task._id}`}>
           <Icon width="1rem">
             <EditSVG />
           </Icon>

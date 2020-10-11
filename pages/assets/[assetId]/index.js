@@ -3,25 +3,26 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 
 //Components
-import AssetForm from "../../components/forms/AssetForm";
-import Back from "../../components/Back";
-import PrivateLayout from "../../components/PrivateLayout";
+import AssetForm from "../../../components/forms/AssetForm";
+import Back from "../../../components/Back";
+import PrivateLayout from "../../../components/PrivateLayout";
 
 //Utils
-import { getAssets } from "../../utils/client/fetchers";
-import useUser from "../../hooks/useUser";
+import { getAssets } from "../../../utils/client/fetchers";
+import useUser from "../../../hooks/useUser";
 
 export default function Asset() {
   const router = useRouter();
-  const { id } = router.query;
+  const { assetId } = router.query;
 
   const { token } = useUser();
 
-  const { data, error } = useSWR([`/api/assets/${id}`, token], getAssets);
+  const { data, error } = useSWR([`/api/assets/${assetId}`, token], getAssets);
   return (
     <PrivateLayout narrow>
       <Back href="/assets" label="list of assets" />
       {error && "failed to load"}
+      {!data && "..loading"}
       {data && (
         <>
           <h1>{data.asset.name}</h1>
