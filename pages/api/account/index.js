@@ -80,6 +80,7 @@ function getAssetData() {
           name: "Wash burner drip plates",
           description:
             "Remove and wash burner drip plates, or replace them if they are corroded",
+          frequency: 180,
         },
       ],
     },
@@ -91,6 +92,7 @@ function getAssetData() {
           canonicalId: 31,
           name: "Clean",
           description: "Remove stuff from gutters.",
+          frequency: 90,
         },
       ],
     },

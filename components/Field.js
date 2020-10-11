@@ -7,19 +7,32 @@ import theme from "../styles/theme";
 
 function getLinkStyles(noMargin) {
   return css.resolve`
-    input {
+    input,
+    textarea {
+      transition: border-color ${theme.timings.fast};
+      width: 100%;
+      border-radius: ${theme.borders.radius};
       border: solid 1px ${theme.colors.middle};
       display: block;
       padding: ${theme.spacing.s};
       margin-bottom: ${noMargin ? 0 : theme.spacing.m};
-      transition: border-color ${theme.timings.fast};
-      width: 100%;
-      border-radius: ${theme.borders.radius};
     }
 
-    input:focus {
+    input:focus,
+    textarea:focus {
       outline: none;
       border-color: ${theme.colors.accent1};
+    }
+
+    textarea {
+      min-height: ${theme.spacing.xxl};
+    }
+
+    select {
+      border-color: ${theme.colors.dark};
+      border-radius: ${theme.borders.radius};
+      padding: ${theme.spacing.s};
+      margin: 0 ${theme.spacing.s};
     }
   `;
 }

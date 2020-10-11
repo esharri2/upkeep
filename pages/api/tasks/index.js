@@ -15,7 +15,14 @@ const handler = async (req, res) => {
         const home = await Home.findOne(
           { _id: user.homeId },
           "assets.name assets._id assets.owned assets.tasks"
-        );
+        ).lean();
+
+        // Add item names to tasks
+        for (const asset of home.assets) {
+          for (const task of asset.tasks) {
+            task.asset = asset.name;
+          }
+        }
 
         res.status(200).json({ assets: home.assets });
       } catch (error) {

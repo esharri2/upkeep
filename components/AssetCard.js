@@ -45,8 +45,8 @@ export default function AssetCard({ asset }) {
   };
 
   return (
-    <div className="card">
-      <h2>{asset.name}</h2>
+    <section className="card">
+      <h2 className={asset.owned ? "owned" : "unowned"}>{asset.name}</h2>
       <div className="buttons">
         {asset.owned ? (
           <>
@@ -54,7 +54,7 @@ export default function AssetCard({ asset }) {
               <Icon width="1rem">
                 <EditSVG />
               </Icon>
-              Edit
+              Edit details
             </LinkAsButton>
             <Button reverse onClick={handleRemove}>
               <Icon>
@@ -74,14 +74,28 @@ export default function AssetCard({ asset }) {
       </div>
       <style jsx>{`
         .card {
-          padding: ${theme.spacing.m};
+          padding: ${theme.spacing.m} 0;
           fill: ${theme.colors.accent1};
           border-bottom: solid 1px ${theme.colors.middle};
         }
 
+        .card:first-of-type {
+          margin-top: ${theme.spacing.m};
+        }
+
+        .card.unowned {
+           {
+            /* background-color: ${theme.colors.disabled}; */
+          }
+        }
+
         h2 {
-          margin: 0 0 ${theme.spacing.m} 0;
+          margin: 0 0 ${theme.spacing.s} 0;
           font-size: ${theme.fontSizes.l};
+        }
+
+        h2.unowned {
+          color: ${theme.colors.disabledText};
         }
 
         .buttons {
@@ -89,6 +103,6 @@ export default function AssetCard({ asset }) {
           justify-content: space-between;
         }
       `}</style>
-    </div>
+    </section>
   );
 }

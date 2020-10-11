@@ -51,14 +51,12 @@ export default function AssetForm() {
                     <label htmlFor="search">Search:</label>
                     <Field noMargin name="search" type="text" />
                   </div>
-                  <label>
-                    <CheckboxInput name="owned" type="checkbox" />
-                    Show owned
-                  </label>
-                  <label>
-                    <CheckboxInput name="unowned" type="checkbox" />
-                    Show unowned
-                  </label>
+                  <CheckboxInput name="owned" type="checkbox">
+                    My assets
+                  </CheckboxInput>
+                  <CheckboxInput name="unowned" type="checkbox">
+                    Unowned assets
+                  </CheckboxInput>
                 </Form>
                 <div className="cards">
                   {data &&
@@ -75,7 +73,7 @@ export default function AssetForm() {
         .search {
           display: flex;
           align-items: center;
-          margin-bottom: ${theme.spacing.s};
+          padding: ${theme.spacing.m} 0;
         }
 
         .search label {

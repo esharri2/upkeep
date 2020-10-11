@@ -165,7 +165,6 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          box-shadow: ${theme.shadows.s};
           border-radius: ${theme.borders.radius};
           padding: ${theme.spacing.m};
           fill: ${theme.colors.accent1};

@@ -1,10 +1,12 @@
 // Libs
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import useSWR from "swr";
 
 // Components
+import Field from "../../components/Field";
 import Link from "../../components/Link";
-import PrivateLayout from "../../components/PrivateLayout";
+import Layout from "../../components/Layout";
+import TaskCard from "../../components/TaskCard";
 
 //Utils
 import { getTasks } from "../../utils/client/fetchers";
@@ -21,6 +23,7 @@ export default function Tasks() {
   // TODO may get tasks in order?
 
   // TODO component?
+  // Flatten tasks into a single array
   const renderTasksByDate = (assets) => {
     const tasks = [].concat(
       ...assets.map((asset) => (!asset.owned ? [] : asset.tasks))
@@ -39,37 +42,18 @@ export default function Tasks() {
     // sort by that
 
     // const sortedTasks =
-    return tasks.map((task) => (
-      <p>
-        {task.name}{" "}
-        <Link href={`/tasks/${task.id}`}>
-          <a>Edit</a>
-        </Link>
-      </p>
-    ));
+    return tasks.map((task) => <TaskCard task={task} />);
   };
 
   // TODO component?
   const renderTasksByAsset = (assets) => {
-    return assets.map((asset) => {
-      return (
-        <div>
-          <h2>{asset.name}</h2>
-          {asset.tasks.map((task) => (
-            <p>
-              {task.name}{" "}
-              <Link href={`/tasks/${task.id}`}>
-                <a>Edit</a>
-              </Link>
-            </p>
-          ))}
-        </div>
-      );
-    });
+    return assets.map((asset) =>
+      asset.tasks.map((task) => <TaskCard task={task} />)
+    );
   };
 
   return (
-    <PrivateLayout>
+    <Layout narrow>
       <h1>Tasks</h1>
       <Formik initialValues={{ sort: "date" }}>
         {({ values }) => {
@@ -88,6 +72,6 @@ export default function Tasks() {
           );
         }}
       </Formik>
-    </PrivateLayout>
+    </Layout>
   );
 }

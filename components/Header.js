@@ -34,6 +34,7 @@ export default function Header() {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          height: ${theme.sizes.headerHeight};
         }
 
         .logo {

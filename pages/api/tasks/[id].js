@@ -15,7 +15,11 @@ const handler = async (req, res) => {
     case "GET":
       try {
         const home = await Home.findOne({ _id: user.homeId }, "assets");
-        let asset = home.assets.id(query.id);
+        // TODO test this. prob doesn't work?
+        console.log(query.id);
+        // let asset = home.assets.tasks.id(query.id);
+        asset = "fart";
+        console.log(asset);
         res.status(200).json({ asset });
       } catch (error) {
         sendError(res, 400, error);

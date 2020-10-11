@@ -17,6 +17,7 @@ const theme = {
     warning: "#c03221",
     success: "#a2ad59",
     disabled: "#DCDCDC",
+    disabledText: "#717171",
   },
   timings: {
     fast: ".2s",
@@ -56,6 +57,9 @@ const theme = {
   },
   hoverEffects: {
     filter: "brightness(92%)",
+  },
+  sizes: {
+    headerHeight: "80px",
   },
 };
 

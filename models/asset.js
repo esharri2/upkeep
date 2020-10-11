@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const taskSchema = require("./task");
+
 const assetSchema = new Schema({
   name: {
     type: String,
@@ -14,7 +16,7 @@ const assetSchema = new Schema({
   owned: { type: Boolean, default: false },
   canonicalId: Number, //ID for canonical asset; custom asset will not have ID.
   notes: String, //TODO check type on this one? May need to allow whitespace or something
-  tasks: [],
+  tasks: [taskSchema],
 });
 
 module.exports = assetSchema;

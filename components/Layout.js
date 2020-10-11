@@ -41,10 +41,24 @@ export default function Layout({ children, narrow = false }) {
         }
 
         main {
-          margin: ${theme.spacing.xl} auto;
+          margin: 0 auto;
           max-width: ${narrow ? theme.breakpoints.s : theme.breakpoints.xl};
-          padding: 0 ${theme.spacing.m};
-          min-height: 50vh;
+          padding: ${theme.spacing.xl} ${theme.spacing.m};
+          min-height: calc(100vh - ${theme.sizes.headerHeight});
+        }
+
+        .sr-only {
+          border: 0 !important;
+          clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+          -webkit-clip-path: inset(50%) !important;
+          clip-path: inset(50%) !important; /* 2 */
+          height: 1px !important;
+          margin: -1px !important;
+          overflow: hidden !important;
+          padding: 0 !important;
+          position: absolute !important;
+          width: 1px !important;
+          white-space: nowrap !important; /* 3 */
         }
 
          {

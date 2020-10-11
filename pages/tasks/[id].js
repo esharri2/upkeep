@@ -5,7 +5,8 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 
 //Components
-import TaskForm from "../../components/TaskForm";
+import Back from "../../components/Back";
+import TaskForm from "../../components/forms/TaskForm";
 import PrivateLayout from "../../components/PrivateLayout";
 
 //Utils
@@ -18,15 +19,19 @@ export default function Asset() {
 
   const { token } = useUser();
 
-  const { data, error } = useSWR([`/api/assets/${id}`, token], getAssets);
-
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  const { data, error } = useSWR([`/api/tasks/${id}`, token], getTasks);
 
   return (
-    <PrivateLayout>
-      <h1>{data.asset.name}</h1>
-      <TaskForm task={data.task} />
+    <PrivateLayout narrow>
+      <Back href="/tasks" />
+      {error && <p>Failed to load</p>}
+      {!data && <p>loading...</p>}
+      {data && (
+        <>
+          <h1>{data.task.name}</h1>
+          <TaskForm task={data.task} />
+        </>
+      )}
     </PrivateLayout>
   );
 }
