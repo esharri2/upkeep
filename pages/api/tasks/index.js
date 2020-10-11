@@ -21,7 +21,6 @@ const handler = async (req, res) => {
         for (const asset of home.assets) {
           for (const task of asset.tasks) {
             task.asset = asset.name;
-            task.assetId = asset._id;
           }
         }
 

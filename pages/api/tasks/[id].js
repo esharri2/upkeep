@@ -16,9 +16,9 @@ const handler = async (req, res) => {
       try {
         const home = await Home.findOne({ _id: user.homeId }, "assets");
         // TODO test this. prob doesn't work?
-        console.log(query);
+        console.log(query.id);
         // let asset = home.assets.tasks.id(query.id);
-        let asset = "fart";
+        asset = "fart";
         console.log(asset);
         res.status(200).json({ asset });
       } catch (error) {

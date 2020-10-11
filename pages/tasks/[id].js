@@ -5,22 +5,21 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 
 //Components
-import Back from "../../../../components/Back";
-import PrivateLayout from "../../../../components/PrivateLayout";
-import TaskForm from "../../../../components/forms/TaskForm";
+import Back from "../../components/Back";
+import TaskForm from "../../components/forms/TaskForm";
+import PrivateLayout from "../../components/PrivateLayout";
 
 //Utils
-import { getTasks } from "../../../../utils/client/fetchers";
-import useUser from "../../../../hooks/useUser";
+import { getTasks, postTasks } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
-export default function Task() {
+export default function Asset() {
   const router = useRouter();
-  console.log(router.query);
-  const { taskId } = router.query;
+  const { id } = router.query;
 
   const { token } = useUser();
 
-  const { data, error } = useSWR([`/api/tasks/${taskId}`, token], getTasks);
+  const { data, error } = useSWR([`/api/tasks/${id}`, token], getTasks);
 
   return (
     <PrivateLayout narrow>

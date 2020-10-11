@@ -3,14 +3,14 @@ import { Formik, Form } from "formik";
 import useSWR from "swr";
 
 // Components
-import Field from "../components/Field";
-import Link from "../components/Link";
-import Layout from "../components/Layout";
-import TaskCard from "../components/TaskCard";
+import Field from "../../components/Field";
+import Link from "../../components/Link";
+import Layout from "../../components/Layout";
+import TaskCard from "../../components/TaskCard";
 
 //Utils
-import { getTasks } from "../utils/client/fetchers";
-import useUser from "../hooks/useUser";
+import { getTasks } from "../../utils/client/fetchers";
+import useUser from "../../hooks/useUser";
 
 export default function Tasks() {
   const { token } = useUser();
