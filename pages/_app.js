@@ -13,8 +13,9 @@ const AutoLogin = dynamic(() => import("../components/AutoLogin"), {
 export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
-      <AutoLogin />
-      <Component {...pageProps} />
+      <AutoLogin>
+        <Component {...pageProps} />
+      </AutoLogin>
     </UserProvider>
   );
 }

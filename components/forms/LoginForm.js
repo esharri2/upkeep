@@ -46,7 +46,7 @@ export default function LoginForm(props) {
             <label htmlFor="password">Password:</label>
             <Field name="password" type="password" maxLength="50" />
           </div>
-          <ButtonSubmit text="Log in" isSubmitting={isSubmitting} />
+          <ButtonSubmit isSubmitting={isSubmitting}>Log in</ButtonSubmit>
           <Notification role="alert">
             {status.error && <ServerErrorMessage error={status.error} />}
           </Notification>

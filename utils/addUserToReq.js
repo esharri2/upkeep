@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 const getUser = async (req) => {
   const { headers } = req;
   const authHeader = headers?.authorization;
+  console.log("authHeader is ", authHeader);
   // TODO - split throws error here, no auth Header?
   const token = authHeader.split(" ")[1];
   //todo what if token is undefined?

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 
+// TODO change default state?
 const defaultState = {
   email: null,
   token: null,

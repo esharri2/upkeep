@@ -1,5 +1,8 @@
+// todo copy paste from task form update everyting!
+
 //Libs
 import { Formik, Form } from "formik";
+import { useRouter } from "next/router";
 
 //Components
 import ButtonSubmit from "../ButtonSubmit";
@@ -8,26 +11,29 @@ import Notification from "../Notification";
 import ServerErrorMessage from "../ServerErrorMessage";
 
 //Utils
-import { postTasks } from "../../utils/client/fetchers";
 import useUser from "../../hooks/useUser";
+import { postInstances } from "../../utils/client/fetchers";
 
-export default function TaskForm({ task }) {
+/**
+ * Not set up for updating, jsut adding new instance.
+ */
+
+export default function InstanceForm() {
   const { token } = useUser();
+  const router = useRouter();
 
-  const { _id: taskId, assetId, frequency, notes } = task;
+  const { id: taskId } = router.query;
 
   const handleSubmit = async (values, setStatus) => {
-    postTasks(
+    postInstances(
       token,
       {
         body: JSON.stringify(values),
       },
-      taskId,
-      assetId
+      taskId
     )
       .then(() => {
-        alert("yaya");
-        //mutate? maybe not ...
+        router.push(`/tasks/${taskId}`);
       })
       .catch((error) => setStatus(error));
   };
@@ -35,8 +41,8 @@ export default function TaskForm({ task }) {
   return (
     <Formik
       initialValues={{
-        frequency,
-        notes,
+        notes: "",
+        date: new Date().toLocaleDateString("en-CA"),
       }}
       onSubmit={async (values, { setStatus }) =>
         handleSubmit(values, setStatus)
@@ -45,13 +51,11 @@ export default function TaskForm({ task }) {
         return (
           <Form>
             <div>
-              <label htmlFor="frequency">Frequency (in days)</label>
-              <Field type="number" name="frequency" />
-            </div>
-            <div>
-              <label htmlFor="notes">General notes</label>
+              <label htmlFor="date">Date completed</label>
+              <Field name="date" type="date" />
+              <label htmlFor="notes">Notes</label>
               <Field
-                placeholder="Add some notes to reference next time you do this task, i.e. youtube links"
+                placeholder="Add any notes about what you did."
                 as="textarea"
                 name="notes"
               />

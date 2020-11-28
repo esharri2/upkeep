@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const instanceSchema = require("./instance");
+
 const taskSchema = new Schema({
   name: {
     type: String,
@@ -11,7 +13,7 @@ const taskSchema = new Schema({
   frequency: { type: Number, required: true }, //TODO should this be frequencyInDays?
   isMuted: { type: Boolean, default: false },
   notes: String, //TODO check type on this one? May need to allow whitespace or something
-  instances: [],
+  instances: [instanceSchema],
 });
 
 module.exports = taskSchema;

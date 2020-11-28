@@ -18,6 +18,8 @@ const handler = async (req, res) => {
           { _id: user.homeId },
           "assets.name assets._id assets.owned"
         );
+        home.assets.sort((a, b) => (a.name > b.name ? 1 : -1));
+
         res.status(200).json({ assets: home.assets });
       } catch (error) {
         sendError(res, 400, error);

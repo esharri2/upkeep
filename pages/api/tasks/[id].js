@@ -3,24 +3,33 @@ import connectToDatabase from "../../../utils/connectToDatabase";
 import addUserToReq from "../../../utils/addUserToReq";
 import sendError from "../../../utils/sendError";
 import sanitize from "../../../utils/sanitize";
-
-// TODO copy and paste form tODO ,rewrite whole thing
+import getDueInDays from "../../../utils/getDueInDays";
 
 const handler = async (req, res) => {
   await connectToDatabase();
 
-  const { body, method, query, user } = req;
+  const { body: rawBody, method, query, user } = req;
+  const body = sanitize(rawBody);
 
   switch (method) {
     case "GET":
       try {
-        const home = await Home.findOne({ _id: user.homeId }, "assets");
-        // TODO test this. prob doesn't work?
-        console.log(query.id);
-        // let asset = home.assets.tasks.id(query.id);
-        asset = "fart";
-        console.log(asset);
-        res.status(200).json({ asset });
+        const home = await Home.findOne({ _id: user.homeId }, "assets").lean();
+        // Get asset with the task
+        const task = (() => {
+          for (const asset of home.assets) {
+            const task = asset.tasks.find((task) => task._id.equals(query.id));
+            if (task) {
+              task.asset = asset.name;
+              task.assetId = asset._id;
+              task.dueIn = getDueInDays(task);
+              // figure out when it's due!
+              return task;
+            }
+          }
+        })();
+        if (!task) throw new Error();
+        res.status(200).json({ task });
       } catch (error) {
         sendError(res, 400, error);
       }
@@ -28,26 +37,11 @@ const handler = async (req, res) => {
     case "POST":
       try {
         const home = await Home.findOne({ _id: user.homeId }, "assets");
-        let asset = home.assets.id(query.id);
-        asset = Object.assign(asset, body);
+        let task = home.assets.id(query.assetId).tasks.id(query.id);
+        // todo what if no task?
+        task = Object.assign(task, body);
         await home.save();
         res.status(200).json({});
-
-        // const { assetIds } = req.body;
-        // if (assetIds.length > 0) {
-        //   const home = await Home.findOne({ _id: user.homeId }, "assets._id");
-        //   for (const asset of home.assets) {
-        //     if (assetIds.includes(asset._id.toString())) {
-        //       asset.owned = true;
-        //     } else {
-        //       asset.owned = false;
-        //     }
-        //   }
-        //   await home.save();
-        //   res.status(200).json({});
-        // } else {
-        //   res.status(200).json({});
-        // }
       } catch (error) {
         sendError(res, 400, error);
       }

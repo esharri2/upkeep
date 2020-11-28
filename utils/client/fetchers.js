@@ -40,12 +40,11 @@ const handleResponse = async (response) => {
   try {
     json = await response.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
     console.error("Response does not contain json.");
     throw new Error();
   }
   if (!response.ok) throw json;
-  console.log("ok!");
   return json;
 };
 
@@ -117,33 +116,25 @@ export const postAssets = async (token, body, id) => {
 // TASKS
 
 export const getTasks = async (path, token) => {
+  debugger;
   const response = await fetch(path, getOptions(null, token));
   return await handleResponse(response);
 };
 
-export const postTasks = async (token, body, id) => {
+export const postTasks = async (token, body, taskId, assetId = "") => {
   const response = await fetch(
-    `/api/tasks${id ? `/${id}` : ""}`,
+    `/api/tasks${taskId ? `/${taskId}?assetId=${assetId}` : ""}`,
     postOptions(body, token)
   );
   return await handleResponse(response);
 };
 
-// TO-DOS DELETE
+// INSTANCES
 
-// export const getTodos = async (path, token) => {
-//   const response = await fetch(path, getOptions(null, token));
-//   return await handleResponse(response);
-// };
-
-// export const postTodos = async (token, body) => {
-//   const response = await fetch("/api/todos", postOptions(body, token));
-//   return await handleResponse(response);
-// };
-
-// export const deleteTodo = async (token, id) => {
-//   const response = await fetch(`/api/todos/${id}`, deleteOptions(null, token));
-//   return await handleResponse(response);
-// };
-
-// END TO-DOS
+export const postInstances = async (token, body, taskId) => {
+  const response = await fetch(
+    `/api/instances?taskId=${taskId}`,
+    postOptions(body, token)
+  );
+  return await handleResponse(response);
+};

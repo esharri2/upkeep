@@ -28,9 +28,7 @@ export default async (req, res) => {
         if (email && password) {
           // Login with email and password.
           user = await User.findOne({ email }).populate(homeQueryConditions);
-          console.log("Hi, ", user);
           if (!user) throw new Error("Sorry, we can't find this account.");
-          console.log(user);
 
           if (user.isLocked) {
             throw new Error(

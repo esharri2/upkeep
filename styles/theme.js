@@ -23,7 +23,7 @@ const theme = {
     fast: ".2s",
   },
   fontFamilies: {
-    body: '"Work Sans", "Helvetica Neue", Arial, sans-serif',
+    body: '"Red Hat Text", "Helvetica Neue", Arial, sans-serif',
   },
   borders: {
     radius: ".25rem",

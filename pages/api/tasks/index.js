@@ -2,6 +2,7 @@ import Home from "../../../models/home";
 import connectToDatabase from "../../../utils/connectToDatabase";
 import addUserToReq from "../../../utils/addUserToReq";
 import sendError from "../../../utils/sendError";
+import getDueInDays from "../../../utils/getDueInDays";
 
 const handler = async (req, res) => {
   await connectToDatabase();
@@ -18,13 +19,17 @@ const handler = async (req, res) => {
         ).lean();
 
         // Add item names to tasks
+
         for (const asset of home.assets) {
           for (const task of asset.tasks) {
             task.asset = asset.name;
+            task.dueIn = getDueInDays(task);
           }
         }
 
-        res.status(200).json({ assets: home.assets });
+        const ownedAssets = home.assets.filter((asset) => asset.owned);
+
+        res.status(200).json({ assets: ownedAssets });
       } catch (error) {
         sendError(res, 400, error);
       }

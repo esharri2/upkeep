@@ -10,6 +10,7 @@ export default async function login(
     body: JSON.stringify({ email: emailInput, password: passwordInput }),
   });
   if (!accessToken) throw new Error();
+
   window.localStorage.setItem("returningUser", true);
   setUserCallback({ email, homeId, token: accessToken });
   setTokenRefreshTimer(setUserCallback);
@@ -18,7 +19,6 @@ export default async function login(
 
 const setTokenRefreshTimer = (setUserCallback) => {
   setInterval(async function () {
-    console.log("refresh time!");
     getToken()
       .then(({ email, accessToken }) => {
         if (accessToken) {

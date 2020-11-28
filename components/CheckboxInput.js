@@ -40,8 +40,8 @@ const { className, styles } = css.resolve`
 
 export default function CheckboxInput(props) {
   return (
-    <label>
-      <Field className={`${className}`} name={props.name} type="checkbox" />
+    <label className={props.className}>
+      <Field className={className} name={props.name} type="checkbox" />
       {props.children}
       {styles}
       <style jsx>{`

@@ -16,6 +16,7 @@ const handler = async (req, res) => {
       try {
         const home = await Home.findOne({ _id: user.homeId }, "assets");
         let asset = home.assets.id(query.id);
+        // todo what if no asset is here?
         res.status(200).json({ asset });
       } catch (error) {
         sendError(res, 400, error);

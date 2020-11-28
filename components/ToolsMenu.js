@@ -9,6 +9,7 @@ import {
 
 // Components
 import Icon from "./Icon";
+import Link from "./Link";
 import Menu from "./Menu";
 import AppsSVG from "../media/icons/view-apps.svg";
 import GraphlineSVG from "../media/icons/graph-line.svg";
@@ -29,12 +30,12 @@ export default function UserMenu() {
         </Icon>
       </MenuButton>
       <MenuList>
-        <MenuLink href="/dashboard">
+        <Link href="/dashboard">
           <Icon {...styleProps}>
             <GraphlineSVG />
           </Icon>{" "}
           Dashboard
-        </MenuLink>
+        </Link>
         <MenuLink href="/assets">
           <Icon {...styleProps}>
             <HomeSVG />

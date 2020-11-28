@@ -8,20 +8,23 @@ import LinkAsButton from "./LinkAsButton";
 import theme from "../styles/theme";
 
 export default function TaskCard({ task }) {
-  console.log(task);
+  const { _id, asset, dueIn } = task;
   return (
     <section>
       <h2>
-        <span>{task.asset}:</span> {task.name}
+        <span>{asset}:</span> {task.name}
       </h2>
+      <p>
+        {dueIn ? `Due in ${dueIn} days.` : "There is no history for this task."}
+      </p>
       <div>
-        <LinkAsButton reverse href={`/tasks/${task._id}`}>
+        <LinkAsButton reverse href={`/tasks/${_id}`}>
           <Icon width="1rem">
             <EditSVG />
           </Icon>
           Edit details
         </LinkAsButton>
-        <LinkAsButton href={`/tasks/complete/${task._id}`}>
+        <LinkAsButton href={`/tasks/${_id}/complete`}>
           <Icon width="1rem">
             <CheckmarkSVG />
           </Icon>

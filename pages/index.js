@@ -1,5 +1,5 @@
 // Libs
-import Link from "../components/Link";
+import { useRouter } from "next/router";
 
 // Components
 import ChevronRightSVG from "../media/icons/chevron-right.svg";
@@ -14,29 +14,46 @@ import TodoSVG from "../media/icons/to-do.svg";
 // Utils
 import theme from "../styles/theme";
 import useUser from "../hooks/useUser";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const { email } = useUser();
+
+  useEffect(() => {
+    // Send user to dashboard if they are already logged in
+    if (email) {
+      router.push("/dashboard");
+    }
+  }, email);
+
   const iconWidth = { width: "100px" };
   return (
     <Layout>
       <section className="home-section">
-        <div>
-          <h1>Upkeep</h1>
-          <p>A simple app for taking care of your less-than-simple home.</p>
+        <div className="home-section-title">
+          <h1>
+            <span className="accent">Upkeep</span> is a simple way to stay on
+            top of home maintenance.
+          </h1>
           <div className="link-container">
             <div>
-              <LinkAsButton bigText href="/signup">
+              <LinkAsButton centerText bigText href="/signup">
                 Create an account
               </LinkAsButton>
             </div>
-            <div>
+            {/* <div>
               <LinkAsButton bigText reverse href="/login">
                 Log in with existing account
               </LinkAsButton>
-            </div>
+            </div> */}
             <div>
-              <LinkAsButton bigText reverse noBorder href="#features">
+              <LinkAsButton
+                bigText
+                centerText
+                reverse
+                noBorder
+                href="#features">
                 Learn more
                 <Icon>
                   <ChevronRightSVG />
@@ -50,29 +67,44 @@ export default function Home() {
         </div>
       </section>
       <section id="features" className="features">
+        <div>
+          <h2>Homecare is hard.</h2>
+          <p>
+            Changing your furnance filter. Checking your gutters for leaks.
+            Clearing the shower drain.
+          </p>
+          <p>
+            It's a lot to keep up with. And you may not even be doing everything
+            you need to do to ensure the longevity and value of your home.{" "}
+            <span className="accent">Upkeep can help!</span>
+          </p>
+        </div>
         <div className="card">
           <Icon {...iconWidth}>
             <HomeSVG />
           </Icon>
+          <h2>Keep track of your assets</h2>
           <p>
-            This is some great text it is very good yay. This is some great text
-            it is very good yay. This is some great text it is very good yay.
-            This is some great text it is very good yay.
+            Keep a list of what you have in your home, inside and out. Store
+            important details, like make, model, and purchase date.
           </p>
         </div>
         <div className="card">
           <Icon {...iconWidth}>
             <TodoSVG />
           </Icon>
+          <h2>Know what to do and when to do it</h2>
           <p>
-            This is some great text it is very good yay. This is some great text
-            it is very good yay. This is some great text it is very good yay.
+            Based on your list of assets, we'll tell you what you need to do to
+            take care of them. Descaled your hot water heater? Enter the date
+            and we'll let you know when to do it again.
           </p>
         </div>
         <div className="card">
           <Icon {...iconWidth}>
             <GraphlineSVG />
           </Icon>
+          <h2>Create a record of your homecare history</h2>
           <p>
             This is some great text it is very good yay. This is some great text
             it is very good yay
@@ -80,16 +112,11 @@ export default function Home() {
         </div>
       </section>
 
-      {email && (
-        <>
-          <p>Hey! We logged you in automatically as {email}.</p>
-          <Link href="/dashboard">Go to your dashboard.</Link>
-        </>
-      )}
       <style jsx>{`
         .home-section {
           display: flex;
           flex-direction: column;
+          align-items: center;
         }
 
         .home-section > div:first-of-type {
@@ -118,11 +145,27 @@ export default function Home() {
         }
 
         h1 {
-          font-size: 3.5rem;
+          font-size: 3rem;
+        }
+
+        .accent {
           color: ${theme.colors.accent1};
-          margin: ${theme.spacing.l} 0;
+        }
+
+        h2 {
+          color: ${theme.colors.accent1};
+          text-align: center;
+          margin-bottom: 0;
+        }
+
+        h2:first-of-type {
+          font-size: 2rem;
+        }
+
+        .emphasis {
+          color: ${theme.colors.accent1};
           font-weight: 600;
-          letter-spacing: -0.025em;
+          text-align: center;
         }
 
         .home-section p {
@@ -130,6 +173,10 @@ export default function Home() {
           margin: 0;
           line-height: 1.2;
           font-weight: 600;
+        }
+
+        p + p {
+          margin-top: 0;
         }
 
         .link-container {
@@ -157,7 +204,6 @@ export default function Home() {
         }
 
         .features p {
-          text-align: center;
           font-size: ${theme.fontSizes.l};
         }
 
@@ -166,7 +212,7 @@ export default function Home() {
           flex-direction: column;
           align-items: center;
           border-radius: ${theme.borders.radius};
-          padding: ${theme.spacing.m};
+          padding: ${theme.spacing.m} 0;
           fill: ${theme.colors.accent1};
           margin: ${theme.spacing.m};
         }
@@ -174,6 +220,13 @@ export default function Home() {
         @media screen and (${theme.mediaQueries.desktop}) {
           .home-section {
             flex-direction: row;
+            min-height: 80vh;
+          }
+
+          .home-section-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
           }
 
           .home-section p {
@@ -183,7 +236,9 @@ export default function Home() {
           }
 
           h1 {
-            font-size: 5rem;
+            font-size: 4rem;
+            margin: 0;
+            line-height: 1.2;
           }
 
           .features {
@@ -192,6 +247,22 @@ export default function Home() {
 
           .link-container {
             width: 50%;
+          }
+
+          .features > div:first-child {
+            grid-column-start: 1;
+            grid-column-end: 4;
+            text-align: center;
+            padding: 0 10vw;
+            font-size: 3rem;
+          }
+
+          .features > div:first-child h2 {
+            font-size: inherit;
+          }
+
+          .features > div:first-child p {
+            font-size: 1.7rem;
           }
         }
       `}</style>

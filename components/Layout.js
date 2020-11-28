@@ -1,7 +1,3 @@
-// todo give this full, desktop, mobile size widths
-
-// Libs
-
 // Components
 import Header from "./Header";
 import Footer from "./Footer";

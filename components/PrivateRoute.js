@@ -11,9 +11,7 @@ export default function PrivateRoute(props) {
     return (
       <>
         <p>YOU are not authorized.</p>
-        <Link href="/">
-          <a>Go home</a>
-        </Link>
+        <Link href="/">Go home</Link>
       </>
     );
   } else {

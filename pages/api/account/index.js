@@ -69,6 +69,12 @@ function getAssetData() {
           description: "Power off your freezer and let ice build up melt",
           frequency: 360,
         },
+        {
+          canonicalId: 12,
+          name: "Clean seal",
+          description: "Wipe the door seals.",
+          frequency: 60,
+        },
       ],
     },
     {
@@ -81,6 +87,19 @@ function getAssetData() {
           description:
             "Remove and wash burner drip plates, or replace them if they are corroded",
           frequency: 180,
+        },
+        {
+          canonicalId: 22,
+          name: "Run a cleaning cycle",
+          description: "Run a cleaning cycle on your oven.",
+          frequency: 180,
+        },
+        {
+          canonicalId: 23,
+          name: "Clean controls",
+          description:
+            "Clean any gunk or debris off of the  buttons and dials.",
+          frequency: 60,
         },
       ],
     },

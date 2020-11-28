@@ -2,12 +2,13 @@ import theme from "../styles/theme";
 
 export default function Icon({
   children,
+  className,
   marginRight = theme.spacing.s,
   rotate,
   width = "1.5rem",
 }) {
   return (
-    <div className="icon">
+    <div className={`icon ${className}`}>
       {children}
 
       <style jsx>{`

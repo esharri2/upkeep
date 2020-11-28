@@ -17,7 +17,7 @@ export default function sanitize(input) {
 }
 
 const sanitizeValue = (string) => {
-  if (string) {
+  if (string && typeof string === "string") {
     return trim(escape(string));
   }
   return string;
