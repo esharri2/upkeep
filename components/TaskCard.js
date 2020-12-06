@@ -18,13 +18,13 @@ export default function TaskCard({ task }) {
         {dueIn ? `Due in ${dueIn} days.` : "There is no history for this task."}
       </p>
       <div>
-        <LinkAsButton reverse href={`/tasks/${_id}`}>
+        <LinkAsButton reverse href="/tasks/[id]" as={`/tasks/${_id}`}>
           <Icon width="1rem">
             <EditSVG />
           </Icon>
           Edit details
         </LinkAsButton>
-        <LinkAsButton href={`/tasks/${_id}/complete`}>
+        <LinkAsButton href="/tasks/[id]/complete" as={`/tasks/${_id}/complete`}>
           <Icon width="1rem">
             <CheckmarkSVG />
           </Icon>

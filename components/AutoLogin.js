@@ -19,13 +19,18 @@ export default function AutoLogin({ children }) {
     window.localStorage.getItem("returningUser")
   );
 
+  console.log("TOKEN: ", token);
+
   // Send user to login page if the auto login fails
   useEffect(() => {
-    if (failed) router.push("/login");
-  }, failed);
+    if (failed) {
+      window.localStorage.removeItem("returningUser");
+      router.push("/login");
+    }
+  }, [failed]);
 
   // Do nothing (just pass children) if new visitor OR logged in
-  if (!isReturningUser || token) {
+  if (!isReturningUser || token || failed) {
     return children;
   } else {
     // Returning user who is not logged in; let's try to log in.

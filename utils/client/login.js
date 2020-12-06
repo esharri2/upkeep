@@ -33,5 +33,5 @@ const setTokenRefreshTimer = (setUserCallback) => {
         alert("Sorry to interrupt, but we need you to log in again.");
         Router.push("/login");
       });
-  }, 0.9 * 60 * 1000);
+  }, 1000 * 60 * 9);
 };

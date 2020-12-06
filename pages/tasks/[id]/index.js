@@ -45,7 +45,9 @@ export default function Asset() {
                   ? `Due in ${data.task.dueIn} days`
                   : "Mark this task complete to add the last date you did it. Then we can tell when it's due again!"}
               </p>
-              <LinkAsButton href={`/tasks/${data.task._id}/complete`}>
+              <LinkAsButton
+                href="/tasks/[id]/complete"
+                as={`/tasks/${data.task._id}/complete`}>
                 <Icon width="1rem">
                   <CheckmarkSVG />
                 </Icon>

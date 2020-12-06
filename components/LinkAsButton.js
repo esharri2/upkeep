@@ -34,6 +34,7 @@ function getLinkStyles(bigText, noBorder, centerText, reverse) {
 }
 
 export default function LinkAsButton({
+  as,
   children,
   href,
   bigText,
@@ -49,7 +50,7 @@ export default function LinkAsButton({
   );
 
   return (
-    <Link className={className} href={href}>
+    <Link className={className} as={as} href={href}>
       {children}
       {styles}
     </Link>

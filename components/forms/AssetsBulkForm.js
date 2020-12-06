@@ -31,7 +31,6 @@ export default function AssetsForm() {
   const { data, error } = useSWR(["/api/assets", token], getAssets);
 
   const handleSubmit = async (values, setStatus) => {
-    debugger;
     postAssets(token, {
       body: JSON.stringify({ assetIds: values.checked }),
     })

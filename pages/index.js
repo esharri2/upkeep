@@ -22,10 +22,11 @@ export default function Home() {
 
   useEffect(() => {
     // Send user to dashboard if they are already logged in
+    // TODO this feels glitchy, since you see the home page first ...
     if (email) {
       router.push("/dashboard");
     }
-  }, email);
+  }, [email]);
 
   const iconWidth = { width: "100px" };
   return (

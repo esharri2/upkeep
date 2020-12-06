@@ -30,11 +30,18 @@ export default function UserMenu({ children }) {
           min-width: 250px;
         }
 
-        :global([data-reach-menu-item]) {
-          padding: ${theme.spacing.m};
+        :global(.menu-item) {
           display: flex;
           align-items: center;
           border-bottom: solid 1px ${theme.colors.middle};
+        }
+
+        :global(.menu-item > a, .menu-item > button) {
+          display: flex;
+          padding: ${theme.spacing.m};
+
+          height: 100%;
+          width: 100%;
         }
 
         :global([data-reach-menu-item][data-selected], [data-selected] button) {

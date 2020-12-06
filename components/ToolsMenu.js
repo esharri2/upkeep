@@ -30,24 +30,30 @@ export default function UserMenu() {
         </Icon>
       </MenuButton>
       <MenuList>
-        <Link href="/dashboard">
-          <Icon {...styleProps}>
-            <GraphlineSVG />
-          </Icon>{" "}
-          Dashboard
-        </Link>
-        <MenuLink href="/assets">
-          <Icon {...styleProps}>
-            <HomeSVG />
-          </Icon>
-          Manage assets
-        </MenuLink>
-        <MenuLink href="/tasks">
-          <Icon {...styleProps}>
-            <TodoSVG />
-          </Icon>
-          Manage tasks
-        </MenuLink>
+        <div className="menu-item">
+          <Link href="/dashboard">
+            <Icon {...styleProps}>
+              <GraphlineSVG />
+            </Icon>{" "}
+            Dashboard
+          </Link>
+        </div>
+        <div className="menu-item">
+          <Link href="/assets">
+            <Icon {...styleProps}>
+              <HomeSVG />
+            </Icon>
+            Manage assets
+          </Link>
+        </div>
+        <div className="menu-item">
+          <Link href="/tasks">
+            <Icon {...styleProps}>
+              <TodoSVG />
+            </Icon>
+            Manage tasks
+          </Link>
+        </div>{" "}
       </MenuList>
     </Menu>
   );

@@ -44,7 +44,12 @@ export default function LoginForm(props) {
           </div>
           <div>
             <label htmlFor="password">Password:</label>
-            <Field name="password" type="password" maxLength="50" />
+            <Field
+              autoComplete="current-password"
+              name="password"
+              type="password"
+              maxLength="50"
+            />
           </div>
           <ButtonSubmit isSubmitting={isSubmitting}>Log in</ButtonSubmit>
           <Notification role="alert">

@@ -8,9 +8,9 @@ import {
 } from "@reach/menu-button";
 
 // Components
-import ExitSVG from "../media/icons/exit.svg";
 import GearSVG from "../media/icons/gear.svg";
 import Icon from "./Icon";
+import Link from "./Link";
 import Logout from "./Logout";
 import Menu from "./Menu";
 import UserSVG from "../media/icons/user.svg";
@@ -32,18 +32,17 @@ export default function UserMenu({ userName }) {
         <div className="menu-header">
           Hello! <div className="user-name">{userName}</div>
         </div>
-        <MenuLink href="/settings">
-          <Icon {...iconWidth}>
-            <GearSVG />
-          </Icon>
-          Manage account
-        </MenuLink>
-        <MenuItem>
-          <Icon {...iconWidth}>
-            <ExitSVG />
-          </Icon>
+        <div className="menu-item">
+          <Link href="/settings">
+            <Icon {...iconWidth}>
+              <GearSVG />
+            </Icon>
+            Manage account
+          </Link>
+        </div>
+        <div className="menu-item">
           <Logout />
-        </MenuItem>
+        </div>
       </MenuList>
     </Menu>
   );

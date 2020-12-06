@@ -2,9 +2,9 @@
 
 import NextLink from "next/link";
 
-export default function Link({ children, className, href }) {
+export default function Link({ as, children, className, href }) {
   return (
-    <NextLink href={href} passHref>
+    <NextLink as={as} href={href} passHref>
       <a className={className}>{children}</a>
     </NextLink>
   );

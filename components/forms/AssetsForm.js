@@ -35,7 +35,7 @@ export default function AssetForm() {
                 name.toLowerCase().includes(values.search.toLowerCase()) &&
                 ((values.owned && owned) || (values.unowned && !owned))
               ) {
-                return <AssetCard asset={asset} />;
+                return <AssetCard key={asset._id} asset={asset} />;
               } else {
                 return null;
               }

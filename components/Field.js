@@ -42,7 +42,13 @@ export default function Field(props) {
 
   return (
     <>
-      <FormikField className={className} {...props} />
+      <FormikField
+        className={className}
+        as={props.as}
+        name={props.name}
+        type={props.type}>
+        {props.children}
+      </FormikField>
       {styles}
     </>
   );

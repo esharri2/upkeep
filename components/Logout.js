@@ -2,7 +2,8 @@ import useUser from "../hooks/useUser";
 import logout from "../utils/client/logout";
 
 // Components
-import Button from "./Button";
+import Icon from "./Icon";
+import ExitSVG from "../media/icons/exit.svg";
 
 export default function Logout() {
   const { setUser } = useUser();
@@ -11,5 +12,12 @@ export default function Logout() {
     logout(setUser, true);
   };
 
-  return <button onClick={handleClick}>Logout</button>;
+  return (
+    <button onClick={handleClick}>
+      <Icon width="1rem">
+        <ExitSVG />
+      </Icon>
+      Logout
+    </button>
+  );
 }

@@ -116,7 +116,6 @@ export const postAssets = async (token, body, id) => {
 // TASKS
 
 export const getTasks = async (path, token) => {
-  debugger;
   const response = await fetch(path, getOptions(null, token));
   return await handleResponse(response);
 };

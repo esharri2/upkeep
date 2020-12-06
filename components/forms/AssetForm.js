@@ -1,5 +1,7 @@
 //Libs
 import { Formik, Form } from "formik";
+import { useRouter } from "next/router";
+import { mutate } from "swr";
 
 //Components
 import Field from "../Field";
@@ -13,6 +15,7 @@ import useUser from "../../hooks/useUser";
 
 export default function AssetForm({ asset }) {
   const { token } = useUser();
+  const router = useRouter();
 
   const {
     _id,
@@ -35,8 +38,8 @@ export default function AssetForm({ asset }) {
       _id
     )
       .then(() => {
-        alert("done!");
-        //mutate? maybe not ...
+        mutate([`/api/assets/${_id}`, token]);
+        router.push("/assets");
       })
       .catch((error) => setStatus(error));
 

@@ -50,7 +50,10 @@ export default function AssetCard({ asset }) {
       <div className="buttons">
         {asset.owned ? (
           <>
-            <LinkAsButton aria-label="Edit" href={`/assets/${asset._id}`}>
+            <LinkAsButton
+              aria-label="Edit"
+              href="/assets/[id]"
+              as={`/assets/${asset._id}`}>
               <Icon width="1rem">
                 <EditSVG />
               </Icon>
@@ -84,9 +87,7 @@ export default function AssetCard({ asset }) {
         }
 
         .card.unowned {
-           {
-            /* background-color: ${theme.colors.disabled}; */
-          }
+          background-color: ${theme.colors.disabled};
         }
 
         h2 {
