@@ -6,13 +6,16 @@ import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
 import Notification from "../Notification";
 import ServerErrorMessage from "../ServerErrorMessage";
+import StatusBanner from "../StatusBanner";
 
 //Utils
 import { postTasks } from "../../utils/client/fetchers";
 import useUser from "../../hooks/useUser";
+import useStatus from "../../hooks/useStatus";
 
 export default function TaskForm({ task }) {
   const { token } = useUser();
+  const [type, message, setStatus] = useStatus();
 
   const { _id: taskId, assetId, frequency, notes } = task;
 
@@ -26,10 +29,9 @@ export default function TaskForm({ task }) {
       assetId
     )
       .then(() => {
-        alert("yaya");
-        //mutate? maybe not ...
+        setStatus(true);
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus(false, error));
   };
 
   return (
@@ -38,10 +40,8 @@ export default function TaskForm({ task }) {
         frequency,
         notes,
       }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }>
-      {({ dirty, isSubmitting, status, values }) => {
+      onSubmit={async (values) => handleSubmit(values)}>
+      {({ dirty, isSubmitting, values }) => {
         return (
           <Form>
             <div>
@@ -57,9 +57,7 @@ export default function TaskForm({ task }) {
               />
             </div>
             <ButtonSubmit isSubmitting={isSubmitting}>Save</ButtonSubmit>
-            <Notification role="alert">
-              {status?.error && <ServerErrorMessage error={status.error} />}
-            </Notification>
+            <StatusBanner type={type} message={message} />
           </Form>
         );
       }}

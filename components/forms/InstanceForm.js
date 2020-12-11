@@ -41,7 +41,7 @@ export default function InstanceForm() {
   return (
     <Formik
       initialValues={{
-        notes: "",
+        note: "",
         date: new Date().toLocaleDateString("en-CA"),
       }}
       onSubmit={async (values, { setStatus }) =>
@@ -53,11 +53,11 @@ export default function InstanceForm() {
             <div>
               <label htmlFor="date">Date completed</label>
               <Field name="date" type="date" />
-              <label htmlFor="notes">Notes</label>
+              <label htmlFor="note">Notes</label>
               <Field
                 placeholder="Add any notes about what you did."
                 as="textarea"
-                name="notes"
+                name="note"
               />
             </div>
             <ButtonSubmit isSubmitting={isSubmitting}>Save</ButtonSubmit>

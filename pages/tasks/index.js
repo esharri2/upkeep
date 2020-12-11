@@ -42,23 +42,25 @@ export default function Tasks() {
       <h1>Tasks</h1>
       {error && <div>Failed to load.</div>}
       {!data && <div>Loading...</div>}
-      <Formik initialValues={{ sort: "date" }}>
-        {({ values }) => {
-          return (
-            <>
-              <Form>
-                <label htmlFor="sort-tasks">Sort by:</label>
-                <Field as="select" id="sort-tasks" name="sort">
-                  <option value="date">Date due</option>
-                  <option value="asset">Asset</option>
-                </Field>
-              </Form>
-              {values.sort === "date" && renderTasksByDate(assets)}
-              {values.sort === "asset" && renderTasksByAsset(assets)}
-            </>
-          );
-        }}
-      </Formik>
+      {data && (
+        <Formik initialValues={{ sort: "date" }}>
+          {({ values }) => {
+            return (
+              <>
+                <Form>
+                  <label htmlFor="sort-tasks">Sort by:</label>
+                  <Field as="select" id="sort-tasks" name="sort">
+                    <option value="date">Date due</option>
+                    <option value="asset">Asset</option>
+                  </Field>
+                </Form>
+                {values.sort === "date" && renderTasksByDate(assets)}
+                {values.sort === "asset" && renderTasksByAsset(assets)}
+              </>
+            );
+          }}
+        </Formik>
+      )}
     </PrivateLayout>
   );
 }

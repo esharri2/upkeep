@@ -29,7 +29,7 @@ function getLinkStyles(noMargin) {
     }
 
     select {
-      border-color: ${theme.colors.dark};
+      border-color: ${theme.colors.middle};
       border-radius: ${theme.borders.radius};
       padding: ${theme.spacing.s};
       margin: 0 ${theme.spacing.s};

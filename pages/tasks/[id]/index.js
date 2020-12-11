@@ -9,6 +9,7 @@ import Back from "../../../components/Back";
 import CheckmarkSVG from "../../../media/icons/checkmark.svg";
 import Icon from "../../../components/Icon";
 import LinkAsButton from "../../../components/LinkAsButton";
+import LocaleDate from "../../../components/LocaleDate";
 import TaskForm from "../../../components/forms/TaskForm";
 import PrivateLayout from "../../../components/PrivateLayout";
 
@@ -20,9 +21,7 @@ import useUser from "../../../hooks/useUser";
 export default function Asset() {
   const router = useRouter();
   const { id } = router.query;
-
   const { token } = useUser();
-
   const { data, error } = useSWR([`/api/tasks/${id}`, token], getTasks);
 
   return (
@@ -39,7 +38,6 @@ export default function Asset() {
           <section>
             <p>{data.task.description}</p>
             <div className="complete">
-              {/* todo fix this */}
               <p>
                 {data.task.dueIn
                   ? `Due in ${data.task.dueIn} days`
@@ -63,11 +61,18 @@ export default function Asset() {
             <h2>Task history</h2>
             {data.task.instances.length === 0 && (
               <p>
-                You don't have any records of doing this task. Click here to
-                record the last time you completed it.
+                You don't have any records of doing this task. Click
+                <b>Mark complete</b> to update the last time you completed it.
               </p>
             )}
-            {data.task.instances.map((instance) => instance.date)}
+            <ol>
+              {data.task.instances.map((instance, index) => (
+                <li key={index}>
+                  <LocaleDate date={instance.date} />
+                  {instance.note && <p>{instance.note}</p>}
+                </li>
+              ))}
+            </ol>
           </section>
         </>
       )}
@@ -75,6 +80,11 @@ export default function Asset() {
         span {
           color: ${theme.colors.accent1};
           font-weight: 300;
+        }
+
+        ol {
+          margin: 0;
+          padding: 0 0 0 ${theme.spacing.m};
         }
 
         section {
@@ -88,18 +98,6 @@ export default function Asset() {
 
         h2 {
           margin-top: 0;
-        }
-
-        .complete {
-          display: flex;
-          align-items: center;
-          margin-top: ${theme.spacing.l};
-        }
-
-        .complete p {
-          margin: 0 ${theme.spacing.l} 0 0;
-          font-weight: 600;
-          flex: 0 0 50%;
         }
       `}</style>
     </PrivateLayout>
