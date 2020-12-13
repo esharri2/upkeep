@@ -1,27 +1,35 @@
 // Libs
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 
 // Components
+import ButtonSubmit from "../ButtonSubmit";
+import Field from "../Field";
+import FormErrorMessage from "./FormErrorMessage";
 import Link from "../Link";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
 import logout from "../../utils/client/logout";
 import { postPassword } from "../../utils/client/fetchers";
 import useUser from "../../hooks/useUser";
+import useStatus from "../../hooks/useStatus";
 
 export default function PasswordChangeForm(props) {
   const { token, setUser } = useUser();
+  const { setStatus } = useStatus();
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values) => {
     const { oldPassword, newPassword } = values;
     postPassword(token, { body: JSON.stringify({ oldPassword, newPassword }) })
       .then(() => {
         logout(setUser, true);
-        setStatus({ success: true });
+        setStatus({
+          type: "success",
+          message: `Your password has been changed. ${(
+            <Link href="/login">Please log in with your new password.</Link>
+          )} `,
+        });
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus({ type: "error" }));
   };
 
   const handleFormValidatation = ({
@@ -44,7 +52,7 @@ export default function PasswordChangeForm(props) {
     }
 
     if (newPasswordMatch && newPassword !== newPasswordMatch) {
-      errors.newPasswordMatch = "Doesn't not match!";
+      errors.newPasswordMatch = "Your new passwords do not match.";
     }
     return errors;
   };
@@ -52,43 +60,33 @@ export default function PasswordChangeForm(props) {
   return (
     <Formik
       initialValues={{ oldPassword: "", newPassword: "", newPasswordMatch: "" }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }
+      onSubmit={async (values) => handleSubmit(values)}
       validate={handleFormValidatation}>
-      {({ dirty, isSubmitting, isValid, status }) => (
+      {({ dirty, isSubmitting, isValid }) => (
         <Form>
           <div>
             <label htmlFor="oldPassword">Old password:</label>
             <Field name="oldPassword" type="password" />
-            <ErrorMessage name="oldPassword" />
+            <ErrorMessage name="oldPassword" component={FormErrorMessage} />
           </div>
           <div>
             <label htmlFor="newPassword">New password:</label>
             <Field name="newPassword" type="password" maxLength="50" />
-            <ErrorMessage name="newPassword" />
+            <ErrorMessage name="newPassword" component={FormErrorMessage} />
           </div>
           <div>
             <label htmlFor="newPasswordMatch">Retype new password:</label>
             <Field name="newPasswordMatch" type="password" />
-            <ErrorMessage name="newPasswordMatch" />
+            <ErrorMessage
+              name="newPasswordMatch"
+              component={FormErrorMessage}
+            />
           </div>
           <ButtonSubmit
             isSubmitting={isSubmitting}
             formHasChanged={dirty}
             isValid={isValid}
           />
-          <Notification role="alert">
-            {status?.error && <ServerErrorMessage error={status.error} />}
-            {status?.success && (
-              <p>
-                Your password has been successfully changed!
-                <Link href="/login">
-                  <a>Please log in with your new password.</a>
-                </Link>
-              </p>
-            )}
-          </Notification>
         </Form>
       )}
     </Formik>

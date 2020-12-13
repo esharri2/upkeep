@@ -7,13 +7,11 @@ import { useRouter } from "next/router";
 // Components
 import ButtonSubmit from "../ButtonSubmit";
 import CheckboxInput from "../CheckboxInput";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
 import { getAssets, postAssets } from "../../utils/client/fetchers";
-import theme from "../../styles/theme";
 import useUser from "../../hooks/useUser";
+import useStatus from "../../hooks/useStatus";
 
 const { className, styles } = css.resolve`
   label:not(:first-of-type) {
@@ -28,20 +26,20 @@ const { className, styles } = css.resolve`
 export default function AssetsForm() {
   const router = useRouter();
   const { token } = useUser();
+  const { setStatus } = useStatus();
   const { data, error } = useSWR(["/api/assets", token], getAssets);
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values) => {
     postAssets(token, {
       body: JSON.stringify({ assetIds: values.checked }),
     })
       .then(() => {
         router.push("/dashboard");
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus({ type: "error", message: error }));
   };
 
   const assets = data?.assets || [];
-  console.log(assets);
   return (
     <>
       <p id="checkbox-group">
@@ -55,10 +53,8 @@ export default function AssetsForm() {
           initialValues={{
             checked: assets.map((asset) => (asset.owned ? asset._id : null)),
           }}
-          onSubmit={async (values, { setStatus }) =>
-            handleSubmit(values, setStatus)
-          }>
-          {({ dirty, isSubmitting, status, values }) => {
+          onSubmit={async (values) => handleSubmit(values)}>
+          {({ dirty, isSubmitting, values }) => {
             return (
               <Form>
                 <div role="group" aria-labelledby="checkbox-group">
@@ -77,9 +73,6 @@ export default function AssetsForm() {
                   isSubmitting={isSubmitting}
                   dirty={dirty}
                 />
-                <Notification>
-                  {status && <ServerErrorMessage error={status.error} />}
-                </Notification>
               </Form>
             );
           }}

@@ -4,41 +4,34 @@ import { Formik, Form } from "formik";
 // Components
 import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
 import { postForgotPassword } from "../../utils/client/fetchers";
+import useStatus from "../../hooks/useStatus";
 
 export default function ForgotPasswordForm(props) {
-  const handleSubmit = async (values, setStatus) => {
+  const { setStatus } = useStatus();
+
+  const handleSubmit = async (values) => {
     const { email } = values;
     postForgotPassword({ body: JSON.stringify({ email }) })
       .then(() => {
-        setStatus({ success: true });
+        setStatus({ type: "success" });
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus({ type: "error", message: error }));
   };
 
   return (
     <Formik
       initialValues={{ email: "", newPassword: "", newPasswordMatch: "" }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }>
-      {({ dirty, isSubmitting, status }) => (
+      onSubmit={async (values) => handleSubmit(values)}>
+      {({ dirty, isSubmitting }) => (
         <Form>
           <label htmlFor="email">Email:</label>
           <Field name="email" type="email" />
           <ButtonSubmit isSubmitting={isSubmitting} formHasChanged={dirty}>
             Send email
           </ButtonSubmit>
-          <Notification role="alert">
-            {status?.error && <ServerErrorMessage error={status.error} />}
-            {status?.success && (
-              <p>Check your email for a password reset link.</p>
-            )}
-          </Notification>
         </Form>
       )}
     </Formik>

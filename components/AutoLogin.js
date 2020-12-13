@@ -19,8 +19,6 @@ export default function AutoLogin({ children }) {
     window.localStorage.getItem("returningUser")
   );
 
-  console.log("TOKEN: ", token);
-
   // Send user to login page if the auto login fails
   useEffect(() => {
     if (failed) {

@@ -1,5 +1,3 @@
-// todo copy paste from task form update everyting!
-
 //Libs
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
@@ -7,10 +5,9 @@ import { useRouter } from "next/router";
 //Components
 import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
 
 //Utils
+import useStatus from "../../hooks/useStatus";
 import useUser from "../../hooks/useUser";
 import { postInstances } from "../../utils/client/fetchers";
 
@@ -20,11 +17,12 @@ import { postInstances } from "../../utils/client/fetchers";
 
 export default function InstanceForm() {
   const { token } = useUser();
+  const { setStatus } = useStatus();
   const router = useRouter();
 
   const { id: taskId } = router.query;
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values) => {
     postInstances(
       token,
       {
@@ -33,9 +31,10 @@ export default function InstanceForm() {
       taskId
     )
       .then(() => {
+        setStatus({ type: "success" });
         router.push(`/tasks/${taskId}`);
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus({ type: "error", message: error }));
   };
 
   return (
@@ -44,10 +43,8 @@ export default function InstanceForm() {
         note: "",
         date: new Date().toLocaleDateString("en-CA"),
       }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }>
-      {({ dirty, isSubmitting, status, values }) => {
+      onSubmit={async (values) => handleSubmit(values)}>
+      {({ dirty, isSubmitting, values }) => {
         return (
           <Form>
             <div>
@@ -61,9 +58,6 @@ export default function InstanceForm() {
               />
             </div>
             <ButtonSubmit isSubmitting={isSubmitting}>Save</ButtonSubmit>
-            <Notification role="alert">
-              {status?.error && <ServerErrorMessage error={status.error} />}
-            </Notification>
           </Form>
         );
       }}

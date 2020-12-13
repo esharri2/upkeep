@@ -14,11 +14,12 @@
     "formik": "^2.1.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "5.9.13",
-    "next": "^9.3.5",
+    "next": "^9.5.5",
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.11",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-spring": "^8.0.27",
     "styled-jsx": "^3.3.0",
     "swr": "^0.2.3",
     "validator": "^13.1.1"

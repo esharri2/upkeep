@@ -3,16 +3,18 @@ import Router from "next/router";
 import { Formik, Form, ErrorMessage } from "formik";
 
 // Components
+import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
+import FormErrorMessage from "../forms/FormErrorMessage";
 
 // Utils
 import { postSignUp } from "../../utils/client/fetchers";
-import ButtonSubmit from "../ButtonSubmit";
+import useStatus from "../../hooks/useStatus";
 
-export default function SignUpForm(props) {
-  const handleSubmit = async (values, setStatus) => {
+export default function SignUpForm() {
+  const { setStatus } = useStatus();
+
+  const handleSubmit = async (values) => {
     const { email, password } = values;
 
     try {
@@ -21,7 +23,7 @@ export default function SignUpForm(props) {
       });
       Router.push({ pathname: "/login", query: { isNewUser: true } });
     } catch (error) {
-      setStatus(error);
+      setStatus({ type: "error", message: error });
     }
   };
 
@@ -42,16 +44,14 @@ export default function SignUpForm(props) {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }
+      onSubmit={async (values) => handleSubmit(values)}
       validate={handleFormValidatation}>
       {({ dirty, isSubmitting, isValid, status }) => (
         <Form>
           <div>
             <label htmlFor="email">Email:</label>
             <Field name="email" type="email" />
-            <ErrorMessage name="email" />
+            <ErrorMessage name="email" component={FormErrorMessage} />
           </div>
           <div>
             <label htmlFor="password">Password:</label>
@@ -68,9 +68,6 @@ export default function SignUpForm(props) {
             formHasChanged={dirty}>
             Sign up
           </ButtonSubmit>
-          <Notification role="alert">
-            {status && <ServerErrorMessage error={status.error} />}
-          </Notification>
         </Form>
       )}
     </Formik>

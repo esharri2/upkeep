@@ -5,18 +5,18 @@ import { useRouter } from "next/router";
 // Components
 import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
 
 // Utils
 import login from "../../utils/client/login";
 import useUser from "../../hooks/useUser";
+import useStatus from "../../hooks/useStatus";
 
 export default function LoginForm(props) {
   const { setUser } = useUser();
+  const { setStatus } = useStatus();
   const router = useRouter();
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values) => {
     const { email, password } = values;
 
     login(email, password, setUser)
@@ -27,7 +27,7 @@ export default function LoginForm(props) {
           router.push("/dashboard");
         }
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus({ type: "error", message: error }));
   };
 
   return (
@@ -52,9 +52,6 @@ export default function LoginForm(props) {
             />
           </div>
           <ButtonSubmit isSubmitting={isSubmitting}>Log in</ButtonSubmit>
-          <Notification role="alert">
-            {status.error && <ServerErrorMessage error={status.error} />}
-          </Notification>
         </Form>
       )}
     </Formik>

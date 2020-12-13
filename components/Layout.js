@@ -1,6 +1,7 @@
 // Components
 import Header from "./Header";
 import Footer from "./Footer";
+import StatusBanner from "./StatusBanner";
 
 // Utils
 import theme from "../styles/theme";
@@ -8,6 +9,7 @@ import theme from "../styles/theme";
 export default function Layout({ children, narrow = false }) {
   return (
     <>
+      <StatusBanner />
       <Header />
       <main>{children}</main>
       <Footer />

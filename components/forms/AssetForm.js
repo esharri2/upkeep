@@ -5,16 +5,16 @@ import { mutate } from "swr";
 
 //Components
 import Field from "../Field";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
 import ButtonSubmit from "../ButtonSubmit";
 
 //Utils
 import { postAssets } from "../../utils/client/fetchers";
 import useUser from "../../hooks/useUser";
+import useStatus from "../../hooks/useStatus";
 
 export default function AssetForm({ asset }) {
   const { token } = useUser();
+  const { setStatus } = useStatus();
   const router = useRouter();
 
   const {
@@ -29,7 +29,7 @@ export default function AssetForm({ asset }) {
     tasks,
   } = asset;
 
-  const handleSubmit = async (values, setStatus) =>
+  const handleSubmit = async (values) =>
     postAssets(
       token,
       {
@@ -38,10 +38,16 @@ export default function AssetForm({ asset }) {
       _id
     )
       .then(() => {
+        setStatus({ type: "success" });
         mutate([`/api/assets/${_id}`, token]);
         router.push("/assets");
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => {
+        setStatus({
+          message: error,
+          type: "error",
+        });
+      });
 
   return (
     <Formik
@@ -54,10 +60,8 @@ export default function AssetForm({ asset }) {
         notes,
         tasks,
       }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }>
-      {({ dirty, isSubmitting, status, values }) => {
+      onSubmit={async (values) => handleSubmit(values)}>
+      {({ dirty, isSubmitting, values }) => {
         return (
           <Form>
             <label htmlFor="name">Manufacturer</label>
@@ -75,9 +79,6 @@ export default function AssetForm({ asset }) {
             <ButtonSubmit isSubmitting={isSubmitting} formHasChanged={dirty}>
               Save
             </ButtonSubmit>
-            <Notification role="alert">
-              {status?.error && <ServerErrorMessage error={status.error} />}
-            </Notification>
           </Form>
         );
       }}

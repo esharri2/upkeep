@@ -9,7 +9,6 @@ import HomeSVG from "../media/icons/home.svg";
 import Icon from "../components/Icon";
 import Layout from "../components/Layout";
 import LinkAsButton from "../components/LinkAsButton";
-import StatusBanner from "../components/StatusBanner";
 import TodoSVG from "../media/icons/to-do.svg";
 
 // Utils
@@ -32,9 +31,6 @@ export default function Home() {
   const iconWidth = { width: "100px" };
   return (
     <Layout>
-      <StatusBanner type="success">
-        Hello friends. Everything is going very well!
-      </StatusBanner>
       <section className="home-section">
         <div className="home-section-title">
           <h1>

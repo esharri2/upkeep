@@ -13,9 +13,12 @@ import PlusSVG from "../media/icons/plus.svg";
 import { postAssets } from "../utils/client/fetchers";
 import theme from "../styles/theme";
 import useUser from "../hooks/useUser";
+import useStatus from "../hooks/useStatus";
 
 export default function AssetCard({ asset }) {
   const { token } = useUser();
+  const { setStatus } = useStatus();
+
   const handleAdd = async () => {
     postAssets(
       token,
@@ -27,7 +30,9 @@ export default function AssetCard({ asset }) {
       .then(() => {
         mutate(["/api/assets", token]);
       })
-      .catch((error) => alert("error"));
+      .catch((error) => {
+        setStatus({ type: "error", message: error });
+      });
   };
 
   const handleRemove = async () => {
@@ -39,9 +44,12 @@ export default function AssetCard({ asset }) {
       asset._id
     )
       .then(() => {
+        setStatus({ type: "success" });
         mutate(["/api/assets", token]);
       })
-      .catch((error) => alert("error"));
+      .catch((error) => {
+        setStatus({ type: "error", message: error });
+      });
   };
 
   return (

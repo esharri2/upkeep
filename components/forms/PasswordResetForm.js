@@ -2,28 +2,32 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 // Components
-import Link from "../Link";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
+import FormErrorMessage from "../FormErrorMessage";
 
 // Utils
 import { postResetPassword } from "../../utils/client/fetchers";
 import logout from "../../utils/client/logout";
 import useUser from "../../hooks/useUser";
+import useStatus from "../../hooks/useStatus";
 
 export default function PasswordResetForm({ resetPasswordToken }) {
   const { setUser } = useUser();
+  const { setStatus } = useStatus();
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values) => {
     const { email, newPassword } = values;
     postResetPassword({
       body: JSON.stringify({ email, newPassword, resetPasswordToken }),
     })
       .then(() => {
         logout(setUser);
-        setStatus({ success: true });
+        setStatus({
+          type: "success",
+          message:
+            "Your password has been reset. Please log in with your new password",
+        });
       })
-      .catch((error) => setStatus(error));
+      .catch((error) => setStatus({ type: "error", message: error }));
   };
 
   const handleFormValidatation = ({ email, newPassword, newPasswordMatch }) => {
@@ -42,42 +46,32 @@ export default function PasswordResetForm({ resetPasswordToken }) {
   return (
     <Formik
       initialValues={{ email: "", newPassword: "", newPasswordMatch: "" }}
-      onSubmit={async (values, { setStatus }) =>
-        handleSubmit(values, setStatus)
-      }
+      onSubmit={async (values) => handleSubmit(values)}
       validate={handleFormValidatation}>
-      {({ isSubmitting, status = {} }) => (
+      {({ isSubmitting }) => (
         <Form>
           <div>
             <label htmlFor="email">Email:</label>
             <Field name="email" type="email" />
-            <ErrorMessage name="email" />
+            <ErrorMessage name="email" component={FormErrorMessage} />
           </div>
           <div>
             <label htmlFor="newPassword">New password:</label>
             <Field name="newPassword" type="password" maxLength="50" />
-            <ErrorMessage name="newPassword" />
+            <ErrorMessage name="newPassword" component={FormErrorMessage} />
           </div>
           <div>
             <label htmlFor="newPasswordMatch">Retype new password:</label>
             <Field name="newPasswordMatch" type="password" />
-            <ErrorMessage name="newPasswordMatch" />
+            <ErrorMessage
+              name="newPasswordMatch"
+              component={FormErrorMessage}
+            />
           </div>
           <ButtonSubmit
             disabled={isSubmitting | !dirty}
             isSubmitting={isSubmitting}
           />
-          <Notification role="alert">
-            {status.error && <ServerErrorMessage error={status.error} />}
-            {status.success && (
-              <p>
-                <p>Your password has been successfully reset!</p>
-                <Link href="/login">
-                  <a>Please log in with your new password.</a>
-                </Link>
-              </p>
-            )}
-          </Notification>
         </Form>
       )}
     </Formik>

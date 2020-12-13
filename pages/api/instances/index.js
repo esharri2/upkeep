@@ -22,7 +22,6 @@ const handler = async (req, res) => {
             task._id.equals(query.taskId)
           );
           if (task) {
-            console.log(body);
             task.instances.push(body);
             taskIsUpdated = true;
             break;

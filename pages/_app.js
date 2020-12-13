@@ -4,6 +4,7 @@ import "../styles/index.css";
 import dynamic from "next/dynamic";
 
 // Utils
+import { StatusProvider } from "../context/StatusContext";
 import { UserProvider } from "../context/UserContext";
 
 const AutoLogin = dynamic(() => import("../components/AutoLogin"), {
@@ -13,9 +14,11 @@ const AutoLogin = dynamic(() => import("../components/AutoLogin"), {
 export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
-      <AutoLogin>
-        <Component {...pageProps} />
-      </AutoLogin>
+      <StatusProvider>
+        <AutoLogin>
+          <Component {...pageProps} />
+        </AutoLogin>
+      </StatusProvider>
     </UserProvider>
   );
 }

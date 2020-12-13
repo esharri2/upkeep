@@ -4,9 +4,6 @@ import { Formik, Form } from "formik";
 //Components
 import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
-import Notification from "../Notification";
-import ServerErrorMessage from "../ServerErrorMessage";
-import StatusBanner from "../StatusBanner";
 
 //Utils
 import { postTasks } from "../../utils/client/fetchers";
@@ -15,11 +12,11 @@ import useStatus from "../../hooks/useStatus";
 
 export default function TaskForm({ task }) {
   const { token } = useUser();
-  const [type, message, setStatus] = useStatus();
+  const { setStatus } = useStatus();
 
   const { _id: taskId, assetId, frequency, notes } = task;
 
-  const handleSubmit = async (values, setStatus) => {
+  const handleSubmit = async (values) => {
     postTasks(
       token,
       {
@@ -29,9 +26,9 @@ export default function TaskForm({ task }) {
       assetId
     )
       .then(() => {
-        setStatus(true);
+        setStatus({ type: "success" });
       })
-      .catch((error) => setStatus(false, error));
+      .catch((error) => setStatus({ type: "error", message: error }));
   };
 
   return (
@@ -57,7 +54,6 @@ export default function TaskForm({ task }) {
               />
             </div>
             <ButtonSubmit isSubmitting={isSubmitting}>Save</ButtonSubmit>
-            <StatusBanner type={type} message={message} />
           </Form>
         );
       }}
