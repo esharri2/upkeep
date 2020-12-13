@@ -2,63 +2,58 @@
 import useSWR from "swr";
 
 // Components
-import Link from "../components/Link";
+import WarningFailedToLoad from "../components/WarningFailedToLoad";
 import LinkAsButton from "../components/LinkAsButton";
-
 import PrivateLayout from "../components/PrivateLayout";
 
 // Utils
 import { getDashboard } from "../utils/client/fetchers";
 import useUser from "../hooks/useUser";
 import theme from "../styles/theme";
+import SpinnerInPage from "../components/SpinnerInPage";
 
 export default function Dashboard() {
   const { token } = useUser();
   const { data, error } = useSWR(["/api/dashboard", token], getDashboard);
-  if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-  const {
-    ownedAssets,
-    totalAssets,
-    tasksWithoutHistory,
-    overdueTasks,
-    dueSoonTasks,
-  } = data;
 
   return (
     <PrivateLayout>
       <h1>Dashboard</h1>
-      {error && <div>failed to load</div>}
-      {!data && <div>loading..</div>}
-      <div className="tiles">
-        <div className="tile">
-          <LinkAsButton bigText href="/assets">
-            Manage assets
-          </LinkAsButton>
+      {error && <WarningFailedToLoad />}
+      {!data && <SpinnerInPage />}
+      {data && (
+        <div className="tiles">
+          <div className="tile">
+            <LinkAsButton bigText href="/assets">
+              Manage assets
+            </LinkAsButton>
+          </div>
+          <div className="tile">
+            <LinkAsButton bigText href="/tasks">
+              Manage tasks
+            </LinkAsButton>
+          </div>
+          <div className="tile">
+            <p>
+              You own <em>{data?.ownedAssets}</em> of{" "}
+              <em>{data?.totalAssets}</em> available assets.
+            </p>
+          </div>
+          <div className="tile">
+            <p>
+              You have <em>{data?.tasksWithoutHistory.length}</em> tasks with no
+              history.
+            </p>
+          </div>
+          <div className="tile">
+            <p>
+              You have <em>{data?.overdueTasks.length}</em> tasks that are
+              overdue.
+            </p>
+          </div>
         </div>
-        <div className="tile">
-          <LinkAsButton bigText href="/tasks">
-            Manage tasks
-          </LinkAsButton>
-        </div>
-        <div className="tile">
-          <p>
-            You own <em>{ownedAssets}</em> of <em>{totalAssets}</em> available
-            assets.
-          </p>
-        </div>
-        <div className="tile">
-          <p>
-            You have <em>{tasksWithoutHistory.length}</em> tasks with no
-            history.
-          </p>
-        </div>
-        <div className="tile">
-          <p>
-            You have <em>{overdueTasks.length}</em> tasks that are overdue.
-          </p>
-        </div>
-      </div>
+      )}
+
       <style jsx>
         {`
           .tiles {

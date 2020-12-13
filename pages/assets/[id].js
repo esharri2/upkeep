@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import AssetForm from "../../components/forms/AssetForm";
 import Back from "../../components/Back";
 import PrivateLayout from "../../components/PrivateLayout";
+import SpinnerInPage from "../../components/SpinnerInPage";
+import WarningFailedToLoad from "../../components/WarningFailedToLoad";
 
 //Utils
 import { getAssets } from "../../utils/client/fetchers";
@@ -21,7 +23,8 @@ export default function Asset() {
   return (
     <PrivateLayout narrow>
       <Back href="/assets" label="list of assets" />
-      {error && "failed to load"}
+      {error && <WarningFailedToLoad />}
+      {!data && <SpinnerInPage />}
       {data && (
         <>
           <h1>{data.asset.name}</h1>

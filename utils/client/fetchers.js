@@ -137,3 +137,13 @@ export const postInstances = async (token, body, taskId) => {
   );
   return await handleResponse(response);
 };
+
+// EXPORT DATA
+
+export const getExportData = async (token) => {
+  const options = getOptions(null, token);
+  options.headers["Content-Type"] = "application/octet-stream";
+  console.log(options);
+  const response = await fetch("/api/export", options);
+  return await handleResponse(response);
+};

@@ -14,7 +14,7 @@ export default function Header() {
   const { email, homeId } = useUser();
   return (
     <header>
-      <Link href="/">
+      <Link href={email ? "/dashboard" : "/"}>
         <a className="logo">Upkeep</a>
       </Link>
       <div className="utilities">

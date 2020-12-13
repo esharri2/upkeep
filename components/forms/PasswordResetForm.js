@@ -1,8 +1,11 @@
 // Libs
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
+import { useRouter } from "next/router";
 
 // Components
-import FormErrorMessage from "../FormErrorMessage";
+import ButtonSubmit from "../ButtonSubmit";
+import Field from "../Field";
+import FormErrorMessage from "./FormErrorMessage";
 
 // Utils
 import { postResetPassword } from "../../utils/client/fetchers";
@@ -13,6 +16,7 @@ import useStatus from "../../hooks/useStatus";
 export default function PasswordResetForm({ resetPasswordToken }) {
   const { setUser } = useUser();
   const { setStatus } = useStatus();
+  const router = useRouter();
 
   const handleSubmit = async (values) => {
     const { email, newPassword } = values;
@@ -26,6 +30,7 @@ export default function PasswordResetForm({ resetPasswordToken }) {
           message:
             "Your password has been reset. Please log in with your new password",
         });
+        router.push("/login");
       })
       .catch((error) => setStatus({ type: "error", message: error }));
   };
@@ -48,7 +53,7 @@ export default function PasswordResetForm({ resetPasswordToken }) {
       initialValues={{ email: "", newPassword: "", newPasswordMatch: "" }}
       onSubmit={async (values) => handleSubmit(values)}
       validate={handleFormValidatation}>
-      {({ isSubmitting }) => (
+      {({ isSubmitting, dirty }) => (
         <Form>
           <div>
             <label htmlFor="email">Email:</label>

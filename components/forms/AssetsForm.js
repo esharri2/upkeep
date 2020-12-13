@@ -8,6 +8,9 @@ import CheckboxInput from "../CheckboxInput";
 import Field from "../Field";
 import Icon from "../Icon";
 import SearchSVG from "../../media/icons/search.svg";
+import SpinnerInPage from "../SpinnerInPage";
+import Warning from "../Warning";
+import WarningFailedToLoad from "../WarningFailedToLoad";
 
 //Utils
 import { getAssets } from "../../utils/client/fetchers";
@@ -20,7 +23,8 @@ export default function AssetForm() {
 
   return (
     <>
-      {error && <div>failed to load</div>}
+      {error && <WarningFailedToLoad />}
+      {!data && <SpinnerInPage />}
       {data && (
         <Formik
           initialValues={{
@@ -60,9 +64,13 @@ export default function AssetForm() {
                 </Form>
                 <div className="cards">
                   {data &&
-                    (assetCards.some((item) => item !== null)
-                      ? assetCards
-                      : "Nothing matches these filters.")}
+                    (assetCards.some((item) => item !== null) ? (
+                      assetCards
+                    ) : (
+                      <Warning>
+                        <p>Nothing matches these filters.</p>
+                      </Warning>
+                    ))}
                 </div>
               </>
             );

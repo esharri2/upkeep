@@ -1,7 +1,7 @@
 const sendError = (res, statusCode, error, message) => {
   console.log("------Error------");
   console.error(error);
-  console.log("-----Error Message------");
+  console.log("-----Custom Error Message------");
   console.error(message);
 
   /*
@@ -11,6 +11,7 @@ const sendError = (res, statusCode, error, message) => {
    */
   const userMessage =
     message ||
+    error.message ||
     "Sorry, something has gone wrong. Please try again a little later.";
 
   res.status(statusCode).json({ error: userMessage });

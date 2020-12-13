@@ -6,6 +6,10 @@ const StatusProvider = (props) => {
   const [status, setStatusValue] = useState([]);
 
   const setStatus = (object) => {
+    // Handle error objects passed from server
+    if (object.message && object.message.hasOwnProperty("error")) {
+      object.message = object.message.error;
+    }
     object.time = new Date().getTime();
     setStatusValue([object, ...status]);
   };

@@ -8,6 +8,7 @@ import {
 } from "@reach/menu-button";
 
 // Components
+import ExportData from "./ExportData";
 import Icon from "./Icon";
 import Link from "./Link";
 import Menu from "./Menu";
@@ -16,10 +17,7 @@ import GraphlineSVG from "../media/icons/graph-line.svg";
 import HomeSVG from "../media/icons/home.svg";
 import TodoSVG from "../media/icons/to-do.svg";
 
-// Utils
-import theme from "../styles/theme";
-
-export default function UserMenu() {
+export default function ToolsMenu() {
   const styleProps = { width: "1rem", marginRight: "1rem" };
 
   return (
@@ -53,7 +51,10 @@ export default function UserMenu() {
             </Icon>
             Manage tasks
           </Link>
-        </div>{" "}
+        </div>
+        <div className="menu-item">
+          <ExportData styleProps={styleProps} />
+        </div>
       </MenuList>
     </Menu>
   );

@@ -22,11 +22,15 @@ export default function PasswordChangeForm(props) {
     postPassword(token, { body: JSON.stringify({ oldPassword, newPassword }) })
       .then(() => {
         logout(setUser, true);
+        const message = (
+          <>
+            Your password has been changed.{" "}
+            <Link href="/login">Please log in with your new password.</Link>
+          </>
+        );
         setStatus({
           type: "success",
-          message: `Your password has been changed. ${(
-            <Link href="/login">Please log in with your new password.</Link>
-          )} `,
+          message,
         });
       })
       .catch((error) => setStatus({ type: "error" }));

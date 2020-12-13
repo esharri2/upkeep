@@ -16,7 +16,10 @@ export default function ForgotPasswordForm(props) {
     const { email } = values;
     postForgotPassword({ body: JSON.stringify({ email }) })
       .then(() => {
-        setStatus({ type: "success" });
+        setStatus({
+          type: "success",
+          message: "Check your email for next steps.",
+        });
       })
       .catch((error) => setStatus({ type: "error", message: error }));
   };

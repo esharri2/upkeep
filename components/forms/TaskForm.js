@@ -1,5 +1,6 @@
 //Libs
 import { Formik, Form } from "formik";
+import { mutate } from "swr";
 
 //Components
 import ButtonSubmit from "../ButtonSubmit";
@@ -26,6 +27,7 @@ export default function TaskForm({ task }) {
       assetId
     )
       .then(() => {
+        mutate([`/api/tasks/${taskId}`, token]);
         setStatus({ type: "success" });
       })
       .catch((error) => setStatus({ type: "error", message: error }));

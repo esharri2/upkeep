@@ -3,9 +3,13 @@ import { Formik, Form } from "formik";
 import useSWR from "swr";
 
 // Components
+import WarningFailedToLoad from "../../components/WarningFailedToLoad";
 import Field from "../../components/Field";
+import Link from "../../components/Link";
 import PrivateLayout from "../../components/PrivateLayout";
+import SpinnerInPage from "../../components/SpinnerInPage";
 import TaskCard from "../../components/TaskCard";
+import Warning from "../../components/Warning";
 
 //Utils
 import { getTasks } from "../../utils/client/fetchers";
@@ -26,8 +30,7 @@ export default function Tasks() {
       }
       return -1;
     });
-    // sort by duen
-    return tasks.map((task) => <TaskCard key={task._id} task={task} />);
+    return sortedTasks.map((task) => <TaskCard key={task._id} task={task} />);
   };
 
   // TODO component?
@@ -40,8 +43,8 @@ export default function Tasks() {
   return (
     <PrivateLayout narrow>
       <h1>Tasks</h1>
-      {error && <div>Failed to load.</div>}
-      {!data && <div>Loading...</div>}
+      {error && <WarningFailedToLoad />}
+      {!data && <SpinnerInPage />}
       {data && (
         <Formik initialValues={{ sort: "date" }}>
           {({ values }) => {
@@ -54,8 +57,17 @@ export default function Tasks() {
                     <option value="asset">Asset</option>
                   </Field>
                 </Form>
-                {values.sort === "date" && renderTasksByDate(assets)}
-                {values.sort === "asset" && renderTasksByAsset(assets)}
+                {assets.length > 0 ? (
+                  <>
+                    {values.sort === "date" && renderTasksByDate(assets)}
+                    {values.sort === "asset" && renderTasksByAsset(assets)}
+                  </>
+                ) : (
+                  <Warning>
+                    You don't have any assets, so you don't have any tasks!
+                    <Link href="/setup">Click here to update your assets.</Link>
+                  </Warning>
+                )}
               </>
             );
           }}

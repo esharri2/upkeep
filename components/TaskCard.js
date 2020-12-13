@@ -1,5 +1,6 @@
 // Components
 import CheckmarkSVG from "../media/icons/checkmark.svg";
+import DueIn from "./DueIn";
 import EditSVG from "../media/icons/pencil.svg";
 import Icon from "./Icon";
 import LinkAsButton from "./LinkAsButton";
@@ -9,14 +10,13 @@ import theme from "../styles/theme";
 
 export default function TaskCard({ task }) {
   const { _id, asset, dueIn } = task;
+
   return (
     <section>
       <h2>
         <span>{asset}:</span> {task.name}
       </h2>
-      <p>
-        {dueIn ? `Due in ${dueIn} days.` : "There is no history for this task."}
-      </p>
+      <DueIn dueIn={dueIn} />
       <div>
         <LinkAsButton reverse href="/tasks/[id]" as={`/tasks/${_id}`}>
           <Icon width="1rem">

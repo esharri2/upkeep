@@ -22,7 +22,7 @@ export default function DeleteAccount() {
         logout(setUser, true);
       })
       .catch((error) => {
-        setStatus({ type: "error", message: "error" });
+        setStatus({ type: "error", message: error });
       });
 
   return (

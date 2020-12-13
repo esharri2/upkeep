@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 
 export default function RequestPasswordReset() {
   return (
-    <Layout>
+    <Layout narrow>
       <h1>Request a password reset</h1>
       <ForgotPasswordForm />
     </Layout>

@@ -96,6 +96,7 @@ export default async (req, res) => {
           homeId,
         });
       } catch (error) {
+        console.log(error);
         sendError(res, 401, error);
       }
       break;

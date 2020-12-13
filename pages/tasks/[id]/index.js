@@ -7,11 +7,14 @@ import { useRouter } from "next/router";
 //Components
 import Back from "../../../components/Back";
 import CheckmarkSVG from "../../../media/icons/checkmark.svg";
+import DueIn from "../../../components/DueIn";
 import Icon from "../../../components/Icon";
 import LinkAsButton from "../../../components/LinkAsButton";
 import LocaleDate from "../../../components/LocaleDate";
-import TaskForm from "../../../components/forms/TaskForm";
 import PrivateLayout from "../../../components/PrivateLayout";
+import SpinnerInPage from "../../../components/SpinnerInPage";
+import TaskForm from "../../../components/forms/TaskForm";
+import WarningFailedToLoad from "../../../components/WarningFailedToLoad";
 
 //Utils
 import { getTasks } from "../../../utils/client/fetchers";
@@ -27,8 +30,8 @@ export default function Asset() {
   return (
     <PrivateLayout narrow>
       <Back href="/tasks" />
-      {error && <p>Failed to load</p>}
-      {!data && <p>loading...</p>}
+      {error && <WarningFailedToLoad />}
+      {!data && <SpinnerInPage />}
       {data && (
         <>
           <h1>
@@ -38,11 +41,7 @@ export default function Asset() {
           <section>
             <p>{data.task.description}</p>
             <div className="complete">
-              <p>
-                {data.task.dueIn
-                  ? `Due in ${data.task.dueIn} days`
-                  : "Mark this task complete to add the last date you did it. Then we can tell when it's due again!"}
-              </p>
+              <DueIn dueIn={data.task.dueIn} />
               <LinkAsButton
                 href="/tasks/[id]/complete"
                 as={`/tasks/${data.task._id}/complete`}>
@@ -69,7 +68,7 @@ export default function Asset() {
               {data.task.instances.map((instance, index) => (
                 <li key={index}>
                   <LocaleDate date={instance.date} />
-                  {instance.note && <p>{instance.note}</p>}
+                  {instance.note && <p>Notes: {instance.note}</p>}
                 </li>
               ))}
             </ol>

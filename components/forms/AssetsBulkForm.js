@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 // Components
 import ButtonSubmit from "../ButtonSubmit";
 import CheckboxInput from "../CheckboxInput";
+import SpinnerInPage from "../SpinnerInPage";
+import WarningFailedToLoad from "../WarningFailedToLoad";
 
 // Utils
 import { getAssets, postAssets } from "../../utils/client/fetchers";
@@ -46,8 +48,8 @@ export default function AssetsForm() {
         Select the assets that you have in your home. You can always update
         these later.
       </p>
-      {error && <p>failed to load</p>}
-      {!data && <p>loading</p>}
+      {error && <WarningFailedToLoad />}
+      {!data && <SpinnerInPage />}
       {data && (
         <Formik
           initialValues={{
