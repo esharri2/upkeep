@@ -38,6 +38,39 @@ const handler = async (req, res) => {
         sendError(res, 400, error);
       }
       break;
+    case "DELETE":
+      try {
+        const { instanceId, taskId } = query;
+        const home = await Home.findOne({ _id: user.homeId }, "assets");
+        let taskIsUpdated = false;
+
+        // Go over assets and find the task, update instances array
+        for (const asset of home.assets) {
+          const task = asset.tasks.find((task) => task._id.equals(taskId));
+          if (task) {
+            console.log(instanceId);
+            console.log(task.instances);
+            console.log(
+              task.instances.findIndex((item) => item._id === instanceId)
+            );
+            task.instances = task.instances.filter(
+              (instance) => !instance._id.equals(instanceId)
+            );
+            taskIsUpdated = true;
+            break;
+          }
+        }
+
+        if (taskIsUpdated) {
+          await home.save();
+          res.status(200).json({});
+        } else {
+          throw new Error();
+        }
+      } catch (error) {
+        sendError(res, 400, error);
+      }
+      break;
     default:
       sendError(res, 405);
   }

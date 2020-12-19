@@ -15,8 +15,8 @@ const handler = async (req, res) => {
       try {
         const home = await Home.findOne(
           { _id: user.homeId },
-          "assets.owned assets.tasks"
-        );
+          "assets.owned assets.name assets.tasks"
+        ).lean();
         const assets = home.assets;
         const ownedAssets = assets.filter((asset) => asset.owned);
 
@@ -25,9 +25,10 @@ const handler = async (req, res) => {
         const dueSoonTasks = [];
 
         for (const asset of ownedAssets) {
+          // console.log(asset);
           for (const task of asset.tasks) {
             if (!task.instances || task.instances.length === 0) {
-              tasksWithoutHistory.push(task);
+              tasksWithoutHistory.push({ ...task, asset: asset.name });
             }
             // TODO add else if to test if task is overdue / due soon, populated other arrays
           }

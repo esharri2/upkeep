@@ -23,7 +23,6 @@ const handler = async (req, res) => {
               task.asset = asset.name;
               task.assetId = asset._id;
               task.dueIn = getDueInDays(task);
-              // figure out when it's due!
               return task;
             }
           }

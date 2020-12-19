@@ -138,6 +138,14 @@ export const postInstances = async (token, body, taskId) => {
   return await handleResponse(response);
 };
 
+export const deleteInstances = async (token, instanceId, taskId) => {
+  const response = await fetch(
+    `/api/instances?taskId=${taskId}&instanceId=${instanceId}`,
+    deleteOptions(null, token)
+  );
+  return await handleResponse(response);
+};
+
 // EXPORT DATA
 
 export const getExportData = async (token) => {

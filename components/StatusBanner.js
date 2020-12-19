@@ -39,6 +39,7 @@ export default function StatusBanner() {
 }
 
 const StatusMessage = ({ message, time, type = "warning", removeStatus }) => {
+  console.log(message);
   // Set default message for when there is no message prop
   const defaultMessage =
     type === "success"
@@ -61,7 +62,7 @@ const StatusMessage = ({ message, time, type = "warning", removeStatus }) => {
   return (
     <div className={type}>
       <Icon>{type === "success" ? <CheckmarkSVG /> : <WarningSVG />}</Icon>
-      <p>{message || defaultMessage}</p>
+      <p>{typeof message === "string" ? message : defaultMessage}</p>
       <style jsx>{`
         div {
           display: flex;

@@ -7,7 +7,7 @@ import Link from "./Link";
 // Utils
 import theme from "../styles/theme";
 
-function getLinkStyles(bigText, noBorder, centerText, reverse) {
+function getLinkStyles(bigText, noBorder, centerText, reverse, width) {
   return css.resolve`
     a {
       display: inline-block;
@@ -25,6 +25,7 @@ function getLinkStyles(bigText, noBorder, centerText, reverse) {
       align-items: center;
       transition: filter ${theme.timings.fast};
       justify-content: ${centerText ? "center" : "flex-start"};
+      width: ${width || "auto"};
     }
 
     a:hover {
@@ -41,12 +42,14 @@ export default function LinkAsButton({
   noBorder,
   centerText,
   reverse,
+  width,
 }) {
   const { className, styles } = getLinkStyles(
     bigText,
     noBorder,
     centerText,
-    reverse
+    reverse,
+    width
   );
 
   return (

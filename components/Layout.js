@@ -115,6 +115,12 @@ export default function Layout({ children, narrow = false }) {
         [type="submit"]:-moz-focusring {
           outline: 1px dotted ButtonText;
         }
+
+        em {
+          font-weight: 600;
+          font-style: normal;
+          color: ${theme.colors.accent1};
+        }
       `}</style>
     </>
   );
