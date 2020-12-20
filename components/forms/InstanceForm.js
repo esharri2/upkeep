@@ -1,6 +1,7 @@
 //Libs
 import { Formik, Form } from "formik";
 import { useRouter } from "next/router";
+import { mutate } from "swr";
 
 //Components
 import ButtonSubmit from "../ButtonSubmit";
@@ -32,9 +33,12 @@ export default function InstanceForm() {
     )
       .then(() => {
         setStatus({ type: "success" });
-        router.push(`/tasks/${taskId}`);
+        mutate(["/api/dashboard", token]);
+        router.back();
       })
-      .catch((error) => setStatus({ type: "error", message: error }));
+      .catch((error) => {
+        setStatus({ type: "error", message: error });
+      });
   };
 
   return (

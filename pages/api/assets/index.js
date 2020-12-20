@@ -27,7 +27,7 @@ const handler = async (req, res) => {
       break;
     case "POST":
       try {
-        // TODO should be an array of objects representing the upate, not just id string
+        // TODO should be an array of objects representing the upate, not just id string (works but kinda goofy?)
         const { assetIds } = req.body;
 
         if (assetIds.length > 0) {

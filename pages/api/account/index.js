@@ -1,9 +1,12 @@
+const fs = require("fs");
+
 import connectToDatabase from "../../../utils/connectToDatabase";
 import createToken from "../../../utils/createToken";
 import sendError from "../../../utils/sendError";
 import sanitize from "../../../utils/sanitize";
 import User from "../../../models/user";
 import Home from "../../../models/home";
+import assetsData from "../../../data/assets.json";
 
 import { hashPassword, checkPassword } from "../../../utils/bcrypt";
 
@@ -57,65 +60,6 @@ async function signUp(email, password) {
   return user;
 }
 
-function getAssetData() {
-  const assets = [
-    {
-      canonicalId: 1,
-      name: "Refriderator",
-      tasks: [
-        {
-          canonicalId: 11,
-          name: "Defrost",
-          description: "Power off your freezer and let ice build up melt",
-          frequency: 360,
-        },
-        {
-          canonicalId: 12,
-          name: "Clean seal",
-          description: "Wipe the door seals.",
-          frequency: 60,
-        },
-      ],
-    },
-    {
-      canonicalId: 2,
-      name: "Stove",
-      tasks: [
-        {
-          canonicalId: 21,
-          name: "Wash burner drip plates",
-          description:
-            "Remove and wash burner drip plates, or replace them if they are corroded",
-          frequency: 180,
-        },
-        {
-          canonicalId: 22,
-          name: "Run a cleaning cycle",
-          description: "Run a cleaning cycle on your oven.",
-          frequency: 180,
-        },
-        {
-          canonicalId: 23,
-          name: "Clean controls",
-          description:
-            "Clean any gunk or debris off of the  buttons and dials.",
-          frequency: 60,
-        },
-      ],
-    },
-    {
-      canonicalId: 3,
-      name: "Gutters",
-      tasks: [
-        {
-          canonicalId: 31,
-          name: "Clean",
-          description: "Remove stuff from gutters.",
-          frequency: 90,
-        },
-      ],
-    },
-  ];
-
-  return assets;
-}
+const getAssetData = () => {
+  return assetsData;
+};

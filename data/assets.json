@@ -1,0 +1,176 @@
+[
+  {
+    "canonicalId": 1,
+    "name": "Refriderator",
+    "tasks": [
+      {
+        "canonicalId": 11,
+        "name": "Defrost",
+        "description": "Power off your freezer and let the ice build up melt.",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 12,
+        "name": "Clean condenser coils",
+        "description": "Vacuum or wipe dust and debris from the condensor coils.",
+        "frequency": 180
+      },
+      {
+        "canonicalId": 13,
+        "name": "Check door gasket",
+        "description": "Clean food residue off the door gasket and make sure it's tight.",
+        "frequency": 90
+      },
+      {
+        "canonicalId": 14,
+        "name": "Change ice maker filter",
+        "description": "Change the water filter in your ice maker.",
+        "frequency": 180
+      },
+      {
+        "canonicalId": 15,
+        "name": "Change water dispenser filter",
+        "description": "Change the water filter in your water dispenser.",
+        "frequency": 180
+      }
+    ]
+  },
+  {
+    "canonicalId": 2,
+    "name": "Stove",
+    "tasks": [
+      {
+        "canonicalId": 21,
+        "name": "Clean under the hood",
+        "description": "Lift the cooktop to clean any food particles or grease buildup beneath it.",
+        "frequency": 90
+      },
+      {
+        "canonicalId": 22,
+        "name": "Wash burner drip plates",
+        "description": "Remove and wash burner drip plates, or replace them if they are corroded.",
+        "frequency": 90
+      },
+      {
+        "canonicalId": 23,
+        "name": "Clean knobs",
+        "description": "Remove control panel knobs and clean around the bases.",
+        "frequency": 90
+      }
+    ]
+  },
+  {
+    "canonicalId": 3,
+    "name": "Gutters",
+    "tasks": [
+      {
+        "canonicalId": 31,
+        "name": "Clean",
+        "description": "Inspect gutters for debris and remove.",
+        "frequency": 60
+      },
+      {
+        "canonicalId": 32,
+        "name": "Inspect for leaks",
+        "description": "Check gutters for leaks and repair.",
+        "frequency": 180
+      }
+    ]
+  },
+  {
+    "canonicalId": 4,
+    "name": "Shower",
+    "tasks": [
+      {
+        "canonicalId": 41,
+        "name": "Clean showerhead",
+        "description": "Clean showerheads to remove mineral deposits.",
+        "frequency": 30
+      },
+      {
+        "canonicalId": 42,
+        "name": "Inspect drain",
+        "description": "Inspect the drain for clogs or buildup and remove.",
+        "frequency": 30
+      }
+    ]
+  },
+  {
+    "canonicalId": 5,
+    "name": "Hot Water Heater (Tankless)",
+    "tasks": [
+      {
+        "canonicalId": 51,
+        "name": "Descale",
+        "description": "Run a cleaning solution through your hot water heater to clean mineral deposits.",
+        "frequency": 1080
+      },
+      {
+        "canonicalId": 52,
+        "name": "Check for leaks",
+        "description": "Inspect for leaking water or signs of moisture around the unit.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 6,
+    "name": "Roof (Asphalt)",
+    "tasks": [
+      {
+        "canonicalId": 61,
+        "name": "Check shingles",
+        "description": "Check for missing, curling, or cracking shingles and replace.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 7,
+    "name": "Roof (Metal)",
+    "tasks": [
+      {
+        "canonicalId": 71,
+        "name": "Clean",
+        "description": "Clean off dirt, mildew, stains, and other elements.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 8,
+    "name": "Roof (Slate)",
+    "tasks": [
+      {
+        "canonicalId": 81,
+        "name": "Check shingles",
+        "description": "Check for missing, curling, or cracking shingles and replace.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 9,
+    "name": "Dishwasher",
+    "tasks": [
+      {
+        "canonicalId": 91,
+        "name": "Clean trap",
+        "description": "Remove and clean the trap in the bottom of your dishwasher.",
+        "frequency": 30
+      },
+      {
+        "canonicalId": 92,
+        "name": "Sanitize",
+        "description": "Put vinegar or cleaning solution in and run a hot water cycle to sanitize and deodorize.",
+        "frequency": 90
+      },
+      {
+        "canonicalId": 93,
+        "name": "Clean sprayer arm",
+        "description": "Check holes in sprayer arms for debris and dried soap and clean if needed.",
+        "frequency": 90
+      }
+    ]
+  }
+]

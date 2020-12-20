@@ -54,7 +54,7 @@ export default function Asset() {
 
   return (
     <PrivateLayout narrow>
-      <Back href="/tasks" />
+      <Back href="/tasks" label="Tasks" />
       {error && <WarningFailedToLoad />}
       {!data && <SpinnerInPage />}
       {data && (
@@ -68,7 +68,13 @@ export default function Asset() {
             <div className="complete">
               <DueIn dueIn={data.task.dueIn} />
               <LinkAsButton
-                href="/tasks/[id]/complete"
+                href={{
+                  pathname: "/tasks/[id]/complete",
+                  query: {
+                    asset: data.task.asset,
+                    task: data.task.name,
+                  },
+                }}
                 as={`/tasks/${data.task._id}/complete`}>
                 <Icon width="1rem">
                   <CheckmarkSVG />

@@ -121,6 +121,32 @@ export default function Layout({ children, narrow = false }) {
           font-style: normal;
           color: ${theme.colors.accent1};
         }
+
+        /* Focusing the button with a keyboard will show a dashed black line. */
+        *:focus-visible {
+          outline: 3px solid ${theme.colors.accent2};
+        }
+
+        /* Focusing the button with a mouse, touch, or stylus */
+        *:focus:not(:focus-visible) {
+          opacity: 0.8;
+          outline: none;
+        }
+
+        /* Animation utils */
+
+        .fade-in {
+          animation: fadeIn ease-in ${theme.timings.fast};
+        }
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
       `}</style>
     </>
   );

@@ -39,7 +39,6 @@ export default function StatusBanner() {
 }
 
 const StatusMessage = ({ message, time, type = "warning", removeStatus }) => {
-  console.log(message);
   // Set default message for when there is no message prop
   const defaultMessage =
     type === "success"
@@ -47,7 +46,7 @@ const StatusMessage = ({ message, time, type = "warning", removeStatus }) => {
       : "Whoops, there was a problem! Try again later.";
 
   // Let's do a little longer duration on error and warning messages.
-  const successMultipler = 3;
+  const successMultipler = 2;
   const errorMultipler = 5;
   const duration =
     (type === "success" ? successMultipler : errorMultipler) * 1000;
@@ -69,7 +68,7 @@ const StatusMessage = ({ message, time, type = "warning", removeStatus }) => {
           justify-content: center;
           color: ${theme.colors.light};
           fill: ${theme.colors.light};
-          opacity: 1;
+          opacity: 0;
           box-shadow: ${theme.shadows.m};
         }
         .success {

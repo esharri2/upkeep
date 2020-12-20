@@ -9,10 +9,10 @@ import LinkAsButton from "./LinkAsButton";
 import theme from "../styles/theme";
 
 export default function TaskCard({ task }) {
-  const { _id, asset, dueIn } = task;
+  const { _id, asset, dueIn, name } = task;
 
   return (
-    <section>
+    <section className="fade-in">
       <h2>
         <span>{asset}:</span> {task.name}
       </h2>
@@ -24,7 +24,15 @@ export default function TaskCard({ task }) {
           </Icon>
           Edit details
         </LinkAsButton>
-        <LinkAsButton href="/tasks/[id]/complete" as={`/tasks/${_id}/complete`}>
+        <LinkAsButton
+          href={{
+            pathname: "/tasks/[id]/complete",
+            query: {
+              asset,
+              task: name,
+            },
+          }}
+          as={`/tasks/${_id}/complete`}>
           <Icon width="1rem">
             <CheckmarkSVG />
           </Icon>

@@ -31,7 +31,7 @@ export default function Home() {
   const iconWidth = { width: "100px" };
   return (
     <Layout>
-      <section className="home-section">
+      <section className="home-section fade-in">
         <div className="home-section-title">
           <h1>
             <span className="accent">Upkeep</span> is a simple way to stay on
@@ -70,10 +70,11 @@ export default function Home() {
       <section id="features" className="features">
         <div>
           <h2>Homecare is hard.</h2>
-          <p>
-            Changing your furnance filter. Checking your gutters for leaks.
-            Clearing the shower drain.
-          </p>
+          <ul>
+            <li>Changing your furnance filter.</li>
+            <li>Checking your gutters for leaks.</li>
+            <li>Clearing the shower drain.</li>
+          </ul>
           <p>
             It's a lot to keep up with. And you may not even be doing everything
             you need to do to ensure the longevity and value of your home.{" "}
@@ -147,6 +148,20 @@ export default function Home() {
 
         h1 {
           font-size: 3rem;
+        }
+
+        ul {
+          list-style-type: none;
+          font-size: ${theme.fontSizes.l};
+          text-align: left;
+          margin: ${theme.spacing.m} auto 0;
+          max-width: 400px;
+          padding: 0;
+        }
+
+        ul li:before {
+          content: "✓";
+          padding-right: 1rem;
         }
 
         .accent {

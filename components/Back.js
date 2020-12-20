@@ -23,14 +23,14 @@ const { className, styles } = css.resolve`
 export default function Back({
   href = "/dashboard",
   className: parentClassName,
-  label = "dashboard",
+  label = "Dashboard",
 }) {
   return (
     <Link className={`${parentClassName} ${className}`} href={href}>
       <Icon>
         <ChevronLeftSVG />
       </Icon>
-      Back to {label}
+      {label}
       {styles}
     </Link>
   );

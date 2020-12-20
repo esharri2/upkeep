@@ -9,7 +9,7 @@ import LoginForm from "../components/forms/LoginForm";
 // Utils
 import theme from "../styles/theme";
 
-export default function Login(props) {
+export default function Login() {
   const router = useRouter();
   const isNewUser = router.query?.isNewUser;
 

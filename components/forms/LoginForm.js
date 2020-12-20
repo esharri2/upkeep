@@ -22,7 +22,7 @@ export default function LoginForm(props) {
     login(email, password, setUser)
       .then(() => {
         if (props.isNewUser) {
-          router.push("/setup");
+          router.push({ pathname: "/setup", query: { isNewUser: true } });
         } else {
           router.push("/dashboard");
         }

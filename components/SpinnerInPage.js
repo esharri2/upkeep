@@ -6,14 +6,14 @@ import theme from "../styles/theme";
 
 export default function SpinnerInPage() {
   return (
-    <div>
+    <div className="fade-in">
       <p className="sr-only">Loading...</p>
       <Spinner />
       <style jsx>{`
         div {
-          margin: ${theme.spacing.m} auto;
+          margin: ${theme.spacing.l} auto;
           fill: ${theme.colors.accent1};
-          width: 100px;
+          width: 80px;
         }
       `}</style>
     </div>

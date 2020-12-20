@@ -22,7 +22,7 @@ export default function Asset() {
   const { data, error } = useSWR([`/api/assets/${id}`, token], getAssets);
   return (
     <PrivateLayout narrow>
-      <Back href="/assets" label="list of assets" />
+      <Back href="/assets" label="List of assets" />
       {error && <WarningFailedToLoad />}
       {!data && <SpinnerInPage />}
       {data && (

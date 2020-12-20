@@ -2,6 +2,7 @@ import Home from "../../models/home";
 import connectToDatabase from "../../utils/connectToDatabase";
 import addUserToReq from "../../utils/addUserToReq";
 import sendError from "../../utils/sendError";
+import getDueInDays from "../../utils/getDueInDays";
 
 // Fetches assorted data points for dashboard
 
@@ -25,12 +26,13 @@ const handler = async (req, res) => {
         const dueSoonTasks = [];
 
         for (const asset of ownedAssets) {
-          // console.log(asset);
           for (const task of asset.tasks) {
             if (!task.instances || task.instances.length === 0) {
               tasksWithoutHistory.push({ ...task, asset: asset.name });
             }
-            // TODO add else if to test if task is overdue / due soon, populated other arrays
+            if (getDueInDays(task) < 1 && task.instances.length > 0) {
+              overdueTasks.push({ ...task, asset: asset.name });
+            }
           }
         }
 

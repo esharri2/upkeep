@@ -14,6 +14,7 @@ const theme = {
     light: "#fefffe",
     middle: "#c0d4df",
     accent1: "#068d9d",
+    accent2: "#EE6C4D",
     warning: "#ffc107",
     success: "#28a745",
     error: "#dc3545",

@@ -1,10 +1,14 @@
 // Libs
 import useSWR from "swr";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 // Components
+import Button from "../components/Button";
 import CheckmarkSVG from "../media/icons/checkmark.svg";
 import HomeSVG from "../media/icons/home.svg";
+import CrossSVG from "../media/icons/cross.svg";
+import Link from "../components/Link";
 import Icon from "../components/Icon";
 import TodoSVG from "../media/icons/to-do.svg";
 import WarningFailedToLoad from "../components/WarningFailedToLoad";
@@ -17,19 +21,43 @@ import useUser from "../hooks/useUser";
 import theme from "../styles/theme";
 import SpinnerInPage from "../components/SpinnerInPage";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const { token } = useUser();
   const { data, error } = useSWR(["/api/dashboard", token], getDashboard);
-
+  const router = useRouter();
+  const [showWelcome, setShowWelcome] = useState(router.query?.isNewUser);
   return (
     <PrivateLayout>
       <h1>My home</h1>
+      {showWelcome && (
+        <section className="welcome fade-in">
+          <span className="button-wrapper">
+            <Button
+              onClick={() => {
+                setShowWelcome(false);
+              }}>
+              <span className="sr-only">Close Welcome message</span>
+              <Icon marginRight="0">
+                <CrossSVG />
+              </Icon>
+            </Button>
+          </span>
+          <h2>Welcome to Upkeep!</h2>
+          <p>This is your dashboard. </p>
+          <p>
+            We recommend that you start by updating all your tasks with the
+            last-completed date. Then we can tell you when the task is due
+            again. If you've never completed a task, just use the purchase date
+            for the asset.
+          </p>
+        </section>
+      )}
       {error && <WarningFailedToLoad />}
       {!data && <SpinnerInPage />}
       {data && (
         <div className="tiles">
           <div className="tile">
-            <LinkAsButton block bigText centerText href="/assets" width="80%">
+            <LinkAsButton block bigText centerText href="/assets" width="100%">
               <Icon>
                 <HomeSVG />
               </Icon>
@@ -37,22 +65,25 @@ export default function Dashboard() {
             </LinkAsButton>
           </div>
           <div className="tile">
-            <LinkAsButton block bigText centerText href="/tasks" width="80%">
+            <LinkAsButton block bigText centerText href="/tasks" width="100%">
               <Icon>
                 <TodoSVG />
               </Icon>
               View and update tasks
             </LinkAsButton>
           </div>
-          <div className="tile">
+          <div className="tile border">
+            <h2>Asset summary</h2>
             <OwnedAssets owned={data?.ownedAssets} total={data?.totalAssets} />
           </div>
-          <div className="tile">
+          <div className="tile border">
+            <h2>Tasks to update</h2>
             <TasksWithoutHistory
               tasksWithoutHistory={data?.tasksWithoutHistory}
             />
           </div>
-          <div className="tile">
+          <div className="tile border">
+            <h2>Overdue tasks</h2>
             <OverdueTasks overdueTasks={data?.overdueTasks} />
           </div>
         </div>
@@ -60,6 +91,30 @@ export default function Dashboard() {
 
       <style jsx>
         {`
+          .welcome {
+            border-radius: ${theme.borders.radius};
+            background-color: ${theme.colors.accent1};
+            color: ${theme.colors.light};
+            margin: ${theme.spacing.m} 0;
+            padding: ${theme.spacing.m};
+            position: relative;
+            box-shadow: ${theme.shadows.s};
+          }
+
+          .welcome .button-wrapper {
+            position: absolute;
+            right: ${theme.spacing.s};
+            top: ${theme.spacing.s};
+          }
+          .welcome h2 {
+            margin: 0;
+          }
+
+          .welcome p {
+            margin-top: ${theme.spacing.s};
+            max-width: 600px;
+          }
+
           .tiles {
             font-size: ${theme.fontSizes.l};
           }
@@ -68,8 +123,18 @@ export default function Dashboard() {
             display: flex;
             align-items: center;
             flex-direction: column;
+            padding: ${theme.spacing.m};
+            border-radius: ${theme.borders.radius};
+          }
+
+          .tile.border {
             border-bottom: solid 1px ${theme.colors.middle};
-            padding: ${theme.spacing.l};
+          }
+
+          @media screen and (${theme.mediaQueries.desktop}) {
+            .tile.border {
+              border: solid 1px ${theme.colors.middle};
+            }
           }
 
           .tile:nth-of-type(1) {
@@ -191,29 +256,79 @@ function OwnedAssets({ owned, total }) {
 }
 
 const OverdueTasks = ({ overdueTasks }) => {
-  console.log(overdueTasks);
   return (
     <>
-      <p>
-        You have <em>{overdueTasks.length}</em> tasks that are overdue.
-      </p>
+      {overdueTasks.length === 1 && (
+        <p>
+          You have <em className="error">{overdueTasks.length}</em> task that is
+          overdue.
+        </p>
+      )}
+      {overdueTasks.length > 1 && (
+        <p>
+          You have <em className="error">{overdueTasks.length}</em> tasks that
+          are overdue.
+        </p>
+      )}
+      {overdueTasks.length === 0 && (
+        <>
+          <p className="note">You don't have any tasks overdue.</p>
+          <p className="note success">Nice!</p>
+        </>
+      )}
+
       {overdueTasks.map((task) => (
-        <div className="task-card">
+        <div key={task._id} className="task-card fade-in">
           <div className="listing">
             <span className="asset">{task.asset}: </span>
             <span className="task">{task.name}</span>
           </div>
           <LinkAsButton
-            href="/tasks/[id]/complete"
+            href={{
+              pathname: "/tasks/[id]/complete",
+              query: {
+                asset: task.asset,
+                task: task.name,
+              },
+            }}
             as={`/tasks/${task._id}/complete`}
             width="100%">
             <Icon width="1rem">
               <CheckmarkSVG />
             </Icon>
-            Add date last completed
+            Update
           </LinkAsButton>
         </div>
       ))}
+      <style jsx>{`
+        .asset {
+          color: ${theme.colors.accent1};
+        }
+
+        .error {
+          color: ${theme.colors.error};
+        }
+
+        .success {
+          color: ${theme.colors.success};
+        }
+
+        .task {
+          font-weight: 700;
+        }
+
+        .task-card {
+          margin: ${theme.spacing.m};
+        }
+
+        .note {
+          text-align: center;
+        }
+
+        .listing {
+          margin: ${theme.spacing.s} 0;
+        }
+      `}</style>
     </>
   );
 };
@@ -231,26 +346,32 @@ const TasksWithoutHistory = ({ tasksWithoutHistory }) => {
       </p>
       {size > 0 ? (
         <p className="note error">
-          Update these ASAP so we can tell you when they're due again!
+          Update these soon so we can tell you when they are due again!
         </p>
       ) : (
         <p className="note success">Nice!</p>
       )}
       <div>
         {tasksWithoutHistory.map((task) => (
-          <div className="task-card">
+          <div key={task._id} className="task-card fade-in">
             <div className="listing">
               <span className="asset">{task.asset}: </span>
               <span className="task">{task.name}</span>
             </div>
             <LinkAsButton
-              href="/tasks/[id]/complete"
+              href={{
+                pathname: "/tasks/[id]/complete",
+                query: {
+                  asset: task.asset,
+                  task: task.name,
+                },
+              }}
               as={`/tasks/${task._id}/complete`}
               width="100%">
               <Icon width="1rem">
                 <CheckmarkSVG />
               </Icon>
-              Add date last completed
+              Update
             </LinkAsButton>
           </div>
         ))}
@@ -280,8 +401,7 @@ const TasksWithoutHistory = ({ tasksWithoutHistory }) => {
           text-align: center;
         }
 
-        .listing,
-        .note {
+        .listing {
           margin: ${theme.spacing.s} 0;
         }
       `}</style>

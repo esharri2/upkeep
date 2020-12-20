@@ -1,8 +1,8 @@
 // Libs
 import css from "styled-jsx/css";
 import { Formik, Form } from "formik";
-import useSWR from "swr";
 import { useRouter } from "next/router";
+import useSWR, { mutate } from "swr";
 
 // Components
 import ButtonSubmit from "../ButtonSubmit";
@@ -25,35 +25,42 @@ const { className, styles } = css.resolve`
   }
 `;
 
-export default function AssetsForm() {
+export default function AssetsForm(props) {
   const router = useRouter();
   const { token } = useUser();
   const { setStatus } = useStatus();
   const { data, error } = useSWR(["/api/assets", token], getAssets);
+
+  const assets = data?.assets || [];
 
   const handleSubmit = async (values) => {
     postAssets(token, {
       body: JSON.stringify({ assetIds: values.checked }),
     })
       .then(() => {
-        router.push("/dashboard");
+        mutate([`/api/assets/`, token]);
+        if (props.isNewUser) {
+          router.push({ pathname: "/dashboard", query: { isNewUser: true } });
+        } else {
+          router.push("/dashboard");
+        }
       })
       .catch((error) => setStatus({ type: "error", message: error }));
   };
 
-  const assets = data?.assets || [];
   return (
     <>
       <p id="checkbox-group">
-        Select the assets that you have in your home. You can always update
-        these later.
+        Select the assets you have in your home. You can always update these
+        later.
       </p>
       {error && <WarningFailedToLoad />}
       {!data && <SpinnerInPage />}
       {data && (
         <Formik
+          enableReinitialize
           initialValues={{
-            checked: assets.map((asset) => (asset.owned ? asset._id : null)),
+            checked: assets.map((asset) => (asset.owned ? asset._id : false)),
           }}
           onSubmit={async (values) => handleSubmit(values)}>
           {({ dirty, isSubmitting, values }) => {
@@ -63,9 +70,9 @@ export default function AssetsForm() {
                   {assets.map(({ _id, name, owned }) => (
                     <CheckboxInput
                       className={className}
-                      name={name}
-                      value={"" + _id}
-                      type="checkbox">
+                      name="checked"
+                      value={_id}
+                      key={_id}>
                       {name}
                     </CheckboxInput>
                   ))}

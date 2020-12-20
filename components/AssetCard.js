@@ -44,7 +44,7 @@ export default function AssetCard({ asset }) {
       asset._id
     )
       .then(() => {
-        setStatus({ type: "success" });
+        setStatus({ type: "success", message: "Removed" });
         mutate(["/api/assets", token]);
       })
       .catch((error) => {
@@ -53,7 +53,7 @@ export default function AssetCard({ asset }) {
   };
 
   return (
-    <section className="card">
+    <section className="card fade-in">
       <h2 className={asset.owned ? "owned" : "unowned"}>{asset.name}</h2>
       <div className="buttons">
         {asset.owned ? (

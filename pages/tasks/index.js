@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import useSWR from "swr";
 
 // Components
+import Back from "../../components/Back";
 import WarningFailedToLoad from "../../components/WarningFailedToLoad";
 import Field from "../../components/Field";
 import Link from "../../components/Link";
@@ -42,6 +43,7 @@ export default function Tasks() {
 
   return (
     <PrivateLayout narrow>
+      <Back />
       <h1>Tasks</h1>
       {error && <WarningFailedToLoad />}
       {!data && <SpinnerInPage />}
