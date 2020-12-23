@@ -31,30 +31,20 @@ export default function Home() {
   const iconWidth = { width: "100px" };
   return (
     <Layout>
-      <section className="home-section fade-in">
-        <div className="home-section-title">
+      <section className="home-section">
+        <div className="home-section-title fade-in">
           <h1>
-            <span className="accent">Upkeep</span> is a simple way to stay on
-            top of home maintenance.
+            <span className="accent">Upkeep</span> is a simple way to keep track
+            of home maintenance.
           </h1>
           <div className="link-container">
             <div>
-              <LinkAsButton centerText bigText href="/signup">
+              <LinkAsButton bigText href="/signup">
                 Create an account
               </LinkAsButton>
             </div>
-            {/* <div>
-              <LinkAsButton bigText reverse href="/login">
-                Log in with existing account
-              </LinkAsButton>
-            </div> */}
             <div>
-              <LinkAsButton
-                bigText
-                centerText
-                reverse
-                noBorder
-                href="#features">
+              <LinkAsButton bigText reverse noBorder href="#features">
                 Learn more
                 <Icon>
                   <ChevronRightSVG />
@@ -63,29 +53,38 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="home-image">
+        <div className="home-image fade-up fade-in">
           <img width="467px" src="house-sm.jpg" />
         </div>
       </section>
       <section id="features" className="features">
-        <div>
-          <h2>Homecare is hard.</h2>
-          <ul>
-            <li>Changing your furnance filter.</li>
-            <li>Checking your gutters for leaks.</li>
-            <li>Clearing the shower drain.</li>
-          </ul>
-          <p>
-            It's a lot to keep up with. And you may not even be doing everything
-            you need to do to ensure the longevity and value of your home.{" "}
-            <span className="accent">Upkeep can help!</span>
-          </p>
+        <div className="hero-image full-bleed">
+          <div className="text">
+            <div>
+              <h2>Homecare is hard.</h2>
+              <p>
+                From changing your air filter ever few months to descaling your
+                water heater every few years, it's a lot to keep up with.
+              </p>
+            </div>
+          </div>
+          <img
+            loading="lazy"
+            srcset="roof-sm.jpg 640w
+                  roof-lg.jpg 1280w,
+                  roof-xl.jpg 2000w"
+            src="room-sm.jpg"
+          />
         </div>
+      </section>
+      <section id="features" className="features">
+        <h2>Upkeep can help.</h2>
+
         <div className="card">
           <Icon {...iconWidth}>
             <HomeSVG />
           </Icon>
-          <h2>Keep track of your assets</h2>
+          <h3>Keep track of your assets</h3>
           <p>
             Keep a list of what you have in your home, inside and out. Store
             important details, like make, model, and purchase date.
@@ -95,7 +94,7 @@ export default function Home() {
           <Icon {...iconWidth}>
             <TodoSVG />
           </Icon>
-          <h2>Know what to do and when to do it</h2>
+          <h3>Know what to do and when to do it</h3>
           <p>
             Based on your list of assets, we'll tell you what you need to do to
             take care of them. Descaled your hot water heater? Enter the date
@@ -106,14 +105,13 @@ export default function Home() {
           <Icon {...iconWidth}>
             <GraphlineSVG />
           </Icon>
-          <h2>Create a record of your homecare history</h2>
+          <h3>Create a record of your homecare history</h3>
           <p>
             This is some great text it is very good yay. This is some great text
             it is very good yay
           </p>
         </div>
       </section>
-
       <style jsx>{`
         .home-section {
           display: flex;
@@ -132,67 +130,77 @@ export default function Home() {
         .home-image img {
           width: 100%;
           border-radius: ${theme.borders.radius};
+          box-shadow: ${theme.shadows.l};
         }
 
-        .home-image img::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
-          -moz-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
-          -webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+        .hero-image {
+          position: relative;
+        }
+
+        .hero-image .text {
+          display: flex;
+          align-items: flex-end;
+          margin: 0 ${theme.spacing.m};
         }
 
         h1 {
           font-size: 3rem;
         }
 
-        ul {
-          list-style-type: none;
-          font-size: ${theme.fontSizes.l};
-          text-align: left;
-          margin: ${theme.spacing.m} auto 0;
-          max-width: 400px;
-          padding: 0;
-        }
-
-        ul li:before {
-          content: "✓";
-          padding-right: 1rem;
-        }
-
-        .accent {
-          color: ${theme.colors.accent1};
-        }
-
         h2 {
+          font-size: ${theme.fontSizes.xxl};
+          line-height: 1;
           color: ${theme.colors.accent1};
           text-align: center;
           margin-bottom: 0;
         }
 
-        h2:first-of-type {
-          font-size: 2rem;
+        p:last-of-type {
+          margin-bottom: 0;
+        }
+
+        .text > div {
+          max-width: 600px;
+          margin: 0 auto;
+          z-index: 1;
+          color: ${theme.colors.dark};
+          text-align: center;
+          padding-bottom: ${theme.spacing.xl};
+        }
+
+        .hero-image img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          object-position: center bottom;
+          display: none;
+          max-height: 75vh;
+          animation: 10s ease-in-out infinite alternate breath;
+        }
+
+        .features {
+          margin-top: ${theme.spacing.l};
+        }
+
+        @keyframes breath {
+          0% {
+            transform: scale(1);
+          }
+
+          100% {
+            transform: scale(1.05);
+          }
+        }
+
+        .accent {
+          color: ${theme.colors.accent1};
+          font-weight: 600;
         }
 
         .emphasis {
           color: ${theme.colors.accent1};
           font-weight: 600;
           text-align: center;
-        }
-
-        .home-section p {
-          font-size: 2rem;
-          margin: 0;
-          line-height: 1.2;
-          font-weight: 600;
-        }
-
-        p + p {
-          margin-top: 0;
         }
 
         .link-container {
@@ -213,30 +221,34 @@ export default function Home() {
           align-items: center;
         }
 
-        .features {
-          display: grid;
-          grid-gap: ${theme.spacing.m};
-          margin: ${theme.spacing.xxl} 0;
-        }
-
-        .features p {
-          font-size: ${theme.fontSizes.l};
-        }
-
         .card {
           display: flex;
           flex-direction: column;
           align-items: center;
-          border-radius: ${theme.borders.radius};
-          padding: ${theme.spacing.m} 0;
           fill: ${theme.colors.accent1};
-          margin: ${theme.spacing.m};
+          margin: ${theme.spacing.l};
+          padding: ${theme.spacing.l};
+           {
+            /* background-color: bisque; */
+          }
+        }
+
+        .card p {
+          margin: 0 auto;
+          font-size: ${theme.fontSizes.l};
+          text-align: center;
+          max-width: 400px;
+        }
+
+        .card h3 {
+          color: ${theme.colors.accent1};
+          font-size: ${theme.fontSizes.xl};
         }
 
         @media screen and (${theme.mediaQueries.desktop}) {
           .home-section {
             flex-direction: row;
-            min-height: 80vh;
+            min-height: 90vh;
           }
 
           .home-section-title {
@@ -246,39 +258,34 @@ export default function Home() {
           }
 
           .home-section p {
-            font-size: 4rem;
+            font-size: ${theme.fontSizes.xxl};
             padding-right: ${theme.spacing.m};
             letter-spacing: -0.05rem;
           }
 
+          .hero-image img {
+            display: block;
+          }
+
+          .hero-image .text {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            align-items: flex-end;
+            font-size: ${theme.fontSizes.xl};
+          }
+
           h1 {
-            font-size: 4rem;
+            font-size: ${theme.fontSizes.xxl};
             margin: 0;
             line-height: 1.2;
           }
 
-          .features {
-            grid-template-columns: 1fr 1fr 1fr;
-          }
-
           .link-container {
             width: 50%;
-          }
-
-          .features > div:first-child {
-            grid-column-start: 1;
-            grid-column-end: 4;
-            text-align: center;
-            padding: 0 10vw;
-            font-size: 3rem;
-          }
-
-          .features > div:first-child h2 {
-            font-size: inherit;
-          }
-
-          .features > div:first-child p {
-            font-size: 1.7rem;
           }
         }
       `}</style>

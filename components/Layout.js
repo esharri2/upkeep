@@ -18,6 +18,7 @@ export default function Layout({ children, narrow = false }) {
           font-size: 16px;
           line-height: 1.4;
           box-sizing: border-box;
+          overflow-x: hidden;
 
            {
             /* Prevent adjustments of font size after orientation changes in iOS. */
@@ -36,6 +37,7 @@ export default function Layout({ children, narrow = false }) {
           background-color: ${theme.colors.light};
           color: ${theme.colors.dark};
           font-family: ${theme.fontFamilies.body};
+          overflow-x: ;
         }
 
         main {
@@ -133,10 +135,16 @@ export default function Layout({ children, narrow = false }) {
           outline: none;
         }
 
+        .full-bleed {
+          width: 100vw;
+          margin-left: calc(50% - 50vw);
+          overflow: hidden;
+        }
+
         /* Animation utils */
 
         .fade-in {
-          animation: fadeIn ease-in ${theme.timings.fast};
+          animation: fadeIn ease-in-out ${theme.timings.med};
         }
 
         @keyframes fadeIn {
@@ -145,6 +153,19 @@ export default function Layout({ children, narrow = false }) {
           }
           100% {
             opacity: 1;
+          }
+        }
+
+        .fade-up {
+          animation: fadeUp ease-in-out ${theme.timings.med};
+        }
+
+        @keyframes fadeUp {
+          0% {
+            transform: translateY(10vh);
+          }
+          100% {
+            transform: translateY(0);
           }
         }
       `}</style>

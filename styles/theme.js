@@ -23,6 +23,8 @@ const theme = {
   },
   timings: {
     fast: ".2s",
+    med: ".5s",
+    slow: "1s",
   },
   fontFamilies: {
     body: '"Red Hat Text", "Helvetica Neue", Arial, sans-serif',
@@ -43,6 +45,7 @@ const theme = {
     m: "1rem",
     l: "1.2rem",
     xl: "2rem",
+    xxl: "4rem",
   },
   size: {
     headerHeight: "4rem",
