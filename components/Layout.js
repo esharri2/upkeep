@@ -138,7 +138,6 @@ export default function Layout({ children, narrow = false }) {
         .full-bleed {
           width: 100vw;
           margin-left: calc(50% - 50vw);
-          overflow: hidden;
         }
 
         /* Animation utils */

@@ -7,7 +7,7 @@ import theme from "../styles/theme";
 export default function DueIn({ dueIn }) {
   let dueInText = "";
   let dueInClass;
-  if (!dueIn) {
+  if (!dueIn && dueIn !== 0) {
     dueInText =
       "There is no history for this task. Mark it complete with the last-completed date (or purchase date).";
     dueInClass = "error";

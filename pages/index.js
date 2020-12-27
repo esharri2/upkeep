@@ -44,7 +44,7 @@ export default function Home() {
               </LinkAsButton>
             </div>
             <div>
-              <LinkAsButton bigText reverse noBorder href="#features">
+              <LinkAsButton bigText reverse noBorder href="#hero">
                 Learn more
                 <Icon>
                   <ChevronRightSVG />
@@ -57,7 +57,7 @@ export default function Home() {
           <img width="467px" src="house-sm.jpg" />
         </div>
       </section>
-      <section id="features" className="features">
+      <section id="hero" className="features">
         <div className="hero-image full-bleed">
           <div className="text">
             <div>
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
           <img
             loading="lazy"
-            srcset="roof-sm.jpg 640w
+            srcSet="roof-sm.jpg 640w
                   roof-lg.jpg 1280w,
                   roof-xl.jpg 2000w"
             src="room-sm.jpg"
@@ -106,13 +106,24 @@ export default function Home() {
             <GraphlineSVG />
           </Icon>
           <h3>Create a record of your homecare history</h3>
-          <p>
-            This is some great text it is very good yay. This is some great text
-            it is very good yay
-          </p>
+          <p>Export your data to create a hard copy of your home maintenace.</p>
+        </div>
+        <div className="card">
+          <h2 className="no-margin">Get started!</h2>
+
+          <div className="link-container">
+            <div>
+              <LinkAsButton centerText bigText href="/signup">
+                Create an account
+              </LinkAsButton>
+            </div>
+          </div>
         </div>
       </section>
       <style jsx>{`
+        .no-margin {
+          margin-bottom: 0;
+        }
         .home-section {
           display: flex;
           flex-direction: column;
@@ -148,7 +159,7 @@ export default function Home() {
         }
 
         h2 {
-          font-size: ${theme.fontSizes.xxl};
+          font-size: ${theme.fontSizes.xl};
           line-height: 1;
           color: ${theme.colors.accent1};
           text-align: center;
@@ -175,21 +186,10 @@ export default function Home() {
           object-position: center bottom;
           display: none;
           max-height: 75vh;
-          animation: 10s ease-in-out infinite alternate breath;
         }
 
         .features {
           margin-top: ${theme.spacing.l};
-        }
-
-        @keyframes breath {
-          0% {
-            transform: scale(1);
-          }
-
-          100% {
-            transform: scale(1.05);
-          }
         }
 
         .accent {
@@ -226,11 +226,7 @@ export default function Home() {
           flex-direction: column;
           align-items: center;
           fill: ${theme.colors.accent1};
-          margin: ${theme.spacing.l};
-          padding: ${theme.spacing.l};
-           {
-            /* background-color: bisque; */
-          }
+          margin: ${theme.spacing.l} 0;
         }
 
         .card p {
@@ -242,7 +238,8 @@ export default function Home() {
 
         .card h3 {
           color: ${theme.colors.accent1};
-          font-size: ${theme.fontSizes.xl};
+          font-size: ${theme.fontSizes.l};
+          text-align: center;
         }
 
         @media screen and (${theme.mediaQueries.desktop}) {
@@ -282,6 +279,19 @@ export default function Home() {
             font-size: ${theme.fontSizes.xxl};
             margin: 0;
             line-height: 1.2;
+          }
+
+          h2 {
+            font-size: ${theme.fontSizes.xxl};
+          }
+
+          h3 {
+            font-size: ${theme.fontSizes.xl};
+          }
+
+          .card {
+            padding: ${theme.spacing.l};
+            margin: ${theme.spacing.l};
           }
 
           .link-container {

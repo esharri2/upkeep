@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import theme from "../styles/theme";
 
 // Components
 import CheckmarkSVG from "../media/icons/checkmark.svg";
@@ -8,6 +7,7 @@ import WarningSVG from "../media/icons/warning.svg";
 
 // Utils
 import useStatus from "../hooks/useStatus";
+import theme from "../styles/theme";
 
 export default function StatusBanner() {
   const { status, removeStatus } = useStatus();
@@ -70,6 +70,7 @@ const StatusMessage = ({ message, time, type = "warning", removeStatus }) => {
           fill: ${theme.colors.light};
           opacity: 0;
           box-shadow: ${theme.shadows.m};
+          padding: 0 ${theme.spacing.m};
         }
         .success {
           background-color: ${theme.colors.success};

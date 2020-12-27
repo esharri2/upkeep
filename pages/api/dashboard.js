@@ -26,7 +26,8 @@ const handler = async (req, res) => {
         const dueSoonTasks = [];
 
         for (const asset of ownedAssets) {
-          for (const task of asset.tasks) {
+          const unIgnoredTasks = asset.tasks.filter((task) => !task.isIgnored);
+          for (const task of unIgnoredTasks) {
             if (!task.instances || task.instances.length === 0) {
               tasksWithoutHistory.push({ ...task, asset: asset.name });
             }

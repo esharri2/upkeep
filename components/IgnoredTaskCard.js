@@ -9,39 +9,19 @@ import LinkAsButton from "./LinkAsButton";
 import theme from "../styles/theme";
 
 export default function TaskCard({ task }) {
-  const { _id, asset, dueIn, name, isIgnored } = task;
-
-  if (isIgnored) {
-    return null;
-  }
+  const { _id, asset, name } = task;
 
   return (
     <section className="fade-in">
       <h2>
-        <span>{asset}:</span> {task.name}
+        <span>{asset}:</span> {name}
       </h2>
-      <DueIn dueIn={dueIn} />
       <div>
         <LinkAsButton reverse href="/tasks/[id]" as={`/tasks/${_id}`}>
           <Icon width="1rem">
             <EditSVG />
           </Icon>
           Edit details
-        </LinkAsButton>
-
-        <LinkAsButton
-          href={{
-            pathname: "/tasks/[id]/complete",
-            query: {
-              asset,
-              task: name,
-            },
-          }}
-          as={`/tasks/${_id}/complete`}>
-          <Icon width="1rem">
-            <CheckmarkSVG />
-          </Icon>
-          Mark complete
         </LinkAsButton>
       </div>
 
@@ -51,9 +31,11 @@ export default function TaskCard({ task }) {
           fill: ${theme.colors.accent1};
           border-bottom: solid 1px ${theme.colors.middle};
         }
-
+        h2 {
+          color: ${theme.colors.disabledText};
+          font-size: ${theme.fontSizes.m};
+        }
         span {
-          color: ${theme.colors.accent1};
           font-weight: 300;
         }
 

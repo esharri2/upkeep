@@ -11,7 +11,7 @@ const taskSchema = new Schema({
   description: String,
   canonicalId: Number,
   frequency: { type: Number, required: true }, //TODO should this be frequencyInDays?
-  isMuted: { type: Boolean, default: false },
+  isIgnored: { type: Boolean, default: false },
   notes: String, //TODO check type on this one? May need to allow whitespace or something
   instances: [instanceSchema],
 });
