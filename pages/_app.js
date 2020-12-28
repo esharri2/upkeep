@@ -1,4 +1,5 @@
-import "../styles/index.css";
+// import "../styles/index.css";
+import "@reach/menu-button/styles.css";
 
 // Libs
 import dynamic from "next/dynamic";

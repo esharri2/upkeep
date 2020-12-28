@@ -97,7 +97,7 @@
   },
   {
     "canonicalId": 5,
-    "name": "Hot Water Heater (Tankless)",
+    "name": "Hot water heater (tankless)",
     "tasks": [
       {
         "canonicalId": 51,
@@ -115,7 +115,7 @@
   },
   {
     "canonicalId": 6,
-    "name": "Roof (Asphalt)",
+    "name": "Roof (asphalt)",
     "tasks": [
       {
         "canonicalId": 61,
@@ -127,7 +127,7 @@
   },
   {
     "canonicalId": 7,
-    "name": "Roof (Metal)",
+    "name": "Roof (metal)",
     "tasks": [
       {
         "canonicalId": 71,
@@ -139,7 +139,7 @@
   },
   {
     "canonicalId": 8,
-    "name": "Roof (Slate)",
+    "name": "Roof (slate)",
     "tasks": [
       {
         "canonicalId": 81,
@@ -175,7 +175,7 @@
   },
   {
     "canonicalId": 10,
-    "name": "Exterior (Masonry)",
+    "name": "Exterior (masonry)",
     "tasks": [
       {
         "canonicalId": 101,
@@ -187,7 +187,7 @@
   },
   {
     "canonicalId": 11,
-    "name": "Exterior (Siding)",
+    "name": "Exterior (siding)",
     "tasks": [
       {
         "canonicalId": 111,
@@ -199,7 +199,7 @@
   },
   {
     "canonicalId": 12,
-    "name": "Patio or Deck (Wood)",
+    "name": "Patio or deck (wood)",
     "tasks": [
       {
         "canonicalId": 121,
@@ -211,7 +211,7 @@
   },
   {
     "canonicalId": 13,
-    "name": "Steam Heat",
+    "name": "Steam heat",
     "tasks": [
       {
         "canonicalId": 131,

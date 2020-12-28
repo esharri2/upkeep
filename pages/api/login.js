@@ -60,6 +60,7 @@ export default async (req, res) => {
           }
           refreshToken = user.refreshToken;
         } else if (refreshToken && !user) {
+          console.log("else...");
           // Search for user by refreshToken (auto-login flow).
           user = await User.findOne({ refreshToken }).populate(
             homeQueryConditions
@@ -78,7 +79,7 @@ export default async (req, res) => {
         }
 
         // Get id of default home for the token
-        const homeId = user.homes[0] ? user.homes[0]._id : null;
+        const homeId = user?.homes[0] ? user?.homes[0]._id : null;
 
         // Final check that user and refresh token have been set
         if (user && refreshToken && homeId) {

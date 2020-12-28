@@ -16,9 +16,15 @@ export default function UserMenu({ children }) {
           fill: ${theme.colors.dark};
         }
 
+        :global([data-reach-menu]) {
+          display: block;
+          position: absolute;
+        }
+
         :global([data-reach-menu-list]) {
           background-color: ${theme.colors.light};
           box-shadow: ${theme.shadows.m};
+          padding: 0;
         }
 
         :global([data-reach-menu-list]:focus) {

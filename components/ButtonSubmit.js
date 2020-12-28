@@ -18,6 +18,7 @@ export default function ButtonSubmit({
   formHasChanged = true,
   isValid = true,
 }) {
+  console.log(isValid, " isvalid?");
   return (
     <Button
       className={className}

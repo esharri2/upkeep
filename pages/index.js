@@ -247,7 +247,7 @@ export default function Home() {
         @media screen and (${theme.mediaQueries.desktop}) {
           .home-section {
             flex-direction: row;
-            min-height: 90vh;
+            min-height: 85vh;
           }
 
           .home-section-title {

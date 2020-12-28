@@ -124,15 +124,18 @@ export default function Layout({ children, narrow = false }) {
           color: ${theme.colors.accent1};
         }
 
-        /* Focusing the button with a keyboard will show a dashed black line. */
-        *:focus-visible {
+         {
+          /* TODO this should be focus-visible I think? */
+        }
+        *:focus {
           outline: 3px solid ${theme.colors.accent2};
         }
 
         /* Focusing the button with a mouse, touch, or stylus */
-        *:focus:not(:focus-visible) {
-          opacity: 0.8;
+         {
+          /* *:focus:not(:focus-visible) {
           outline: none;
+        } */
         }
 
         .full-bleed {

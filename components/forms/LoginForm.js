@@ -49,6 +49,7 @@ export default function LoginForm(props) {
               name="password"
               type="password"
               maxLength="50"
+              minLength="4"
             />
           </div>
           <ButtonSubmit isSubmitting={isSubmitting}>Log in</ButtonSubmit>
