@@ -55,8 +55,10 @@ export default function Dashboard(props) {
             update details.
           </p>
           <p>
-            Go to <b>View and update tasks</b> to see all of your tasks, when
-            they're due, and add or update details about each task.'
+            Go to <b>View and update tasks</b> to see all of your tasks, see
+            when they're due, mark them completed, and add or update details.
+            You can also choose to ignore tasks that you don't need to worry
+            about.
           </p>
         </section>
       )}
