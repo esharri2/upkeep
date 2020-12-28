@@ -154,19 +154,6 @@ export default function Layout({ children, narrow = false }) {
             opacity: 1;
           }
         }
-
-        .fade-up {
-          animation: fadeUp ease-in-out ${theme.timings.med};
-        }
-
-        @keyframes fadeUp {
-          0% {
-            transform: translateY(10vh);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
       `}</style>
     </>
   );

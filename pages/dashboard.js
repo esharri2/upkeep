@@ -50,6 +50,14 @@ export default function Dashboard(props) {
             again. If you've never completed a task, just use the purchase date
             for the asset.
           </p>
+          <p>
+            Go to <b>Manage assets</b> to add or drop assets from your home and
+            update details.
+          </p>
+          <p>
+            Go to <b>View and update tasks</b> to see all of your tasks, when
+            they're due, and add or update details about each task.'
+          </p>
         </section>
       )}
       {error && <WarningFailedToLoad />}
@@ -105,12 +113,13 @@ export default function Dashboard(props) {
         {`
           .welcome {
             border-radius: ${theme.borders.radius};
-            background-color: ${theme.colors.accent1};
-            color: ${theme.colors.light};
+            border: solid 6px ${theme.colors.accent1};
+            background-color: ${theme.colors.light};
+            color: ${theme.colors.accent1};
             margin: ${theme.spacing.m} 0;
             padding: ${theme.spacing.m};
             position: relative;
-            box-shadow: ${theme.shadows.s};
+            box-shadow: ${theme.shadows.l};
           }
 
           .welcome .button-wrapper {
@@ -124,7 +133,7 @@ export default function Dashboard(props) {
 
           .welcome p {
             margin-top: ${theme.spacing.s};
-            max-width: 600px;
+            max-width: 700px;
           }
 
           .tiles {

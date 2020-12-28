@@ -53,7 +53,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="home-image fade-up fade-in">
+        <div className="home-image fade-in">
           <img width="467px" src="house-sm.jpg" />
         </div>
       </section>
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
           <img
             loading="lazy"
-            srcSet="roof-sm.jpg 640w
+            srcSet="roof-sm.jpg 640w,
                   roof-lg.jpg 1280w,
                   roof-xl.jpg 2000w"
             src="room-sm.jpg"
@@ -155,7 +155,9 @@ export default function Home() {
         }
 
         h1 {
-          font-size: 3rem;
+          font-size: 2.5rem;
+          line-height: 1.1;
+          margin-top: 0;
         }
 
         h2 {
