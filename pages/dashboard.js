@@ -290,7 +290,7 @@ const OverdueTasks = ({ overdueTasks }) => {
       )}
       {overdueTasks.length === 0 && (
         <>
-          <p className="note">You don't have any tasks overdue. Nice!</p>
+          <p className="note">You don't have any overdue tasks.</p>
         </>
       )}
 
@@ -336,6 +336,7 @@ const OverdueTasks = ({ overdueTasks }) => {
 
         .task-card {
           margin: ${theme.spacing.m};
+          width: 100%;
         }
 
         .note {
@@ -368,7 +369,7 @@ const TasksWithoutHistory = ({ tasksWithoutHistory }) => {
       ) : (
         <p className="note success">Nice!</p>
       )}
-      <div>
+      <>
         {tasksWithoutHistory.map((task) => (
           <div key={task._id} className="task-card fade-in">
             <div className="listing">
@@ -392,7 +393,7 @@ const TasksWithoutHistory = ({ tasksWithoutHistory }) => {
             </LinkAsButton>
           </div>
         ))}
-      </div>
+      </>
       <style jsx>{`
         .asset {
           color: ${theme.colors.accent1};
@@ -412,6 +413,7 @@ const TasksWithoutHistory = ({ tasksWithoutHistory }) => {
 
         .task-card {
           margin: ${theme.spacing.m};
+          width: 100%;
         }
 
         .note {

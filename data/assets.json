@@ -172,5 +172,185 @@
         "frequency": 90
       }
     ]
+  },
+  {
+    "canonicalId": 10,
+    "name": "Exterior (Masonry)",
+    "tasks": [
+      {
+        "canonicalId": 101,
+        "name": "Wash",
+        "description": "Wash off any moss, mold, mildew, or grit that has accumulated.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 11,
+    "name": "Exterior (Siding)",
+    "tasks": [
+      {
+        "canonicalId": 111,
+        "name": "Wash",
+        "description": "Use a siding cleaning kit to wash off any moss, mold, mildew, or grit on the siding.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 12,
+    "name": "Patio or Deck (Wood)",
+    "tasks": [
+      {
+        "canonicalId": 121,
+        "name": "Wash",
+        "description": "Spray deck with a cleaning solution and scrub it. ",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 13,
+    "name": "Steam Heat",
+    "tasks": [
+      {
+        "canonicalId": 131,
+        "name": "Drain",
+        "description": "Drain your boiler to clear out sediment.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 14,
+    "name": "HVAC system",
+    "tasks": [
+      {
+        "canonicalId": 141,
+        "name": "Clean compressor",
+        "description": "Clean and service A/C compressor.",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 142,
+        "name": "Clean furnace",
+        "description": "Clean and service furnace.",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 142,
+        "name": "Change filters",
+        "description": "Change return vent filters.",
+        "frequency": 60
+      },
+      {
+        "canonicalId": 142,
+        "name": "Clean vents",
+        "description": "Remove vents and wash off any dirt, grime, or mold.",
+        "frequency": 180
+      }
+    ]
+  },
+  {
+    "canonicalId": 15,
+    "name": "Smoke alarms",
+    "tasks": [
+      {
+        "canonicalId": 151,
+        "name": "Test",
+        "description": "Test smoke alarm and replace batteries if it's not functioning.",
+        "frequency": 30
+      },
+      {
+        "canonicalId": 152,
+        "name": "Vacuum dust",
+        "description": "Vacuum dust off of the smoke alarm to prevent false alarms and ensure proper functioning.",
+        "frequency": 180
+      },
+      {
+        "canonicalId": 153,
+        "name": "Replace batteries",
+        "description": "Replace batteries (even if they are still working).",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 154,
+        "name": "Replace",
+        "description": "Buy and install new alarms.",
+        "frequency": 1800
+      }
+    ]
+  },
+  {
+    "canonicalId": 16,
+    "name": "Carbon monoxide detectors",
+    "tasks": [
+      {
+        "canonicalId": 161,
+        "name": "Test",
+        "description": "Test detector and replace batteries if it's not functioning.",
+        "frequency": 30
+      },
+      {
+        "canonicalId": 162,
+        "name": "Vacuum dust",
+        "description": "Vacuum dust off of the detector to prevent false alarms and ensure proper functioning.",
+        "frequency": 180
+      },
+      {
+        "canonicalId": 163,
+        "name": "Replace batteries",
+        "description": "Replace batteries (even if they are still working).",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 164,
+        "name": "Replace",
+        "description": "Buy and install new detectors.",
+        "frequency": 1800
+      }
+    ]
+  },
+  {
+    "canonicalId": 17,
+    "name": "Lawn irrigation system",
+    "tasks": [
+      {
+        "canonicalId": 171,
+        "name": "Clean valves",
+        "description": "Look for clogs and clean the valves.",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 172,
+        "name": "Winterize",
+        "description": "Turn off the water supply and drain water from the system.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 18,
+    "name": "Dryer",
+    "tasks": [
+      {
+        "canonicalId": 181,
+        "name": "Clean dryer vent",
+        "description": "Inspect and clean dryer vent.",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 19,
+    "name": "Faucets (outdoor)",
+    "tasks": [
+      {
+        "canonicalId": 191,
+        "name": "Winterize",
+        "description": "Drain, shut off, and cover outdoor faucets.",
+        "frequency": 360
+      }
+    ]
   }
 ]

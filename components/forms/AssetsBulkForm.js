@@ -77,11 +77,9 @@ export default function AssetsForm(props) {
                     </CheckboxInput>
                   ))}
                 </div>
-                <ButtonSubmit
-                  text="Log in"
-                  isSubmitting={isSubmitting}
-                  dirty={dirty}
-                />
+                <ButtonSubmit isSubmitting={isSubmitting} dirty={dirty}>
+                  Continue
+                </ButtonSubmit>
               </Form>
             );
           }}
