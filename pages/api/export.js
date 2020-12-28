@@ -5,7 +5,6 @@ import sendError from "../../utils/sendError";
 
 const handler = async (req, res) => {
   await connectToDatabase();
-  console.log("hi!");
 
   const { method, user } = req;
 

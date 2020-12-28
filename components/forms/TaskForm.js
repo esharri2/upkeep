@@ -19,8 +19,6 @@ export default function TaskForm({ task }) {
 
   const { _id: taskId, assetId, frequency, notes, isIgnored } = task;
 
-  console.log(isIgnored);
-
   const handleSubmit = async (values) => {
     postTasks(
       token,

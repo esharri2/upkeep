@@ -48,11 +48,6 @@ const handler = async (req, res) => {
         for (const asset of home.assets) {
           const task = asset.tasks.find((task) => task._id.equals(taskId));
           if (task) {
-            console.log(instanceId);
-            console.log(task.instances);
-            console.log(
-              task.instances.findIndex((item) => item._id === instanceId)
-            );
             task.instances = task.instances.filter(
               (instance) => !instance._id.equals(instanceId)
             );

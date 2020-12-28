@@ -15,6 +15,7 @@ import Icon from "../../../components/Icon";
 import LinkAsButton from "../../../components/LinkAsButton";
 import LocaleDate from "../../../components/LocaleDate";
 import PrivateLayout from "../../../components/PrivateLayout";
+import SanitizedHTML from "../../../components/SanitizedHTML";
 import SpinnerInPage from "../../../components/SpinnerInPage";
 import TaskForm from "../../../components/forms/TaskForm";
 import TrashSVG from "../../../media/icons/trash.svg";

@@ -17,6 +17,7 @@ import Warning from "../../components/Warning";
 import { getTasks } from "../../utils/client/fetchers";
 import theme from "../../styles/theme";
 import useUser from "../../hooks/useUser";
+import { render } from "react-dom";
 
 export default function Tasks() {
   const { token } = useUser();
@@ -41,17 +42,21 @@ export default function Tasks() {
     );
   };
 
+  let hasIgnoredTasks = false;
+
   const renderIgnoredTasks = () => {
     return assets.map((asset) =>
       asset.tasks.map((task) => {
-        console.log(task.isIgnored);
         if (task.isIgnored) {
+          hasIgnoredTasks = true;
           return <IgnoredTaskCard key={task._id} task={task} />;
         }
         return null;
       })
     );
   };
+
+  const ignoredTasks = renderIgnoredTasks(assets);
 
   return (
     <PrivateLayout narrow>
@@ -82,12 +87,16 @@ export default function Tasks() {
                     <Link href="/setup">Click here to update your assets.</Link>
                   </Warning>
                 )}
-                <h1 className="ignore">Ignored tasks</h1>
-                <p>
-                  You've chosen to ignore these tasks. They won't show up in
-                  your dashboard.
-                </p>
-                {true && renderIgnoredTasks(assets)}
+                {hasIgnoredTasks && (
+                  <>
+                    <h1 className="ignore">Ignored tasks</h1>
+                    <p>
+                      You've chosen to ignore these tasks. They won't show up in
+                      your dashboard.
+                    </p>
+                    {ignoredTasks}
+                  </>
+                )}
               </>
             );
           }}

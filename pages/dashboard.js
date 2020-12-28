@@ -57,7 +57,13 @@ export default function Dashboard(props) {
       {data && (
         <div className="tiles">
           <div className="tile">
-            <LinkAsButton block bigText centerText href="/assets" width="100%">
+            <LinkAsButton
+              block
+              bigText
+              large
+              centerText
+              href="/assets"
+              width="100%">
               <Icon>
                 <HomeSVG />
               </Icon>
@@ -65,7 +71,13 @@ export default function Dashboard(props) {
             </LinkAsButton>
           </div>
           <div className="tile">
-            <LinkAsButton block bigText centerText href="/tasks" width="100%">
+            <LinkAsButton
+              block
+              large
+              bigText
+              centerText
+              href="/tasks"
+              width="100%">
               <Icon>
                 <TodoSVG />
               </Icon>
@@ -125,6 +137,12 @@ export default function Dashboard(props) {
             flex-direction: column;
             padding: ${theme.spacing.m};
             border-radius: ${theme.borders.radius};
+          }
+
+          .tile:nth-of-type(1),
+          .tile:nth-of-type(2) {
+            padding-left: 0;
+            padding-right: 0;
           }
 
           .tile.border {
@@ -272,8 +290,7 @@ const OverdueTasks = ({ overdueTasks }) => {
       )}
       {overdueTasks.length === 0 && (
         <>
-          <p className="note">You don't have any tasks overdue.</p>
-          <p className="note success">Nice!</p>
+          <p className="note">You don't have any tasks overdue. Nice!</p>
         </>
       )}
 

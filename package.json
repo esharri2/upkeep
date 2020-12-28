@@ -11,6 +11,7 @@
     "@reach/menu-button": "^0.11.2",
     "bcrypt": "^5.0.0",
     "classnames": "^2.2.6",
+    "dompurify": "^2.2.6",
     "formik": "^2.1.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "5.9.13",
@@ -22,7 +23,8 @@
     "react-spring": "^8.0.27",
     "styled-jsx": "^3.3.0",
     "swr": "^0.2.3",
-    "validator": "^13.1.1"
+    "validator": "^13.1.1",
+    "xss": "^1.0.8"
   },
   "devDependencies": {
     "babel-plugin-inline-react-svg": "^1.1.1",

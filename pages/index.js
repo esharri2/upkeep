@@ -113,7 +113,7 @@ export default function Home() {
 
           <div className="link-container">
             <div>
-              <LinkAsButton centerText bigText href="/signup">
+              <LinkAsButton large centerText bigText href="/signup">
                 Create an account
               </LinkAsButton>
             </div>

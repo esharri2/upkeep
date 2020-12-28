@@ -7,11 +7,11 @@ import Link from "./Link";
 // Utils
 import theme from "../styles/theme";
 
-function getLinkStyles(bigText, noBorder, centerText, reverse, width) {
+function getLinkStyles(bigText, noBorder, centerText, reverse, width, large) {
   return css.resolve`
     a {
       display: inline-block;
-      padding: 10px;
+      padding: ${large ? theme.spacing.l : theme.spacing.m};
       background-color: ${reverse ? theme.colors.light : theme.colors.accent1};
       color: ${reverse ? theme.colors.accent1 : theme.colors.light};
       fill: ${reverse ? theme.colors.accent1 : theme.colors.light};
@@ -39,6 +39,7 @@ export default function LinkAsButton({
   children,
   href,
   bigText,
+  large,
   noBorder,
   centerText,
   reverse,
@@ -49,7 +50,8 @@ export default function LinkAsButton({
     noBorder,
     centerText,
     reverse,
-    width
+    width,
+    large
   );
 
   return (
