@@ -1,12 +1,3 @@
-import {
-  MenuList,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  MenuPopover,
-  MenuLink,
-} from "@reach/menu-button";
-
 // Components
 import ExportData from "./ExportData";
 import Icon from "./Icon";
@@ -21,41 +12,41 @@ export default function ToolsMenu() {
   const styleProps = { width: "1rem", marginRight: "1rem" };
 
   return (
-    <Menu>
-      <MenuButton className="menu-button" aria-label="User menu">
-        <Icon>
+    <Menu
+      button={
+        <Icon marginRight="0">
           <AppsSVG />
         </Icon>
-      </MenuButton>
-      <MenuList>
-        <div className="menu-item">
+      }>
+      <ul>
+        <li>
           <Link href="/dashboard">
             <Icon {...styleProps}>
               <GraphlineSVG />
-            </Icon>{" "}
+            </Icon>
             Dashboard
           </Link>
-        </div>
-        <div className="menu-item">
+        </li>
+        <li>
           <Link href="/assets">
             <Icon {...styleProps}>
               <HomeSVG />
             </Icon>
             Manage assets
           </Link>
-        </div>
-        <div className="menu-item">
+        </li>
+        <li>
           <Link href="/tasks">
             <Icon {...styleProps}>
               <TodoSVG />
             </Icon>
             Manage tasks
           </Link>
-        </div>
-        <div className="menu-item">
+        </li>
+        <li>
           <ExportData styleProps={styleProps} />
-        </div>
-      </MenuList>
+        </li>
+      </ul>
     </Menu>
   );
 }

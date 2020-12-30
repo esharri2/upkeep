@@ -17,6 +17,7 @@ const { className, styles } = css.resolve`
     fill: ${theme.colors.accent1};
     display: flex;
     align-items: center;
+    text-decoration: none;
   }
 `;
 

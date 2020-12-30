@@ -1,10 +1,11 @@
 // Libs
-import { Formik, Form } from "formik";
+import { ErrorMessage, Formik, Form } from "formik";
 import { useRouter } from "next/router";
 
 // Components
 import ButtonSubmit from "../ButtonSubmit";
 import Field from "../Field";
+import FormErrorMessage from "./FormErrorMessage";
 
 // Utils
 import login from "../../utils/client/login";
@@ -30,17 +31,37 @@ export default function LoginForm(props) {
       .catch((error) => setStatus({ type: "error", message: error }));
   };
 
+  const handleFormValidatation = ({ email, password }) => {
+    const errors = {};
+
+    // if (!email) {
+    //   errors.email = "Required.";
+    // }
+
+    // if (!/@/.test(email) || /\s/.test(email)) {
+    //   errors.email = "This doesn't look like a valid email.";
+    // }
+
+    // if (!password) {
+    //   errors.password = "You need to enter your password.";
+    // }
+
+    return errors;
+  };
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
       onSubmit={async (values, { setStatus }) =>
         handleSubmit(values, setStatus)
-      }>
-      {({ dirty, isSubmitting, status = {} }) => (
+      }
+      validate={handleFormValidatation}>
+      {({ dirty, isSubmitting, isValid }) => (
         <Form>
           <div>
             <label htmlFor="email">Email:</label>
             <Field name="email" type="email" />
+            <ErrorMessage name="email" component={FormErrorMessage} />
           </div>
           <div>
             <label htmlFor="password">Password:</label>
@@ -51,6 +72,7 @@ export default function LoginForm(props) {
               maxLength="50"
               minLength="4"
             />
+            <ErrorMessage name="password" component={FormErrorMessage} />
           </div>
           <ButtonSubmit isSubmitting={isSubmitting}>Log in</ButtonSubmit>
         </Form>

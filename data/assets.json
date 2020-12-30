@@ -335,9 +335,15 @@
     "tasks": [
       {
         "canonicalId": 181,
-        "name": "Clean dryer vent",
-        "description": "Inspect and clean dryer vent.",
-        "frequency": 360
+        "name": "Clean exhaust vent",
+        "description": "Inspect and clean exhaust vent.",
+        "frequency": 720
+      },
+      {
+        "canonicalId": 181,
+        "name": "Clean exterior vent cap",
+        "description": "Remove any debris from the exterior vent cap.",
+        "frequency": 180
       }
     ]
   },
@@ -350,6 +356,72 @@
         "name": "Winterize",
         "description": "Drain, shut off, and cover outdoor faucets.",
         "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 20,
+    "name": "Bahtroom exhaust fan",
+    "tasks": [
+      {
+        "canonicalId": 201,
+        "name": "Clean",
+        "description": "Clean off any dust or particles that have accumalted on the fan and fan cover.",
+        "frequency": 180
+      }
+    ]
+  },
+  {
+    "canonicalId": 21,
+    "name": "Range hood",
+    "tasks": [
+      {
+        "canonicalId": 211,
+        "name": "Clean filter",
+        "description": "For metal filters, remove and clean. For charcoal filters, inspect and replace if needed.",
+        "frequency": 90
+      },
+      {
+        "canonicalId": 211,
+        "name": "Clean exterior",
+        "description": "Clean the exterior with spray or degreaser.",
+        "frequency": 90
+      }
+    ]
+  },
+  {
+    "canonicalId": 22,
+    "name": "Water heater (tank)",
+    "tasks": [
+      {
+        "canonicalId": 221,
+        "name": "Flush tank",
+        "description": "Flush tank to remove sediment.",
+        "frequency": 360
+      },
+      {
+        "canonicalId": 222,
+        "name": "Check pressure valve",
+        "description": "Test the temperature and pressure release valve ",
+        "frequency": 360
+      }
+    ]
+  },
+  {
+    "canonicalId": 231,
+    "name": "Washing machine",
+    "tasks": [
+      {
+        "canonicalId": 231,
+        "name": "Inspect hoses",
+        "description": "Make sure there are no bulges or cracks in the hoses; replace if needed.",
+        "frequency": 90
+      },
+      {
+        "canonicalId": 232,
+        "name": "Clean",
+        "description": "Wipe down the door, gasket, and drum.",
+        "frequency": 90
       }
     ]
   }

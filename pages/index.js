@@ -146,6 +146,7 @@ export default function Home() {
 
         .hero-image {
           position: relative;
+          min-height: 50vh;
         }
 
         .hero-image .text {

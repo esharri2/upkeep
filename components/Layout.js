@@ -15,7 +15,7 @@ export default function Layout({ children, narrow = false }) {
       <Footer />
       <style jsx global>{`
         html {
-          font-size: 16px;
+          font-size: 15px;
           line-height: 1.4;
           box-sizing: border-box;
           overflow-x: hidden;
@@ -24,6 +24,12 @@ export default function Layout({ children, narrow = false }) {
             /* Prevent adjustments of font size after orientation changes in iOS. */
           }
           -webkit-text-size-adjust: 100%;
+        }
+
+        @media screen and (${theme.mediaQueries.desktop}) {
+          html {
+            font-size: 16px;
+          }
         }
 
         *,
@@ -43,8 +49,14 @@ export default function Layout({ children, narrow = false }) {
         main {
           margin: 0 auto;
           max-width: ${narrow ? theme.breakpoints.s : theme.breakpoints.xl};
-          padding: ${theme.spacing.xl} ${theme.spacing.m};
+          padding: ${theme.spacing.l} ${theme.spacing.m};
           min-height: calc(100vh - ${theme.sizes.headerHeight});
+        }
+
+        @media screen and (${theme.mediaQueries.desktop}) {
+          main {
+            padding: ${theme.spacing.xl} ${theme.spacing.m};
+          }
         }
 
         .sr-only {
@@ -124,18 +136,15 @@ export default function Layout({ children, narrow = false }) {
           color: ${theme.colors.accent1};
         }
 
-         {
-          /* TODO this should be focus-visible I think? */
-        }
-        *:focus {
+        /* Focusing the button with a keyboard will show a dashed black line. */
+        *:focus-visible {
           outline: 3px solid ${theme.colors.accent2};
         }
 
         /* Focusing the button with a mouse, touch, or stylus */
-         {
-          /* *:focus:not(:focus-visible) {
+        *:focus:not(:focus-visible) {
+          opacity: 0.8;
           outline: none;
-        } */
         }
 
         .full-bleed {

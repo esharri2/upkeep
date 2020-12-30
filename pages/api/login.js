@@ -59,8 +59,7 @@ export default async (req, res) => {
             }
           }
           refreshToken = user.refreshToken;
-        } else if (refreshToken && !user) {
-          console.log("else...");
+        } else if (refreshToken && !user && !email && !password) {
           // Search for user by refreshToken (auto-login flow).
           user = await User.findOne({ refreshToken }).populate(
             homeQueryConditions

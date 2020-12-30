@@ -1,84 +1,81 @@
-import { Menu as ReachMenu } from "@reach/menu-button";
+import { useEffect, useState } from "react";
 
 // Components
 
 // Utils
 import theme from "../styles/theme";
 
-export default function UserMenu({ children }) {
+export default function Menu(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener(
+        "click",
+        () => {
+          setIsOpen(false);
+        },
+        { once: true }
+      );
+    }
+    // todo return a function that cleans up this event
+  }, [isOpen]);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <ReachMenu>
-      {children}
+    <div>
+      <button aria-expanded={isOpen} onClick={handleClick}>
+        {props.button}
+      </button>
+      {isOpen && props.children}
       <style jsx>{`
-        :global(.menu-button) {
+        div {
+          position: relative;
+          display: inline-block;
+        }
+        button {
           background-color: transparent;
           border: none;
           fill: ${theme.colors.dark};
         }
-
-        :global([data-reach-menu]) {
-          display: block;
+        div :global(ul) {
           position: absolute;
-        }
-
-        :global([data-reach-menu-list]) {
+          top: 30px;
+          right: 0;
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
           background-color: ${theme.colors.light};
           box-shadow: ${theme.shadows.m};
-          padding: 0;
-        }
-
-        :global([data-reach-menu-list]:focus) {
-          outline: none;
-        }
-
-        :global([data-reach-menu-popover]) {
           border-radius: ${theme.borders.radius};
           min-width: 250px;
         }
 
-        :global(.menu-item) {
+        div :global(li) {
+          padding: 0;
           display: flex;
           align-items: center;
           border-bottom: solid 1px ${theme.colors.middle};
         }
 
-        :global(.menu-item > a, .menu-item > button) {
+        div :global(li:last-child) {
+          border-bottom: none;
+        }
+
+        div :global(li a, li button) {
           display: flex;
           padding: ${theme.spacing.m};
-
           height: 100%;
           width: 100%;
-        }
-
-        :global([data-reach-menu-item][data-selected], [data-selected] button) {
-          background: ${theme.colors.accent1};
-          color: ${theme.colors.light}!important;
-          fill: ${theme.colors.light};
-        }
-
-        :global(.menu-header) {
-          display: block;
-          text-align: center;
-          padding: ${theme.spacing.l};
-          border-bottom: solid 1px ${theme.colors.middle};
-        }
-
-        :global(.user-name) {
-          font-weight: 600;
-        }
-
-        :global(button, a) {
           text-decoration: none;
           color: ${theme.colors.dark};
-          background-color: transparent;
           border: none;
           fill: ${theme.colors.dark};
-        }
-
-        :global(.icon) {
-          margin-right: ${theme.spacing.s};
+          background-color: ${theme.colors.light};
         }
       `}</style>
-    </ReachMenu>
+    </div>
   );
 }

@@ -1,5 +1,3 @@
-import { MenuList, MenuButton } from "@reach/menu-button";
-
 // Components
 import GearSVG from "../media/icons/gear.svg";
 import Icon from "./Icon";
@@ -8,32 +6,42 @@ import Logout from "./Logout";
 import Menu from "./Menu";
 import UserSVG from "../media/icons/user.svg";
 
+import theme from "../styles/theme";
+
 export default function UserMenu({ userName }) {
   const iconWidth = { width: "1rem" };
 
   return (
-    <Menu>
-      <MenuButton className="menu-button" aria-label="User menu">
+    <Menu
+      button={
         <Icon>
           <UserSVG />
         </Icon>
-      </MenuButton>
-      <MenuList>
-        <div className="menu-header">
+      }>
+      <ul>
+        <li className="user-menu">
           Hello! <div className="user-name">{userName}</div>
-        </div>
-        <div className="menu-item">
+        </li>
+        <li>
           <Link href="/settings">
             <Icon {...iconWidth}>
               <GearSVG />
             </Icon>
             Manage account
           </Link>
-        </div>
-        <div className="menu-item">
+        </li>
+        <li>
           <Logout />
-        </div>
-      </MenuList>
+        </li>
+      </ul>
+      <style jsx>{`
+        .user-menu {
+          display: block;
+          text-align: center;
+          padding: ${theme.spacing.l};
+          border-bottom: solid 1px ${theme.colors.middle};
+        }
+      `}</style>
     </Menu>
   );
 }
